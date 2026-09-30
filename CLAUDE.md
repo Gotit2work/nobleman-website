@@ -32,7 +32,7 @@ Marketing site for Nobleman Productions (Jean and Justin; veteran owned; San Die
 - Nav icons (`media/icons/*.png`, README "Navigation icons") must say what they are at 27 px while keeping the maritime style; never a pure metaphor (a compass for Work). Regenerate the whole sheet to change one, so the style stays consistent.
 - The desktop header is a compact pill that hugs its content (`data-navpill`): Home · Services ▾ · Work · About ▾ · Client portal · Start a project. The mega-menus drop below it as their own panels. Keep it compact; the regression script asserts it is under 820 px wide.
 - Menus open on hover, and a click on a hover-opened trigger pins it open (`hoverOpen`/`clickMenu` in `SiteChrome.dc.html`). Never go back to a plain toggle on click: people hover then click, and the toggle closed the menu they had just opened. Closed panels are `visibility:hidden` so their links can't take keyboard focus.
-- The Services menu, the home hero, the home cards, and each service page lead with the three pillars; each pillar has one Murphy's-law line (`docs/WRITING.md`, "Voice"). Keep those lines word for word everywhere they appear.
+- The Services menu, the home cards, and each service page lead with the three pillars, and the home hero names them in its opening sentence as text links (keep the hero to two buttons: Start a project, Watch the reel); each pillar has one Murphy's-law line (`docs/WRITING.md`, "Voice"). Keep those lines word for word everywhere they appear.
 
 ## Conventions
 

@@ -31,8 +31,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="/assets/np.css?v=5">
-<script src="/assets/np.js?v=5" defer></script>
+<link rel="stylesheet" href="/assets/np.css?v=6">
+<script src="/assets/np.js?v=6" defer></script>
 <script src="https://player.vimeo.com/api/player.js" async></script>
 <script src="/vendor/react-18.3.1.production.min.js"></script>
 <script src="/vendor/react-dom-18.3.1.production.min.js"></script>
@@ -78,8 +78,7 @@ a{color:inherit}a:hover{color:inherit}
     <div data-hero-content="" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:{{ heroPad }};gap:{{ heroGap }}">
       <div data-intro="0" style="font-size:{{ metaSize }};letter-spacing:0.22em;text-transform:uppercase;opacity:.85;text-wrap:balance">Veteran owned and operated · San Diego · Las Vegas</div>
       <h1 style="margin:0;font-size:clamp(46px,11.5cqw,184px);font-weight:500;line-height:.9;max-width:1200px;margin-bottom:.06em"><span class="np-line"><span data-intro="1">Hollywood-grade </span></span><span class="np-line"><span data-intro="2" class="np-it">product<span class="np-rec-i">i</span>on.</span></span></h1>
-      <p data-intro="3" style="margin:0;font-size:clamp(17px,1.5cqw,22px);font-weight:300;line-height:1.45;max-width:620px;opacity:.9;text-wrap:pretty">We make three kinds of video, for people who can’t afford for it to go wrong. Pick yours:</p>
-      <nav data-intro="3" class="np-pillars" aria-label="What we do"><a class="np-pillar" href="/services"><i aria-hidden="true" style="-webkit-mask-image:url('media/icons/growth.png');mask-image:url('media/icons/growth.png')"></i>YouTube channels</a><a class="np-pillar" href="/live-production"><i aria-hidden="true" style="-webkit-mask-image:url('media/icons/live.png');mask-image:url('media/icons/live.png')"></i>Livestreams</a><a class="np-pillar" href="/conference-event"><i aria-hidden="true" style="-webkit-mask-image:url('media/icons/mic.png');mask-image:url('media/icons/mic.png')"></i>Conferences &amp; events</a></nav>
+      <p data-intro="3" style="margin:0;font-size:clamp(17px,1.5cqw,22px);font-weight:300;line-height:1.5;max-width:660px;opacity:.92;text-wrap:pretty">We make three kinds of video, for people who can’t afford for it to go wrong: <a class="np-hero-link" href="/services">YouTube channels</a>, <a class="np-hero-link" href="/live-production">livestreams</a>, and <a class="np-hero-link" href="/conference-event">conference &amp; event films</a>.</p>
       <div data-intro="4" style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px">
         <a href="/start" style="height:{{ ctaBtnH }};padding:0 {{ ctaBtnPad }};border-radius:32px;display:inline-flex;align-items:center;background:#f4f4f2;color:#031e25;font-size:{{ ctaBtnFs }};font-weight:500;text-decoration:none;transition:opacity 150ms" style-hover="opacity:.88;color:#031e25">Start a project</a>
         <button onClick="{{ playReel }}" style="height:{{ ctaBtnH }};padding:0 {{ ctaBtnPad }} 0 22px;border-radius:32px;display:inline-flex;align-items:center;gap:12px;border:1px solid rgba(244,244,242,0.8);background:transparent;color:#f4f4f2;font:inherit;font-size:{{ ctaBtnFs }};font-weight:400;cursor:pointer;transition:background 300ms" style-hover="background:rgba(244,244,242,0.12);color:#f4f4f2"><span aria-hidden="true" style="width:0;height:0;border-left:10px solid currentColor;border-top:6px solid transparent;border-bottom:6px solid transparent"></span>Watch the reel</button>
@@ -324,17 +323,17 @@ class Component extends DCLogic {
     }
     if (tries > 0) this.heroAttachT = setTimeout(() => this.attachHero(tries - 1), 100);
   }
-  /** Mini player (desktop home only): once the hero has scrolled away, the same film keeps playing in a small
-   *  card with a Start button, and hides again at the footer (which has its own Start button) or back at the
-   *  top. It is its own Vimeo player: the hero's iframe sits inside a container-type wrapper and a scaled layer,
+  /** Mini player (desktop home only): once the hero has completely left the screen, the same film carries on
+   *  from that second in a small card with a Start button, and hides again at the footer (which has its own
+   *  Start button) or as soon as any of the hero is back in view. It is its own Vimeo player: the hero's iframe sits inside a container-type wrapper and a scaled layer,
    *  both of which trap position:fixed. The hero is never paused (a paused Vimeo background player may not
    *  resume on command), so the mini is created fresh each time it docks, starting where the hero is, and
    *  removed when it undocks. Both run on the same clock, so they stay in step. */
   pipWanted() {
-    if (this.state.mobile || this.preview || this.pipClosed) return false;
+    if (this.state.mobile || this.preview || this.pipClosed || !this.desktop) return false;
     if (window.innerWidth < 900 || window.innerHeight < 560) return false;
     const hero = this.heroRef.current && this.heroRef.current.closest("section");
-    if (!hero || hero.getBoundingClientRect().bottom > window.innerHeight * 0.35) return false;
+    if (!hero || hero.getBoundingClientRect().bottom > 0) return false;
     const foot = [...document.querySelectorAll("footer")].find(f => f.getClientRects().length);
     return !(foot && foot.getBoundingClientRect().top < window.innerHeight - 40);
   }
@@ -364,7 +363,11 @@ class Component extends DCLogic {
         const mini = new window.Vimeo.Player(f);
         // The #t= start usually lands; if it doesn't, seek once, then show the video when it's really playing.
         mini.ready().then(() => mini.getCurrentTime()).then(c => (at && Math.abs(c - at) > 3 ? mini.setCurrentTime(at) : null)).catch(() => {});
-        mini.on("timeupdate", () => { if (token === this.dockToken && !this.miniFailed && !this.state.pipLive) this.setState({ pipLive: true }); });
+        mini.on("timeupdate", e => {
+          if (token !== this.dockToken || this.miniFailed) return;
+          if (e && e.seconds > 0) this.miniTime = e.seconds;
+          if (!this.state.pipLive) this.setState({ pipLive: true });
+        });
         mini.on("error", () => { this.miniFailed = true; this.undock(); });
       } catch (err) { /* API unavailable: the card keeps its still frame */ }
     };
@@ -375,11 +378,21 @@ class Component extends DCLogic {
   undock() {
     this.dockToken = (this.dockToken || 0) + 1;
     const box = this.pipRef.current;
+    // Back to the hero: if it drifted (a browser may hold an off-screen video), bring it to where the mini got to.
+    // Only a seek, never pause/play, and only when they're more than 2 s apart, so the hero doesn't stutter.
+    // The mini's time comes from its own timeupdates: its iframe is removed below, so it can't be asked now.
+    const m = this.miniTime, hero = this.heroPlayer;
+    this.miniTime = 0;
+    if (m > 0 && hero && !this.miniFailed) {
+      hero.getCurrentTime().then(h => { if (Math.abs(m - h) > 2) return hero.setCurrentTime(m); }).catch(() => {});
+    }
     if (box) box.textContent = "";
     if (this.state.pipLive) this.setState({ pipLive: false });
   }
   componentDidMount() {
     this.stillOnly = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // Desktop means a mouse or trackpad: tablets in landscape get the desktop layout but not the mini player.
+    this.desktop = !window.matchMedia || window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     // A film opened from anywhere stops the mini player's second stream; closing the film brings it back.
     this.onFilmOpen = () => { this.filmOpen = true; this.undock(); };
     this.onFilmClose = () => { this.filmOpen = false; if (this.pipOn) this.dock(); };
