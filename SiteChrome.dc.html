@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+@keyframes menuIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-3px) rotate(2deg)}}
+</style>
+</helmet>
+<div data-screen-label="Site chrome" style="font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased">
+  <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+  <header onMouseLeave="{{ closeMenu }}" style="position:fixed;top:0;left:0;right:0;z-index:50;padding:16px 16px 0;color:{{ navInk }};transition:color 500ms ease">
+    <div style="max-width:1200px;margin:0 auto;background:{{ navBg }};backdrop-filter:blur(20px) saturate(1.2);-webkit-backdrop-filter:blur(20px) saturate(1.2);border:1px solid {{ hairline }};border-radius:40px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.18), 0 12px 40px -20px rgba(3,30,37,0.6);transition:background-color 500ms ease, border-color 500ms ease">
+    <div style="height:64px;padding:0 12px 0 24px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+      <a href="/" style="display:flex;text-decoration:none"><img src="assets/Nobleman_Logo_White.png" alt="Nobleman Productions" style="height:34px;width:auto;display:{{ showWhite }}"><img src="assets/Nobleman_Logo_Black.png" alt="Nobleman Productions" style="height:34px;width:auto;display:{{ showBlack }}"></a>
+      <nav style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;justify-content:center">
+        <button onMouseEnter="{{ openServices }}" onClick="{{ toggleServices }}" style="height:40px;padding:0 18px;border-radius:40px;border:0;background:{{ servicesBg }};color:inherit;font:inherit;font-size:15px;font-weight:400;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background 150ms">Services <span style="font-size:10px;opacity:.7;display:inline-block;transform:{{ servicesCaret }};transition:transform 200ms">▼</span></button>
+        <a href="/work" onMouseEnter="{{ closeMenu }}" style="height:40px;padding:0 18px;border-radius:40px;display:inline-flex;align-items:center;font-size:15px;text-decoration:none;transition:background 150ms" style-hover="background:rgba(127,127,127,0.14)">Work</a>
+        <button onMouseEnter="{{ openCompany }}" onClick="{{ toggleCompany }}" style="height:40px;padding:0 18px;border-radius:40px;border:0;background:{{ companyBg }};color:inherit;font:inherit;font-size:15px;font-weight:400;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background 150ms">Company <span style="font-size:10px;opacity:.7;display:inline-block;transform:{{ companyCaret }};transition:transform 200ms">▼</span></button>
+      </nav>
+      <div style="display:flex;align-items:center;gap:8px">
+        <a href="https://portal.noblemanproductions.gotit2work.com" onMouseEnter="{{ closeMenu }}" style="height:40px;padding:0 18px;border-radius:40px;display:inline-flex;align-items:center;font-size:15px;text-decoration:none;transition:background 150ms" style-hover="background:rgba(127,127,127,0.14)">Client portal</a>
+        <a href="/start" onMouseEnter="{{ closeMenu }}" style="position:relative;height:40px;padding:0 22px 0 54px;border-radius:40px;display:inline-flex;align-items:center;font-size:15px;font-weight:500;text-decoration:none;background:{{ navInk }};color:{{ navBgSolid }};transition:background-color 500ms ease, opacity 200ms;overflow:visible" style-hover="opacity:.85"><span style="position:absolute;left:14px;bottom:6px;width:30px;height:24px;display:block;animation:bob 3.2s ease-in-out infinite;transform-origin:50% 100%"><img src="assets/Nobleman_Mark_White.png" alt="" style="height:100%;width:auto;display:{{ showBlack }}"><img src="assets/Nobleman_Mark_Black.png" alt="" style="height:100%;width:auto;display:{{ showWhite }}"></span>Start a project</a>
+      </div>
+    </div>
+
+    <div onMouseEnter="{{ holdMenu }}" style="display:grid;grid-template-rows:{{ servicesRows }};opacity:{{ servicesOp }};transition:grid-template-rows 480ms cubic-bezier(.2,.7,.2,1), opacity 320ms ease">
+      <div style="overflow:hidden;min-height:0;border-top:1px solid {{ servicesLine }};transition:border-color 320ms">
+        <div style="padding:24px 24px 28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+          <a href="/services" style="display:flex;flex-direction:column;gap:14px;padding:24px;border-radius:12px;background:{{ card }};text-decoration:none;transition:background 150ms;min-height:220px" style-hover="background:rgba(127,127,127,0.18)">
+            <span aria-hidden="true" style="display:block;width:32px;height:32px;background-color:currentColor;-webkit-mask-image:url('media/a12.png');mask-image:url('media/a12.png');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;mask-mode:luminance;opacity:.9"></span><span style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;opacity:.6">01 · YouTube</span>
+            <span style="font-size:21px;font-weight:500;letter-spacing:0.005em;line-height:1.2">Channel Retainers</span>
+            <span style="font-size:14px;line-height:1.5;opacity:.75">Grow a channel that actually books clients. Monthly shoots, editing, optimization, growth.</span>
+            <span style="margin-top:auto;font-size:13px;opacity:.6">53 → 8,000 subscribers in six months</span>
+          </a>
+          <a href="/services" style="display:flex;flex-direction:column;gap:14px;padding:24px;border-radius:12px;background:{{ card }};text-decoration:none;transition:background 150ms;min-height:220px" style-hover="background:rgba(127,127,127,0.18)">
+            <span aria-hidden="true" style="display:block;width:32px;height:32px;background-color:currentColor;-webkit-mask-image:url('media/a13.png');mask-image:url('media/a13.png');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;mask-mode:luminance;opacity:.9"></span><span style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;opacity:.6">02 · Live</span>
+            <span style="font-size:21px;font-weight:500;letter-spacing:0.005em;line-height:1.2">Live Production for Course Creators</span>
+            <span style="font-size:14px;line-height:1.5;opacity:.75">Launches and premium sessions that look like broadcast, not a Zoom call.</span>
+            <span style="margin-top:auto;font-size:13px;opacity:.6">Broadcasts to 50,000+ concurrent viewers</span>
+          </a>
+          <a href="/services" style="display:flex;flex-direction:column;gap:14px;padding:24px;border-radius:12px;background:{{ card }};text-decoration:none;transition:background 150ms;min-height:220px" style-hover="background:rgba(127,127,127,0.18)">
+            <span aria-hidden="true" style="display:block;width:32px;height:32px;background-color:currentColor;-webkit-mask-image:url('media/a14.png');mask-image:url('media/a14.png');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;mask-mode:luminance;opacity:.9"></span><span style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;opacity:.6">03 · Events</span>
+            <span style="font-size:21px;font-weight:500;letter-spacing:0.005em;line-height:1.2">Conference &amp; Event Video</span>
+            <span style="font-size:14px;line-height:1.5;opacity:.75">Recap films, executive cuts, and social clips for stages in San Diego, Las Vegas, and nationwide.</span>
+            <span style="margin-top:auto;font-size:13px;opacity:.6">Same-day highlight reels</span>
+          </a>
+          <div style="display:flex;flex-direction:column;gap:6px;padding:24px 8px 24px 24px;border-left:1px solid {{ hairline }}">
+            <span aria-hidden="true" style="display:block;width:32px;height:32px;background-color:currentColor;-webkit-mask-image:url('media/a15.png');mask-image:url('media/a15.png');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;mask-mode:luminance;opacity:.9"></span><span style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;opacity:.6;margin:8px 0 10px">Also offered</span>
+            <a href="#" style="font-size:15px;text-decoration:none;padding:6px 0;opacity:.85" style-hover="opacity:1">Short-form social packages</a>
+            <a href="#" style="font-size:15px;text-decoration:none;padding:6px 0;opacity:.85" style-hover="opacity:1">Executive interviews &amp; brand story</a>
+            <a href="#" style="font-size:15px;text-decoration:none;padding:6px 0;opacity:.85" style-hover="opacity:1">Event photography &amp; headshots</a>
+            <a href="#" style="font-size:15px;text-decoration:none;padding:6px 0;opacity:.85" style-hover="opacity:1">Documentaries</a>
+            <a href="#" style="font-size:15px;text-decoration:none;padding:6px 0;opacity:.85" style-hover="opacity:1">Drone · FAA Part 107</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div onMouseEnter="{{ holdMenu }}" style="display:grid;grid-template-rows:{{ companyRows }};opacity:{{ companyOp }};transition:grid-template-rows 480ms cubic-bezier(.2,.7,.2,1), opacity 320ms ease">
+      <div style="overflow:hidden;min-height:0;border-top:1px solid {{ companyLine }};transition:border-color 320ms">
+        <div style="padding:24px 24px 28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+          <a href="#" style="display:flex;flex-direction:column;gap:10px;padding:24px;border-radius:12px;background:{{ card }};text-decoration:none;transition:background 150ms" style-hover="background:rgba(127,127,127,0.18)"><span aria-hidden="true" style="display:block;width:32px;height:32px;background-color:currentColor;-webkit-mask-image:url('media/a16.png');mask-image:url('media/a16.png');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;mask-mode:luminance;opacity:.9"></span><span style="font-size:19px;font-weight:500">About Nobleman</span><span style="font-size:14px;line-height:1.5;opacity:.75">Veteran owned and operated. Jean and Justin, San Diego and Las Vegas.</span></a>
+          <a href="#" style="display:flex;flex-direction:column;gap:10px;padding:24px;border-radius:12px;background:{{ card }};text-decoration:none;transition:background 150ms" style-hover="background:rgba(127,127,127,0.18)"><span aria-hidden="true" style="display:block;width:32px;height:32px;background-color:currentColor;-webkit-mask-image:url('media/a17.png');mask-image:url('media/a17.png');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;mask-mode:luminance;opacity:.9"></span><span style="font-size:19px;font-weight:500">Nobleman Sailing Media</span><span style="font-size:14px;line-height:1.5;opacity:.75">Justin's offshore channel on YouTube.</span></a>
+          <a href="https://portal.noblemanproductions.gotit2work.com" style="display:flex;flex-direction:column;gap:10px;padding:24px;border-radius:12px;background:{{ card }};text-decoration:none;transition:background 150ms" style-hover="background:rgba(127,127,127,0.18)"><span aria-hidden="true" style="display:block;width:32px;height:32px;background-color:currentColor;-webkit-mask-image:url('media/a18.png');mask-image:url('media/a18.png');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;mask-mode:luminance;opacity:.9"></span><span style="font-size:19px;font-weight:500">Client portal</span><span style="font-size:14px;line-height:1.5;opacity:.75">Track projects, review cuts, and download deliverables.</span></a>
+          <a href="/start" style="display:flex;flex-direction:column;gap:10px;padding:24px;border-radius:12px;background:{{ card }};text-decoration:none;transition:background 150ms" style-hover="background:rgba(127,127,127,0.18)"><span aria-hidden="true" style="display:block;width:32px;height:32px;background-color:currentColor;-webkit-mask-image:url('media/a15.png');mask-image:url('media/a15.png');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;mask-mode:luminance;opacity:.9"></span><span style="font-size:19px;font-weight:500">Start a project</span><span style="font-size:14px;line-height:1.5;opacity:.75">A personal reply the same business day.</span></a>
+        </div>
+      </div>
+    </div>
+    </div>
+  </header>
+  </sc-if>
+
+  <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+  <header style="position:fixed;top:12px;left:0;right:0;z-index:50;display:flex;justify-content:center;pointer-events:none;color:{{ navInk }};transition:color 500ms">
+    <a href="/" style="pointer-events:auto;display:flex;align-items:center;height:48px;padding:0 20px;border-radius:40px;background:{{ navBg }};backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid {{ hairline }};box-shadow:inset 0 1px 0 rgba(255,255,255,0.18);transition:background-color 500ms, border-color 500ms"><img src="assets/Nobleman_Logo_White.png" alt="Nobleman Productions" style="height:26px;width:auto;display:{{ showWhite }}"><img src="assets/Nobleman_Logo_Black.png" alt="Nobleman Productions" style="height:26px;width:auto;display:{{ showBlack }}"></a>
+  </header>
+  <nav style="position:fixed;left:12px;right:12px;bottom:12px;z-index:50;height:68px;padding:0 8px 0 6px;border-radius:40px;display:flex;align-items:center;justify-content:space-between;gap:2px;background:{{ navBg }};backdrop-filter:blur(20px) saturate(1.2);-webkit-backdrop-filter:blur(20px) saturate(1.2);border:1px solid {{ hairline }};box-shadow:inset 0 1px 0 rgba(255,255,255,0.18), 0 16px 40px -18px rgba(3,30,37,0.7);color:{{ navInk }};transition:background-color 500ms, border-color 500ms, color 500ms">
+    <button onClick="{{ toggleServices }}" style="flex:1;height:56px;border:0;border-radius:32px;background:{{ servicesBg }};color:inherit;font:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;min-width:0"><span aria-hidden="true" style="display:block;flex:none;width:22px;height:22px;background-color:currentColor;-webkit-mask-image:url('media/a12.png');mask-image:url('media/a12.png');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;mask-mode:luminance;opacity:.9"></span><span style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;opacity:.8">Services</span></button>
+    <a href="/work" style="flex:1;height:56px;border-radius:32px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-decoration:none;color:inherit;min-width:0"><span aria-hidden="true" style="display:block;flex:none;width:22px;height:22px;background-color:currentColor;-webkit-mask-image:url('media/a15.png');mask-image:url('media/a15.png');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;mask-mode:luminance;opacity:.9"></span><span style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;opacity:.8">Work</span></a>
+    <button onClick="{{ toggleCompany }}" style="flex:1;height:56px;border:0;border-radius:32px;background:{{ companyBg }};color:inherit;font:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;min-width:0"><span aria-hidden="true" style="display:block;flex:none;width:22px;height:22px;background-color:currentColor;-webkit-mask-image:url('media/a16.png');mask-image:url('media/a16.png');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;mask-mode:luminance;opacity:.9"></span><span style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;opacity:.8">Company</span></button>
+    <a href="/start" style="position:relative;flex:none;height:52px;padding:0 18px 0 50px;border-radius:40px;display:inline-flex;align-items:center;font-size:14px;font-weight:500;text-decoration:none;background:{{ navInk }};color:{{ navBgSolid }};transition:background-color 500ms;overflow:visible"><span style="position:absolute;left:12px;bottom:8px;width:30px;height:24px;display:block;animation:bob 3.2s ease-in-out infinite;transform-origin:50% 100%"><img src="assets/Nobleman_Mark_White.png" alt="" style="height:100%;width:auto;display:{{ showBlack }}"><img src="assets/Nobleman_Mark_Black.png" alt="" style="height:100%;width:auto;display:{{ showWhite }}"></span>Start</a>
+  </nav>
+  <sc-if value="{{ mobileSheetOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;z-index:49;background:{{ navBgSolid }};color:{{ navInk }};overflow:auto;padding:84px 20px 110px;animation:menuIn 260ms ease both">
+    <button onClick="{{ closeMenuNow }}" aria-label="Close" style="position:fixed;top:14px;right:16px;z-index:51;width:44px;height:44px;border-radius:50%;border:1px solid {{ hairline }};background:{{ navBg }};color:inherit;font:inherit;font-size:18px;cursor:pointer">×</button>
+    <div style="display:{{ servicesDisp }}">
+      <div style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.6;padding:0 4px 8px">Services</div>
+      <a href="/services" style="display:flex;align-items:center;gap:16px;padding:18px 4px;border-bottom:1px solid {{ hairline }};text-decoration:none;color:inherit"><span aria-hidden="true" style="display:block;flex:none;width:28px;height:28px;background-color:currentColor;-webkit-mask-image:url('media/a12.png');mask-image:url('media/a12.png');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;mask-mode:luminance;opacity:.9"></span><span style="display:flex;flex-direction:column;gap:3px;min-width:0"><span style="font-size:19px;font-weight:500;line-height:1.2">YouTube Channel Retainers</span><span style="font-size:13px;opacity:.65;line-height:1.4">Grow a channel that actually books clients.</span></span><span style="margin-left:auto;opacity:.5">→</span></a>
+      <a href="/services" style="display:flex;align-items:center;gap:16px;padding:18px 4px;border-bottom:1px solid {{ hairline }};text-decoration:none;color:inherit"><span aria-hidden="true" style="display:block;flex:none;width:28px;height:28px;background-color:currentColor;-webkit-mask-image:url('media/a13.png');mask-image:url('media/a13.png');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;mask-mode:luminance;opacity:.9"></span><span style="display:flex;flex-direction:column;gap:3px;min-width:0"><span style="font-size:19px;font-weight:500;line-height:1.2">Live Production for Course Creators</span><span style="font-size:13px;opacity:.65;line-height:1.4">Broadcast quality launches, not a Zoom call.</span></span><span style="margin-left:auto;opacity:.5">→</span></a>
+      <a href="/services" style="display:flex;align-items:center;gap:16px;padding:18px 4px;border-bottom:1px solid {{ hairline }};text-decoration:none;color:inherit"><span aria-hidden="true" style="display:block;flex:none;width:28px;height:28px;background-color:currentColor;-webkit-mask-image:url('media/a14.png');mask-image:url('media/a14.png');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;mask-mode:luminance;opacity:.9"></span><span style="display:flex;flex-direction:column;gap:3px;min-width:0"><span style="font-size:19px;font-weight:500;line-height:1.2">Conference &amp; Event Video</span><span style="font-size:13px;opacity:.65;line-height:1.4">Recap films, executive cuts, same-day clips.</span></span><span style="margin-left:auto;opacity:.5">→</span></a>
+      <div style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.6;padding:32px 4px 8px">Also offered</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;padding:0 4px">
+        <a href="#" style="height:38px;display:inline-flex;align-items:center;padding:0 14px;border-radius:40px;border:1px solid {{ hairline }};font-size:13px;text-decoration:none;color:inherit">Social packages</a>
+        <a href="#" style="height:38px;display:inline-flex;align-items:center;padding:0 14px;border-radius:40px;border:1px solid {{ hairline }};font-size:13px;text-decoration:none;color:inherit">Executive interviews</a>
+        <a href="#" style="height:38px;display:inline-flex;align-items:center;padding:0 14px;border-radius:40px;border:1px solid {{ hairline }};font-size:13px;text-decoration:none;color:inherit">Photography</a>
+        <a href="#" style="height:38px;display:inline-flex;align-items:center;padding:0 14px;border-radius:40px;border:1px solid {{ hairline }};font-size:13px;text-decoration:none;color:inherit">Documentaries</a>
+        <a href="#" style="height:38px;display:inline-flex;align-items:center;padding:0 14px;border-radius:40px;border:1px solid {{ hairline }};font-size:13px;text-decoration:none;color:inherit">Drone · Part 107</a>
+      </div>
+    </div>
+    <div style="display:{{ companyDisp }}">
+      <div style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.6;padding:0 4px 8px">Company</div>
+      <a href="#" style="display:flex;align-items:center;gap:16px;padding:18px 4px;border-bottom:1px solid {{ hairline }};text-decoration:none;color:inherit"><span aria-hidden="true" style="display:block;flex:none;width:28px;height:28px;background-color:currentColor;-webkit-mask-image:url('media/a16.png');mask-image:url('media/a16.png');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;mask-mode:luminance;opacity:.9"></span><span style="display:flex;flex-direction:column;gap:3px;min-width:0"><span style="font-size:19px;font-weight:500;line-height:1.2">About Nobleman</span><span style="font-size:13px;opacity:.65;line-height:1.4">Veteran owned. Jean and Justin, San Diego and Las Vegas.</span></span><span style="margin-left:auto;opacity:.5">→</span></a>
+      <a href="#" style="display:flex;align-items:center;gap:16px;padding:18px 4px;border-bottom:1px solid {{ hairline }};text-decoration:none;color:inherit"><span aria-hidden="true" style="display:block;flex:none;width:28px;height:28px;background-color:currentColor;-webkit-mask-image:url('media/a17.png');mask-image:url('media/a17.png');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;mask-mode:luminance;opacity:.9"></span><span style="display:flex;flex-direction:column;gap:3px;min-width:0"><span style="font-size:19px;font-weight:500;line-height:1.2">Nobleman Sailing Media</span><span style="font-size:13px;opacity:.65;line-height:1.4">Justin's offshore channel on YouTube.</span></span><span style="margin-left:auto;opacity:.5">→</span></a>
+      <a href="https://portal.noblemanproductions.gotit2work.com" style="display:flex;align-items:center;gap:16px;padding:18px 4px;border-bottom:1px solid {{ hairline }};text-decoration:none;color:inherit"><span aria-hidden="true" style="display:block;flex:none;width:28px;height:28px;background-color:currentColor;-webkit-mask-image:url('media/a18.png');mask-image:url('media/a18.png');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;mask-mode:luminance;opacity:.9"></span><span style="display:flex;flex-direction:column;gap:3px;min-width:0"><span style="font-size:19px;font-weight:500;line-height:1.2">Client portal</span><span style="font-size:13px;opacity:.65;line-height:1.4">Track projects, review cuts, and download deliverables.</span></span><span style="margin-left:auto;opacity:.5">→</span></a>
+      <a href="/start" style="display:flex;align-items:center;gap:16px;padding:18px 4px;border-bottom:1px solid {{ hairline }};text-decoration:none;color:inherit"><span aria-hidden="true" style="display:block;flex:none;width:28px;height:28px;background-color:currentColor;-webkit-mask-image:url('media/a15.png');mask-image:url('media/a15.png');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;mask-mode:luminance;opacity:.9"></span><span style="display:flex;flex-direction:column;gap:3px;min-width:0"><span style="font-size:19px;font-weight:500;line-height:1.2">Start a project</span><span style="font-size:13px;opacity:.65;line-height:1.4">A personal reply the same business day.</span></span><span style="margin-left:auto;opacity:.5">→</span></a>
+    </div>
+  </div>
+  </sc-if>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;\&quot;dark\&quot; | \&quot;light\&quot;&quot;},&quot;previewMobile&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { menu: null, mobile: typeof window !== "undefined" && (window.matchMedia("(max-width: 759px)").matches || window.innerWidth < 760) };
+  open(m) { clearTimeout(this.closeT); if (m !== this.state.menu) this.setState({ menu: m }); }
+  componentDidMount() {
+    this.onResize = () => { if (this.props.previewMobile) return; const m = window.matchMedia("(max-width: 759px)").matches || window.innerWidth < 760; if (m !== this.state.mobile) this.setState({ mobile: m, menu: null }); };
+    window.addEventListener("resize", this.onResize);
+    window.addEventListener("orientationchange", this.onResize);
+    this.onResize();
+    this.onKey = e => { if (e.key === "Escape") this.setState({ menu: null }); };
+    window.addEventListener("keydown", this.onKey);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.onResize);
+    window.removeEventListener("orientationchange", this.onResize);
+    window.removeEventListener("keydown", this.onKey);
+  }
+  renderVals() {
+    const isDark = (this.props.theme ?? "dark") === "dark";
+    const menu = this.state.menu;
+    const mob = !!this.props.previewMobile || this.state.mobile;
+    const pillOn = "rgba(127,127,127,0.14)";
+    return {
+      card: isDark ? "rgba(255,255,255,0.06)" : "#f3f4f6",
+      hairline: isDark ? "rgba(244,244,242,0.14)" : "#e5e7eb",
+      navBg: isDark ? "rgba(3,30,37,0.72)" : "rgba(255,255,255,0.78)",
+      navBgSolid: isDark ? "#031e25" : "#ffffff",
+      navInk: isDark ? "#f4f4f2" : "#0a0a0a",
+      showWhite: isDark ? "block" : "none",
+      showBlack: isDark ? "none" : "block",
+      isMobile: mob,
+      isDesktop: !mob,
+      mobileSheetOpen: mob && !!menu,
+      closeMenuNow: () => this.setState({ menu: null }),
+      servicesDisp: menu === "services" ? "block" : "none",
+      companyDisp: menu === "company" ? "block" : "none",
+      servicesRows: menu === "services" ? "1fr" : "0fr",
+      companyRows: menu === "company" ? "1fr" : "0fr",
+      servicesOp: menu === "services" ? 1 : 0,
+      companyOp: menu === "company" ? 1 : 0,
+      servicesLine: menu === "services" ? (isDark ? "rgba(244,244,242,0.14)" : "#e5e7eb") : "transparent",
+      companyLine: menu === "company" ? (isDark ? "rgba(244,244,242,0.14)" : "#e5e7eb") : "transparent",
+      servicesBg: menu === "services" ? pillOn : "transparent",
+      companyBg: menu === "company" ? pillOn : "transparent",
+      servicesCaret: menu === "services" ? "rotate(180deg)" : "none",
+      companyCaret: menu === "company" ? "rotate(180deg)" : "none",
+      openServices: () => this.open("services"),
+      openCompany: () => this.open("company"),
+      toggleServices: () => this.open(menu === "services" ? null : "services"),
+      toggleCompany: () => this.open(menu === "company" ? null : "company"),
+      holdMenu: () => clearTimeout(this.closeT),
+      closeMenu: () => { clearTimeout(this.closeT); this.closeT = setTimeout(() => this.setState({ menu: null }), 160); },
+    };
+  }
+}
+</script>
+<template id="__bundler_thumbnail" data-bg-color="#141414">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#141414"/>
+    <text x="600" y="440" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="240" font-weight="700" fill="#f5f2ec">SC</text>
+  </svg>
+</template>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Cormorant+Garamond:ital,wght@1,400;1,500&amp;display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#031e25;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}a:hover{color:inherit}
+*{box-sizing:border-box}
+[data-reveal]{opacity:0;transform:translateY(28px);transition:opacity 1.2s cubic-bezier(.16,.84,.3,1),transform 1.2s cubic-bezier(.16,.84,.3,1)}
+[data-reveal][data-in]{opacity:1;transform:none}
+@keyframes menuIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@keyframes driftA{from{transform:translateX(0)}to{transform:translateX(-1440px)}}
+@keyframes driftB{from{transform:translateX(-1440px)}to{transform:translateX(0)}}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-3px) rotate(2deg)}}
+@keyframes sail{from{transform:translateX(-12cqw)}to{transform:translateX(100cqw)}}
+@keyframes rock{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-10px) rotate(3deg)}}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:.15}}
+@keyframes cue{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(8px);opacity:1}}
+</style>
+</helmet>
+<div ref="{{ rootRef }}" data-screen-label="Home" style="background:{{ pageBg }};color:{{ ink }};transition:background-color 900ms ease, color 900ms ease;min-height:100vh;padding-bottom:{{ bottomPad }};position:relative;{{ rootFrame }}">
+
+  <dc-import name="SiteChrome" theme="{{ themeName }}" preview-mobile="{{ previewFlag }}" hint-size="100%,0px"></dc-import>
+
+  <div style="container-type:inline-size">
+  <section data-theme="dark" style="position:relative;height:{{ heroH }};min-height:{{ heroMinH }};overflow:hidden;background:#031e25;color:#f4f4f2">
+    <div aria-hidden="true" style="position:absolute;inset:0;background:#031e25 url('media/a00.png') center/cover no-repeat;filter:saturate(.8)"></div>
+    <sc-if value="{{ heroReady }}" hint-placeholder-val="{{ false }}">
+    <iframe loading="eager" src="https://player.vimeo.com/video/1197058424?h=796798a19d&amp;background=1&amp;autoplay=1&amp;loop=1&amp;muted=1&amp;badge=0&amp;title=0&amp;byline=0&amp;portrait=0" title="Nobleman Productions reel" allow="autoplay; fullscreen" style="position:absolute;top:50%;left:50%;width:max(100%, 177.78vh);height:max(100%, 56.25cqw);transform:translate(-50%,-50%);border:0;pointer-events:none"></iframe>
+    </sc-if>
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(3,30,37,0.55) 0%, rgba(3,30,37,{{ overlay }}) 45%, rgba(3,30,37,0.95) 100%)"></div>
+    <div style="position:absolute;inset:{{ hudTop }} 24px 0;pointer-events:none;max-width:1200px;margin:0 auto">
+      <span style="position:absolute;left:8px;top:8px;display:inline-flex;align-items:center;gap:8px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;letter-spacing:.08em;opacity:.9"><span style="width:8px;height:8px;border-radius:50%;background:#e5322d;box-shadow:0 0 10px rgba(229,50,45,.8);display:inline-block;animation:blink 1.2s steps(1) infinite"></span>REC</span>
+      <span ref="{{ tcRef }}" style="position:absolute;right:8px;top:8px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;letter-spacing:.08em;opacity:.9">00:00:00:00</span>
+    </div>
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:{{ heroPad }};gap:{{ heroGap }}">
+      <div style="font-size:{{ metaSize }};letter-spacing:0.08em;text-transform:uppercase;opacity:.8;text-wrap:balance">Veteran owned and operated · San Diego · Las Vegas</div>
+      <h1 style="margin:0;font-size:clamp(40px,6.5cqw,96px);font-weight:500;letter-spacing:-0.01em;line-height:1.05;max-width:1000px;text-wrap:balance">Hollywood-grade production.</h1>
+      <p style="margin:0;font-size:clamp(17px,1.4cqw,21px);line-height:1.4;max-width:600px;opacity:.85;text-wrap:pretty">YouTube channels, live broadcasts, and conference films for people whose work deserves to look as serious as it is.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px">
+        <a href="/start" style="height:{{ ctaBtnH }};padding:0 {{ ctaBtnPad }};border-radius:32px;display:inline-flex;align-items:center;background:#f4f4f2;color:#031e25;font-size:{{ ctaBtnFs }};font-weight:500;text-decoration:none;transition:opacity 150ms" style-hover="opacity:.88;color:#031e25">Start a project</a>
+        <a href="/work" style="height:52px;padding:0 28px;border-radius:32px;display:inline-flex;align-items:center;border:1px solid rgba(244,244,242,0.8);color:#f4f4f2;font-size:16px;font-weight:400;text-decoration:none;transition:background 300ms" style-hover="background:rgba(244,244,242,0.12);color:#f4f4f2">Watch the reel</a>
+      </div>
+      <div style="margin-top:20px;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:19px;letter-spacing:.02em;opacity:.65">crew credits — Apple, Emmy, NASA, FAA Part 107</div>
+    </div>
+    <div style="position:absolute;left:0;right:0;bottom:{{ cueBottom }};display:{{ cueDisplay }};justify-content:center;pointer-events:none">
+      <span style="display:inline-flex;flex-direction:column;align-items:center;gap:12px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;opacity:.7"><span style="display:inline-block;width:1px;height:36px;background:currentColor;animation:cue 1.8s ease-in-out infinite"></span>Scroll</span>
+    </div>
+  </section>
+
+  <section data-theme="light" style="padding:clamp(36px,10cqw,144px) 24px clamp(24px,5cqw,72px)">
+    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;align-items:start">
+      <h2 data-reveal="" style="margin:0;font-size:clamp(32px,3.6cqw,49px);font-weight:500;letter-spacing:0.005em;line-height:1.12;text-wrap:balance">Built for people whose reputation is on the screen.</h2>
+      <div data-reveal="" style="display:flex;flex-direction:column;gap:20px;font-size:18px;line-height:1.5;opacity:.85;max-width:520px">
+        <p style="margin:0;text-wrap:pretty">We produce for coaches and advisors building authority on YouTube, course creators running premium launches, and event teams who won't let the video be a side note.</p>
+        <p style="margin:0;text-wrap:pretty">One crew across all three, led by a former Apple video engineer, with Hollywood and Emmy-recognized camera operators behind it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-theme="light" style="padding:clamp(24px,5cqw,72px) 24px clamp(36px,10cqw,144px)">
+    <div style="max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:40px">
+      <div data-reveal="" style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase"><span style="opacity:.6">What we do</span><span style="width:7px;height:7px;border-radius:50%;background:#e5322d;box-shadow:0 0 8px rgba(229,50,45,.8);display:inline-block;animation:blink 1.2s steps(1) infinite;flex:none"></span></span>
+          <h2 style="margin:0;font-size:clamp(28px,3cqw,42px);font-weight:500;letter-spacing:0.01em;line-height:1.15">Three service lines. One standard.</h2>
+        </div>
+        <a href="/work" style="height:44px;padding:0 22px;border-radius:40px;display:inline-flex;align-items:center;border:1px solid currentColor;font-size:15px;text-decoration:none;transition:background 150ms" style-hover="background:rgba(127,127,127,0.14)">See the work</a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px">
+        <a data-reveal="" href="/services" style="display:flex;flex-direction:column;gap:20px;padding:32px;border-radius:12px;background:{{ card }};text-decoration:none;transition:background 150ms, background-color 900ms ease">
+          <div style="aspect-ratio:16/10;border-radius:8px;overflow:hidden"><img src="media/a01.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+          <span style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;opacity:.6">01 · YouTube Channel Retainers</span>
+          <span style="font-size:28px;font-weight:500;letter-spacing:0.01em;line-height:1.2;text-wrap:balance">Grow a channel that actually books clients.</span>
+          <span style="font-size:16px;line-height:1.5;opacity:.75">Monthly shoots, editing, optimization, and growth for coaches, advisors, attorneys, and luxury brands.</span>
+          <span style="margin-top:auto;padding-top:16px;border-top:1px solid {{ hairline }};font-size:14px;opacity:.7">53 → 8,000 subscribers in six months</span>
+        </a>
+        <a data-reveal="" href="/services" style="display:flex;flex-direction:column;gap:20px;padding:32px;border-radius:12px;background:{{ card }};text-decoration:none;transition:background 150ms, background-color 900ms ease">
+          <div style="aspect-ratio:16/10;border-radius:8px;overflow:hidden"><img src="media/a02.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+          <span style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;opacity:.6">02 · Live Production for Course Creators</span>
+          <span style="font-size:28px;font-weight:500;letter-spacing:0.01em;line-height:1.2;text-wrap:balance">Your program is premium. Your production should match.</span>
+          <span style="font-size:16px;line-height:1.5;opacity:.75">Multi-camera launches, masterminds, and cohort sessions, engineered for the platform you stream on.</span>
+          <span style="margin-top:auto;padding-top:16px;border-top:1px solid {{ hairline }};font-size:14px;opacity:.7">Broadcasts to 50,000+ concurrent viewers</span>
+        </a>
+        <a data-reveal="" href="/services" style="display:flex;flex-direction:column;gap:20px;padding:32px;border-radius:12px;background:{{ card }};text-decoration:none;transition:background 150ms, background-color 900ms ease">
+          <div style="aspect-ratio:16/10;border-radius:8px;overflow:hidden"><img src="media/a03.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+          <span style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;opacity:.6">03 · Conference &amp; Event Video</span>
+          <span style="font-size:28px;font-weight:500;letter-spacing:0.01em;line-height:1.2;text-wrap:balance">Hollywood and Emmy talent — at your event.</span>
+          <span style="font-size:16px;line-height:1.5;opacity:.75">Recap films, executive cuts, and social clips for conferences in San Diego, Las Vegas, and nationwide.</span>
+          <span style="margin-top:auto;padding-top:16px;border-top:1px solid {{ hairline }};font-size:14px;opacity:.7">Same-day highlight reels</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section data-theme="dark" style="position:relative;padding:clamp(48px,18cqw,260px) 24px;min-height:{{ crewMinH }};display:flex;align-items:center;background-color:#031e25;background-image:linear-gradient(90deg, rgba(3,30,37,0.92) 0%, rgba(3,30,37,0.6) 45%, rgba(3,30,37,0.15) 75%, rgba(3,30,37,0.35) 100%), linear-gradient(180deg, #031e25 0%, rgba(3,30,37,0) 22%, rgba(3,30,37,0) 78%, #031e25 100%), url('media/a04.png');background-size:auto,auto,cover;background-position:{{ crewPos }};color:#f4f4f2;overflow:hidden">
+    <div style="max-width:1200px;width:100%;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0 48px;align-items:center">
+      <div data-reveal="" style="display:flex;flex-direction:column;gap:24px;max-width:520px">
+        <span style="display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase"><span style="opacity:.6">The crew</span><span style="width:7px;height:7px;border-radius:50%;background:#e5322d;box-shadow:0 0 8px rgba(229,50,45,.8);display:inline-block;animation:blink 1.2s steps(1) infinite;flex:none"></span></span>
+        <h2 style="margin:0;font-size:clamp(32px,3.6cqw,49px);font-weight:500;letter-spacing:0.005em;line-height:1.12;text-wrap:balance">The people behind the camera have done this at the highest level.</h2>
+        <p style="margin:0;font-size:17px;line-height:1.5;opacity:.8;text-wrap:pretty">A former Apple video engineer leads the crew. Camera operators carry Hollywood and Emmy credits. Drone work is FAA Part 107 certified. It shows in the footage, and it shows in how calm a shoot day feels.</p>
+        <div style="display:flex;flex-direction:column;border-top:1px solid rgba(244,244,242,0.16)">
+          <div style="display:flex;justify-content:space-between;gap:24px;padding:16px 0;border-bottom:1px solid rgba(244,244,242,0.16)"><span style="font-size:15px;opacity:.75">Live audience record</span><span style="font-size:15px;font-weight:500">50,000+ concurrent</span></div>
+          <div style="display:flex;justify-content:space-between;gap:24px;padding:16px 0;border-bottom:1px solid rgba(244,244,242,0.16)"><span style="font-size:15px;opacity:.75">Channel growth</span><span style="font-size:15px;font-weight:500">53 → 8,000 in six months</span></div>
+          <div style="display:flex;justify-content:space-between;gap:24px;padding:16px 0;border-bottom:1px solid rgba(244,244,242,0.16)"><span style="font-size:15px;opacity:.75">Event turnaround</span><span style="font-size:15px;font-weight:500">Same-day social clips</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-theme="dark" style="padding:clamp(24px,5cqw,72px) 24px clamp(36px,10cqw,144px)">
+    <div style="max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:40px">
+      <div data-reveal="" style="display:flex;flex-direction:column;gap:10px;max-width:640px">
+        <span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;opacity:.6">How we work</span>
+        <h2 style="margin:0;font-size:clamp(28px,3cqw,42px);font-weight:500;letter-spacing:0.01em;line-height:1.15;text-wrap:balance">Step by step. Nothing left to chance.</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px">
+        <div data-reveal="" style="display:flex;flex-direction:column;gap:18px;padding:32px;border-radius:12px;background:{{ card }};transition:background-color 900ms ease">
+          <span style="font-size:13px;letter-spacing:0.08em;opacity:.55">01</span>
+          <span style="font-size:24px;font-weight:500;letter-spacing:0.01em">Brief</span>
+          <p style="margin:0;font-size:15px;line-height:1.55;opacity:.8">One call. We learn the audience, the goal, and what the finished piece has to do.</p>
+        </div>
+        <div data-reveal="" style="display:flex;flex-direction:column;gap:18px;padding:32px;border-radius:12px;background:{{ card }};transition:background-color 900ms ease">
+          <span style="font-size:13px;letter-spacing:0.08em;opacity:.55">02</span>
+          <span style="font-size:24px;font-weight:500;letter-spacing:0.01em">Plan</span>
+          <p style="margin:0;font-size:15px;line-height:1.55;opacity:.8">Scope, quote, crew, and schedule in writing. What you approve is what you're billed.</p>
+        </div>
+        <div data-reveal="" style="display:flex;flex-direction:column;gap:18px;padding:32px;border-radius:12px;background:{{ card }};transition:background-color 900ms ease">
+          <span style="font-size:13px;letter-spacing:0.08em;opacity:.55">03</span>
+          <span style="font-size:24px;font-weight:500;letter-spacing:0.01em">Shoot</span>
+          <p style="margin:0;font-size:15px;line-height:1.55;opacity:.8">The crew shows up on time with the right gear for the room, and runs the day quietly.</p>
+        </div>
+        <div data-reveal="" style="display:flex;flex-direction:column;gap:18px;padding:32px;border-radius:12px;background:{{ card }};transition:background-color 900ms ease">
+          <span style="font-size:13px;letter-spacing:0.08em;opacity:.55">04</span>
+          <span style="font-size:24px;font-weight:500;letter-spacing:0.01em">Deliver</span>
+          <p style="margin:0;font-size:15px;line-height:1.55;opacity:.8">Finished films on a private delivery link. No login. Same-day clips where promised.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-theme="light" style="padding:clamp(36px,10cqw,144px) 24px">
+    <div style="max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:40px">
+      <div data-reveal="" style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase"><span style="opacity:.6">Selected work</span><span style="width:7px;height:7px;border-radius:50%;background:#e5322d;box-shadow:0 0 8px rgba(229,50,45,.8);display:inline-block;animation:blink 1.2s steps(1) infinite;flex:none"></span></span>
+          <h2 style="margin:0;font-size:clamp(28px,3cqw,42px);font-weight:500;letter-spacing:0.01em;line-height:1.15">Recent films.</h2>
+        </div>
+        <a href="/work" style="height:44px;padding:0 22px;border-radius:40px;display:inline-flex;align-items:center;border:1px solid currentColor;font-size:15px;text-decoration:none;transition:background 150ms" style-hover="background:rgba(127,127,127,0.14)">All work</a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px">
+        <div data-reveal="" style="display:flex;flex-direction:column;gap:0;border-radius:12px;overflow:hidden;background:{{ card }};transition:background-color 900ms ease">
+          <div style="aspect-ratio:16/9;background:#031e25"><iframe loading="lazy" src="https://player.vimeo.com/video/1197058424?h=796798a19d&amp;badge=0&amp;title=0&amp;byline=0&amp;portrait=0" title="Nobleman Productions reel" allow="fullscreen; picture-in-picture" style="width:100%;height:100%;border:0;display:block"></iframe></div>
+          <div style="display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:20px 24px"><span style="font-size:17px;font-weight:500">Nobleman Productions · Reel</span><span style="font-size:13px;opacity:.6;white-space:nowrap">Vimeo</span></div>
+        </div>
+        <div data-reveal="" style="display:flex;flex-direction:column;gap:0;border-radius:12px;overflow:hidden;background:{{ card }};transition:background-color 900ms ease">
+          <div style="aspect-ratio:16/9;overflow:hidden"><img src="media/a05.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+          <div style="display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:20px 24px"><span style="font-size:17px;font-weight:500">Satellite Phone Store · Series</span><span style="font-size:13px;opacity:.6;white-space:nowrap">28K views</span></div>
+        </div>
+        <div data-reveal="" style="display:flex;flex-direction:column;gap:0;border-radius:12px;overflow:hidden;background:{{ card }};transition:background-color 900ms ease">
+          <div style="aspect-ratio:16/9;overflow:hidden"><img src="media/a06.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+          <div style="display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:20px 24px"><span style="font-size:17px;font-weight:500">MCT Exchange 2022 · Recap</span><span style="font-size:13px;opacity:.6;white-space:nowrap">Events</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <dc-import name="SiteFooter" above-bg="{{ pageBg }}" preview-mobile="{{ previewFlag }}" hint-size="100%,900px"></dc-import>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;heroOverlay&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:0.5,&quot;min&quot;:0.2,&quot;max&quot;:0.85,&quot;step&quot;:0.05,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;auto&quot;,&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;auto&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;,&quot;description&quot;:&quot;Force the page theme instead of switching on scroll&quot;}}">
+class Component extends DCLogic {
+  state = { theme: "dark", menu: null, mobile: typeof window !== "undefined" && (window.matchMedia("(max-width: 759px)").matches || window.innerWidth < 760), heroReady: false };
+  rootRef = React.createRef();
+  get preview() { return !!this.props.previewMobile; }
+  tcRef = React.createRef();
+  open(m) { clearTimeout(this.closeT); if (m !== this.state.menu) this.setState({ menu: m }); }
+  componentDidMount() {
+    this.onResize = () => { if (this.preview) return; const m = window.matchMedia("(max-width: 759px)").matches || window.innerWidth < 760; if (m !== this.state.mobile) this.setState({ mobile: m, menu: null }); };
+    window.addEventListener("resize", this.onResize);
+    window.addEventListener("orientationchange", this.onResize);
+    this.onResize();
+    this.heroT = setTimeout(() => this.setState({ heroReady: true }), 900);
+    this.onScroll = () => {
+      const root = this.rootRef.current;
+      const scope = this.preview && root ? root : document;
+      const top0 = this.preview && root ? root.getBoundingClientRect().top : 0;
+      const y = top0 + (this.preview && root ? root.clientHeight : window.innerHeight) * 0.45;
+      let t = "dark";
+      scope.querySelectorAll("[data-theme]").forEach(el => { if (el.getBoundingClientRect().top <= y) t = el.dataset.theme; });
+      if (t !== this.state.theme) this.setState({ theme: t });
+    };
+    window.addEventListener("scroll", this.onScroll, { passive: true });
+    if (this.preview && this.rootRef.current) this.rootRef.current.addEventListener("scroll", this.onScroll, { passive: true });
+    this.onScroll();
+    this.io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.setAttribute("data-in", ""); this.io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    const observe = () => document.querySelectorAll("[data-reveal]:not([data-in])").forEach(el => this.io.observe(el));
+    observe();
+    this.mo = new MutationObserver(observe);
+    this.mo.observe(document.body, { childList: true, subtree: true });
+    this.onKey = e => { if (e.key === "Escape") this.setState({ menu: null }); };
+    window.addEventListener("keydown", this.onKey);
+    this.t0 = Date.now();
+    this.tc = setInterval(() => { const el = this.tcRef.current; if (!el) return; const f = Math.floor((Date.now() - this.t0) / 1000 * 24); const p = n => String(n).padStart(2, "0"); el.textContent = `${p(Math.floor(f / 86400) % 24)}:${p(Math.floor(f / 1440) % 60)}:${p(Math.floor(f / 24) % 60)}:${p(f % 24)}`; }, 1000 / 24);
+  }
+  componentWillUnmount() {
+    clearInterval(this.tc);
+    window.removeEventListener("scroll", this.onScroll);
+    window.removeEventListener("resize", this.onResize);
+    window.removeEventListener("orientationchange", this.onResize);
+    clearTimeout(this.heroT);
+    window.removeEventListener("keydown", this.onKey);
+    this.io && this.io.disconnect();
+    this.mo && this.mo.disconnect();
+  }
+  renderVals() {
+    const dark = this.state.theme === "dark";
+    const forced = this.props.theme;
+    const isDark = forced && forced !== "auto" ? forced === "dark" : dark;
+    const menu = this.state.menu;
+    const mob = this.preview || this.state.mobile;
+    const set = m => this.setState({ menu: m });
+    const pillOn = "rgba(127,127,127,0.14)";
+    return {
+      overlay: this.props.heroOverlay ?? 0.5,
+      tcRef: this.tcRef,
+      pageBg: isDark ? "#031e25" : "#ffffff",
+      ink: isDark ? "#f4f4f2" : "#0a0a0a",
+      card: isDark ? "rgba(255,255,255,0.06)" : "#f3f4f6",
+      hairline: isDark ? "rgba(244,244,242,0.14)" : "#e5e7eb",
+      navBg: isDark ? "rgba(3,30,37,0.72)" : "rgba(255,255,255,0.78)",
+      navBgSolid: isDark ? "#031e25" : "#ffffff",
+      navInk: isDark ? "#f4f4f2" : "#0a0a0a",
+      showWhite: isDark ? "block" : "none",
+      showBlack: isDark ? "none" : "block",
+      rootRef: this.rootRef,
+      rootFrame: this.preview ? "width:390px;transform:translateZ(0);" : "",
+      heroReady: this.state.heroReady,
+      heroVideoOpacity: this.state.heroReady ? 1 : 0,
+      themeName: isDark ? "dark" : "light",
+      previewFlag: !!this.preview,
+      isMobile: mob,
+      isDesktop: !mob,
+      mobileSheetOpen: mob && !!menu,
+      bottomPad: mob ? "96px" : "0",
+      filmStripDisp: mob ? "none" : "block",
+      slateDisp: mob ? "none" : "flex",
+      footerCols: mob ? "1fr 1fr 1fr" : "repeat(auto-fit,minmax(150px,1fr))",
+      footerFs: mob ? "13px" : "14px",
+      ctaCols: mob ? "1fr" : "repeat(auto-fit,minmax(300px,1fr))",
+      ctaSpan: mob ? "auto" : "span 2",
+      ctaGap: mob ? "14px" : "20px",
+      ctaCopySize: mob ? "15px" : "17px",
+      ctaBtnH: mob ? "44px" : "52px",
+      ctaBtnPad: mob ? "18px" : "28px",
+      ctaBtnFs: mob ? "14px" : "16px",
+      legalFs: mob ? "15px" : "20px",
+      legalTail: mob ? "none" : "inline",
+      footerLinkGap: mob ? "10px" : "14px",
+      cueBottom: mob ? "100px" : "28px",
+      hudTop: mob ? "76px" : "104px",
+      metaSize: mob ? "11px" : "13px",
+      heroPad: mob ? "140px 24px 110px" : "120px 24px 120px",
+      heroGap: mob ? "18px" : "24px",
+      heroH: this.preview ? "844px" : "100vh",
+      heroMinH: mob ? "680px" : "720px",
+      cueDisplay: mob ? "none" : "flex",
+      crewPos: mob ? "78% center" : "center right",
+      crewMinH: mob ? "auto" : "100vh",
+      closeMenuNow: () => this.setState({ menu: null }),
+      servicesDisp: menu === "services" ? "block" : "none",
+      companyDisp: menu === "company" ? "block" : "none",
+      servicesRows: menu === "services" ? "1fr" : "0fr",
+      companyRows: menu === "company" ? "1fr" : "0fr",
+      servicesOp: menu === "services" ? 1 : 0,
+      companyOp: menu === "company" ? 1 : 0,
+      servicesLine: menu === "services" ? (isDark ? "rgba(244,244,242,0.14)" : "#e5e7eb") : "transparent",
+      companyLine: menu === "company" ? (isDark ? "rgba(244,244,242,0.14)" : "#e5e7eb") : "transparent",
+      servicesBg: menu === "services" ? pillOn : "transparent",
+      companyBg: menu === "company" ? pillOn : "transparent",
+      servicesCaret: menu === "services" ? "rotate(180deg)" : "none",
+      companyCaret: menu === "company" ? "rotate(180deg)" : "none",
+      openServices: () => this.open("services"),
+      openCompany: () => this.open("company"),
+      toggleServices: () => this.open(menu === "services" ? null : "services", true),
+      toggleCompany: () => this.open(menu === "company" ? null : "company", true),
+      holdMenu: () => clearTimeout(this.closeT),
+      closeMenu: () => { clearTimeout(this.closeT); this.closeT = setTimeout(() => this.setState({ menu: null }), 160); },
+    };
+  }
+}
+</script>
+<template id="__bundler_thumbnail" data-bg-color="#141414">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#141414"/>
+    <text x="600" y="440" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="260" font-weight="700" fill="#f5f2ec">H</text>
+  </svg>
+</template>
+</body>
+</html>
