@@ -10,8 +10,9 @@ Pages
 - `/live-production` → live-production.html
 - `/conference-event` → conference-event.html (conference, event, and drone coverage)
 - `/about` → about.html
-- `/privacy` → privacy.html
+- `/privacy` → privacy.html (what both sites collect, cookies and storage, providers, retention, choices)
 - `/start` → start.html (intake form)
+- `/sitemap` → sitemap.html (the human site map: an “I want to…” finder, then every page with deep links into its sections); `/sitemap.xml` is the search-engine version
 - anything else → 404.html (static, no runtime)
 
 Service and About copy was adapted from noblemanproductions.com. Live production, conference/event, About, and Privacy were generated from shared templates during the build-out; they are ordinary HTML now, so edit them directly.
@@ -55,6 +56,16 @@ Film thumbnails in `media/work-*.jpg` are 960×540 JPEGs taken from each film's 
 ## Writing
 
 Every word on the site follows [docs/WRITING.md](docs/WRITING.md), a set of rules drawn from the *Murphy's Laws on Technology* poster: say it plainly, name the action on every button, promise only what is always true, plan for the mistake, and proofread. Check new copy against its checklist.
+
+## Site map and deep links
+
+`/sitemap` is for people; `/sitemap.xml` is for search engines. The footer, the Company menu (desktop and mobile), the privacy page and the 404 page all link to `/sitemap`.
+
+Its "Jump to" buttons link into page sections by id: `/#services`, `/#crew`, `/#credentials`, `/#process`, `/#featured`, `/work#films`, `/about#story|founders|credentials|markets`, and on each service page `#what-you-get`, `#who-its-for`, `#how-it-works`, `#questions`. The runtime renders pages after load, so the browser's own jump to a `#id` finds nothing; `assets/np.js` scrolls to the section once it exists and holds it there while images and fonts settle (about 3 s, until the visitor scrolls). `section[id]` has a `scroll-margin-top` in `np.css` so the heading clears the fixed header. Renaming or removing a section id breaks its link on the site map.
+
+## Privacy notice
+
+`privacy.html` describes what the code actually does, and nothing more: the form's fields, Vercel's request logs, no cookies on this site, the portal's `np_session` cookie and its two browser-storage keys (`np-review-time`, `np-portal-seen`), the providers (Vercel, Resend, Microsoft 365, Google Fonts, Vimeo, YouTube, and Neon for the real portal), retention, and how to ask for changes. When a change adds a cookie, storage key, tracker, provider, or new data the portal keeps, update the page and its date in the same change. The portal links to `/privacy#portal` from sign-in, Help, and Account.
 
 ## Environment variables
 
@@ -131,7 +142,7 @@ To add one: make it single-colour white on transparent with a tight `viewBox` an
 ## Still unfinished
 
 - **Client logos need the owners' OK.** Showing a brand's logo implies a working relationship. Confirm each one is a real Nobleman client and that no contract restricts using its logo.
-- **Privacy policy needs an owner review.** It describes what the site actually does (Resend email, Vercel logs, Google Fonts, privacy-enhanced YouTube and Vimeo embeds) and names alexis@gotit2work.com as the contact. It is not legal advice.
+- **Privacy notice needs an owner and legal review.** It matches what both sites do today (see "Privacy notice" above), names GotIT2Work as the operator and alexis@gotit2work.com as the contact, and states choices the owners should confirm: how long inquiries are kept, replying "usually within a few business days", and Neon as the future portal database. Nobody has checked which state laws (California, Nevada) apply to the business. It is not legal advice.
 - There is no Terms page and no Instagram link: no confirmed Instagram account for Nobleman Productions was found, so the link was removed rather than guessed.
 - The "Also offered" services in the nav (social packages, executive interviews, photography, documentaries) link to `/start` rather than to pages of their own.
 - Inquiries go to alexis@gotit2work.com; noblemanproductions.com publishes info@noblemanproductions.com. Pick one before launch.

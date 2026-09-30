@@ -4,6 +4,7 @@
  *   data-reveal=""|"card"|"left"|"right"|"title"|"zoom"   animates in as it scrolls into view (np.css)
  *   data-parallax="40"                                    drifts up to 40 px against the scroll
  *   data-intro="0..7", data-letterbox, data-hero-*        landing sequence and hero scroll effect (np.css)
+ *   <section id="…">                                      deep-link target, e.g. /services#questions
  */
 (function () {
   var root = document.documentElement;
@@ -21,6 +22,28 @@
       if (faces && faces.length) root.classList.add("np-serif");
     }, function () {});
   });
+
+  // Deep links (/services#questions, used by the site map): the runtime renders the page after load, so the
+  // browser's own jump to the #id finds nothing. Jump once the target exists, and keep it in place while images
+  // and fonts settle (about 3 s), until the visitor scrolls on their own. Instant, whatever scroll-behavior says.
+  var hash = "";
+  try { hash = decodeURIComponent(location.hash.slice(1)); } catch (e) {}
+  if (hash) {
+    var t0 = Date.now(), left = false;
+    var stop = function () { left = true; };
+    ["wheel", "touchstart", "keydown", "mousedown"].forEach(function (t) { window.addEventListener(t, stop, { once: true, passive: true }); });
+    (function seek() {
+      if (left) return;
+      var el = document.getElementById(hash);
+      if (el) {
+        var prev = root.style.scrollBehavior;
+        root.style.scrollBehavior = "auto";
+        el.scrollIntoView(true);
+        root.style.scrollBehavior = prev;
+      }
+      if (Date.now() - t0 < 3000) setTimeout(seek, el ? 250 : 50);
+    })();
+  }
 
   if (!("IntersectionObserver" in window) || !window.requestAnimationFrame) return;
   if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;

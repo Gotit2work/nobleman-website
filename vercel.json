@@ -7,14 +7,14 @@
       "permanent": true
     },
     {
-      "source": "/:page(work|services|start|live-production|conference-event|about|privacy).html",
+      "source": "/:page(work|services|start|live-production|conference-event|about|privacy|sitemap).html",
       "destination": "/:page",
       "permanent": true
     }
   ],
   "rewrites": [
     {
-      "source": "/:page(work|services|start|live-production|conference-event|about|privacy)",
+      "source": "/:page(work|services|start|live-production|conference-event|about|privacy|sitemap)",
       "destination": "/:page.html"
     },
     {
