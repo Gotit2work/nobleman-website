@@ -24,6 +24,8 @@ Marketing site for Nobleman Productions (Jean and Justin; veteran owned; San Die
 - Films open in the shared `VideoPlayer.dc.html` via a `np:play` window event (README, "How films play"). Keep its `<dc-import>` outside any `container-type` element, or its `position:fixed` overlay is trapped inside it.
 - The nav/footer colour theme follows `data-theme` sections under the header. Hidden elements report a top of 0, so the check skips anything without client rects; keep that when touching it.
 - New pages: add the name to both patterns in `vercel.json`, and to `sitemap.xml`.
+- Typography and motion live in `assets/np.css` + `assets/np.js`, loaded by every page (README, "Type and motion"). Animate with `data-reveal`/`data-parallax` attributes, not per-page observers. Never hide a `data-reveal` element with `clip-path` (IntersectionObserver then never sees it). Bump `?v=` on every page when those files change.
+- The desktop header is a compact pill that hugs its content (`data-navpill`); the mega-menus drop below it as their own panels. Keep it compact; the regression script asserts it is under 820 px wide.
 
 ## Conventions
 

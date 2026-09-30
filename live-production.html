@@ -22,7 +22,9 @@
 <style>html,body{margin:0;background:#fff}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Cormorant+Garamond:ital,wght@1,400;1,500&amp;display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="/assets/np.css?v=1">
+<script src="/assets/np.js?v=1" defer></script>
 <script src="/vendor/react-18.3.1.production.min.js"></script>
 <script src="/vendor/react-dom-18.3.1.production.min.js"></script>
 <script src="/support.js"></script>
@@ -36,8 +38,6 @@ body{margin:0;background:#ffffff;color:#0a0a0a;font-family:Inter,system-ui,sans-
 a{color:inherit}a:hover{color:inherit}
 *{box-sizing:border-box}
 @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:.15}}
-[data-reveal]{opacity:0;transform:translateY(28px);transition:opacity 1.2s cubic-bezier(.16,.84,.3,1),transform 1.2s cubic-bezier(.16,.84,.3,1)}
-[data-reveal][data-in]{opacity:1;transform:none}
 </style>
 </helmet>
 <div data-screen-label="Service · Live Production" style="background:#fff">
@@ -47,14 +47,14 @@ a{color:inherit}a:hover{color:inherit}
   <section style="max-width:1200px;margin:0 auto;padding:150px 24px 96px;display:flex;flex-direction:column;gap:40px">
     <div style="display:flex;flex-direction:column;gap:24px;max-width:900px">
       <div><span style="display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase"><span style="opacity:.6">02 · Live Production for Course Creators</span><span style="width:7px;height:7px;border-radius:50%;background:#e5322d;box-shadow:0 0 8px rgba(229,50,45,.8);display:inline-block;animation:blink 1.2s steps(1) infinite;flex:none"></span></span></div>
-      <h1 style="margin:0;font-size:clamp(40px,6vw,96px);font-weight:500;letter-spacing:-0.01em;line-height:1.05;text-wrap:balance">Your program is premium. Your production should match.</h1>
+      <h1 data-reveal="title" style="margin:0;font-size:clamp(48px,7.8vw,130px);font-weight:500;line-height:1;text-wrap:balance">Your program is premium. Your production should match.</h1>
       <p style="margin:0;font-size:18px;line-height:1.6;max-width:640px;text-wrap:pretty">Done-for-you live production for course creators, online educators, and cohort-based programs. Built to make your launches and sessions feel like a Netflix special, not a webinar.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap">
         <a href="/start" style="display:inline-flex;align-items:center;height:52px;padding:0 28px;background:#031e25;color:#f4f4f2;border-radius:32px;font-size:15px;font-weight:500;text-decoration:none;transition:background 150ms" style-hover="opacity:.85;color:#f4f4f2">Plan your broadcast</a>
         <a href="/work" style="display:inline-flex;align-items:center;height:52px;padding:0 28px;border:1px solid rgba(10,10,10,0.5);border-radius:32px;font-size:15px;font-weight:500;text-decoration:none;transition:background 150ms" style-hover="background:rgba(10,10,10,0.06)">See the work</a>
       </div>
     </div>
-    <div data-reveal="" role="img" aria-label="Broadcast control, run with calm precision" style="position:relative;display:block;width:100%;aspect-ratio:21/9;min-height:240px;border-radius:32px;overflow:hidden;background:#031e25">
+    <div data-reveal="zoom" role="img" aria-label="Broadcast control, run with calm precision" style="position:relative;display:block;width:100%;aspect-ratio:21/9;min-height:240px;border-radius:32px;overflow:hidden;background:#031e25">
       <div style="position:absolute;inset:0;background:#031e25 url('media/service-live.jpg') center/cover no-repeat;transition:transform 1.6s cubic-bezier(.16,.84,.3,1)" style-hover="transform:scale(1.03)"></div>
       <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,30,37,0) 45%,rgba(3,30,37,.72) 100%);pointer-events:none"></div>
       
@@ -65,7 +65,7 @@ a{color:inherit}a:hover{color:inherit}
   <section style="background:#031e25;color:#f4f4f2;padding:120px 24px">
     <div style="max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:32px">
       <div><span style="display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase"><span style="opacity:.6">The problem we solve</span><span style="width:7px;height:7px;border-radius:50%;background:#e5322d;box-shadow:0 0 8px rgba(229,50,45,.8);display:inline-block;animation:blink 1.2s steps(1) infinite;flex:none"></span></span></div>
-      <blockquote data-reveal="" style="margin:0;font-size:clamp(32px,4.5vw,64px);font-weight:300;letter-spacing:-0.03em;line-height:1.1;max-width:1000px;text-wrap:balance">“We’re charging premium tuition for our course — but our launch livestream looks like a Zoom call. The audience can feel the gap immediately.”</blockquote>
+      <blockquote data-reveal="title" style="margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:clamp(40px,5.6vw,84px);font-weight:400;letter-spacing:-0.01em;line-height:1.05;max-width:1000px;text-wrap:balance">“We’re charging premium tuition for our course — but our launch livestream looks like a Zoom call. The audience can feel the gap immediately.”</blockquote>
     </div>
   </section>
 
@@ -73,7 +73,7 @@ a{color:inherit}a:hover{color:inherit}
     <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:48px">
       <div style="display:flex;flex-direction:column;gap:16px">
         <div><span style="display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase"><span style="opacity:.6">What you get</span><span style="width:7px;height:7px;border-radius:50%;background:#e5322d;box-shadow:0 0 8px rgba(229,50,45,.8);display:inline-block;animation:blink 1.2s steps(1) infinite;flex:none"></span></span></div>
-        <h2 style="margin:0;font-size:clamp(28px,3vw,40px);font-weight:300;letter-spacing:-0.021em;line-height:1.15">A complete, no-loose-ends engagement.</h2>
+        <h2 style="margin:0;font-size:clamp(35px,3.9vw,54px);font-weight:400;line-height:1.08">A complete, no-loose-ends engagement.</h2>
       </div>
       <div style="display:flex;flex-direction:column">
         <div data-reveal="" style="display:flex;justify-content:space-between;gap:24px;padding:20px 0;border-top:1px solid #e5e7eb;flex-wrap:wrap"><span style="font-size:18px">Multi-camera live switching with custom branded graphics</span><span style="font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;white-space:nowrap">Switching</span></div>
@@ -90,7 +90,7 @@ a{color:inherit}a:hover{color:inherit}
     <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:48px;align-items:start">
       <div style="display:flex;flex-direction:column;gap:16px">
         <div><span style="display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase"><span style="opacity:.6">Who it's for</span><span style="width:7px;height:7px;border-radius:50%;background:#e5322d;box-shadow:0 0 8px rgba(229,50,45,.8);display:inline-block;animation:blink 1.2s steps(1) infinite;flex:none"></span></span></div>
-        <h2 style="margin:0;font-size:clamp(28px,3vw,40px);font-weight:300;letter-spacing:-0.021em;line-height:1.2;text-wrap:balance">Course creators, online educators, mastermind hosts, and cohort program leads running launches, live sessions, summits, or premium webinars where production quality is the trust signal.</h2>
+        <h2 style="margin:0;font-size:clamp(35px,3.9vw,54px);font-weight:400;line-height:1.08;text-wrap:balance">Course creators, online educators, mastermind hosts, and cohort program leads running launches, live sessions, summits, or premium webinars where production quality is the trust signal.</h2>
       </div>
       <div style="display:flex;flex-direction:column;gap:28px">
         <div style="display:flex;flex-direction:column;gap:14px">
@@ -109,25 +109,25 @@ a{color:inherit}a:hover{color:inherit}
     <div style="max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:48px">
       <div style="display:flex;flex-direction:column;gap:16px">
         <div><span style="display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase"><span style="opacity:.6">How it works</span><span style="width:7px;height:7px;border-radius:50%;background:#e5322d;box-shadow:0 0 8px rgba(229,50,45,.8);display:inline-block;animation:blink 1.2s steps(1) infinite;flex:none"></span></span></div>
-        <h2 style="margin:0;font-size:clamp(28px,3vw,40px);font-weight:300;letter-spacing:-0.021em;line-height:1.15">A four-step path from kickoff to delivery.</h2>
+        <h2 style="margin:0;font-size:clamp(35px,3.9vw,54px);font-weight:400;line-height:1.08">A four-step path from kickoff to delivery.</h2>
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:40px 32px">
-        <div data-reveal="" style="display:flex;flex-direction:column;gap:20px;border-top:1px solid rgba(255,255,255,0.16);padding-top:24px">
+        <div data-reveal="card" style="display:flex;flex-direction:column;gap:20px;border-top:1px solid rgba(255,255,255,0.16);padding-top:24px">
           <div style="font-size:clamp(56px,6vw,96px);font-weight:300;letter-spacing:-0.043em;line-height:1">01</div>
           <div style="font-size:20px;font-weight:400">Discovery</div>
           <p style="margin:0;font-size:16px;line-height:1.6;color:rgba(255,255,255,0.8)">We map your run-of-show, content blocks, and brand standards before any gear is touched.</p>
         </div>
-        <div data-reveal="" style="display:flex;flex-direction:column;gap:20px;border-top:1px solid rgba(255,255,255,0.16);padding-top:24px">
+        <div data-reveal="card" style="display:flex;flex-direction:column;gap:20px;border-top:1px solid rgba(255,255,255,0.16);padding-top:24px">
           <div style="font-size:clamp(56px,6vw,96px);font-weight:300;letter-spacing:-0.043em;line-height:1">02</div>
           <div style="font-size:20px;font-weight:400">Tech build</div>
           <p style="margin:0;font-size:16px;line-height:1.6;color:rgba(255,255,255,0.8)">We design the camera, audio, and switching plan, including backups and contingency paths.</p>
         </div>
-        <div data-reveal="" style="display:flex;flex-direction:column;gap:20px;border-top:1px solid rgba(255,255,255,0.16);padding-top:24px">
+        <div data-reveal="card" style="display:flex;flex-direction:column;gap:20px;border-top:1px solid rgba(255,255,255,0.16);padding-top:24px">
           <div style="font-size:clamp(56px,6vw,96px);font-weight:300;letter-spacing:-0.043em;line-height:1">03</div>
           <div style="font-size:20px;font-weight:400">Show day</div>
           <p style="margin:0;font-size:16px;line-height:1.6;color:rgba(255,255,255,0.8)">On-site or remote crew runs the broadcast with calm precision. You focus on your content.</p>
         </div>
-        <div data-reveal="" style="display:flex;flex-direction:column;gap:20px;border-top:1px solid rgba(255,255,255,0.16);padding-top:24px">
+        <div data-reveal="card" style="display:flex;flex-direction:column;gap:20px;border-top:1px solid rgba(255,255,255,0.16);padding-top:24px">
           <div style="font-size:clamp(56px,6vw,96px);font-weight:300;letter-spacing:-0.043em;line-height:1">04</div>
           <div style="font-size:20px;font-weight:400">Delivery</div>
           <p style="margin:0;font-size:16px;line-height:1.6;color:rgba(255,255,255,0.8)">Polished VOD, clip package, and recording archive delivered fast, ready for your sales engine.</p>
@@ -139,7 +139,7 @@ a{color:inherit}a:hover{color:inherit}
   <section style="background:#fff;padding:96px 24px">
     <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:48px;align-items:start">
       <div style="display:flex;flex-direction:column;gap:16px"><div><span style="display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase"><span style="opacity:.6">Common questions</span><span style="width:7px;height:7px;border-radius:50%;background:#e5322d;box-shadow:0 0 8px rgba(229,50,45,.8);display:inline-block;animation:blink 1.2s steps(1) infinite;flex:none"></span></span></div>
-        <h2 style="margin:0;font-size:clamp(28px,3vw,40px);font-weight:300;letter-spacing:-0.021em;line-height:1.15">Questions, answered.</h2>
+        <h2 style="margin:0;font-size:clamp(35px,3.9vw,54px);font-weight:400;line-height:1.08">Questions, answered.</h2>
       </div>
       <div style="display:flex;flex-direction:column;border-bottom:1px solid #e5e7eb">
         <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="5">
@@ -160,7 +160,7 @@ a{color:inherit}a:hover{color:inherit}
   <section style="background:#031e25;color:#f4f4f2;padding:120px 24px">
     <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap">
       <div style="display:flex;flex-direction:column;gap:20px;max-width:760px">
-        <h2 style="margin:0;font-size:clamp(36px,5vw,72px);font-weight:500;letter-spacing:0.005em;line-height:1.08;text-wrap:balance">Make your next launch unmistakably premium.</h2>
+        <h2 style="margin:0;font-size:clamp(45px,6.5vw,97px);font-weight:500;line-height:1.08;text-wrap:balance">Make your next launch unmistakably premium.</h2>
         <p style="margin:0;font-size:18px;line-height:1.6;opacity:.8;max-width:560px;text-wrap:pretty">Share your dates, audience size, and platform, and we’ll come back with a production plan worthy of the price your program commands.</p>
       </div>
       <a href="/start" style="display:inline-flex;align-items:center;height:52px;padding:0 26px;background:#fff;color:#0a0a0a;border-radius:32px;font-size:15px;font-weight:500;text-decoration:none;transition:background 150ms" style-hover="background:#f3f4f6;color:#0a0a0a">Start a Project</a>
@@ -179,11 +179,8 @@ class Component extends DCLogic {
   /** Opens the shared film player (VideoPlayer.dc.html). */
   play(v) { window.__npQueued = v; window.dispatchEvent(new CustomEvent("np:play", { detail: v })); }
   componentDidMount() {
-    this.io = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.setAttribute("data-in", ""); this.io.unobserve(e.target); } }); }, { threshold: 0.12 });
-    const observe = () => document.querySelectorAll("[data-reveal]:not([data-in])").forEach(el => this.io.observe(el));
-    observe(); this.mo = new MutationObserver(observe); this.mo.observe(document.body, { childList: true, subtree: true });
   }
-  componentWillUnmount() { this.io && this.io.disconnect(); this.mo && this.mo.disconnect(); }
+  componentWillUnmount() { }
   renderVals() {
     const open = this.state.open;
     const vals = {

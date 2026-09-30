@@ -38,6 +38,18 @@ Film thumbnails in `media/work-*.jpg` are 960×540 JPEGs taken from each film's 
 
 `vendor/` holds React 18.3.1 so pages don't depend on unpkg being up. The files are byte-identical to the unpkg builds `support.js` pins by SRI hash. The version is in the file name, so they can be cached forever.
 
+## Type and motion
+
+`assets/np.css` and `assets/np.js` hold the site's typography and motion, and every page loads both from `<head>` (the script with `defer`, so it runs before the runtime renders).
+
+- **Type.** Headlines (`h1`, `h2`, and anything with `class="np-display"`) are Cormorant Garamond, a classical display serif that echoes the Nobleman wordmark; `class="np-it"` is its italic. Body text stays Inter.
+- **Reveals.** Put `data-reveal` on an element and it animates in as it scrolls into view: `""` (rise and unblur), `"card"` (flies up with a 3D tilt), `"left"`/`"right"`, `"title"` (rises out of a soft mask), `"zoom"`. Items entering together are staggered. Scrolling back up sends them out again at the bottom edge, so they fly in again next time.
+- **Parallax.** `data-parallax="20"` drifts an element up to 20 px against the scroll; give it spare size inside an `overflow:hidden` frame.
+- **Landing.** On the home page, `data-letterbox`, `data-hero-zoom`, `data-hero-media`, `data-hero-content` and `data-intro="0..7"` drive the opening sequence and the hero's scroll effect. It waits for the display font (at most about a second), so headlines never swap typeface mid-animation.
+- **Safety.** Motion only applies once `np.js` adds `np-motion` to `<html>`. It skips that for visitors with reduced motion turned on, and if the script doesn't load nothing is hidden.
+- **Don't hide a revealing element with `clip-path`.** IntersectionObserver measures the clipped area, so a clipped element can look off-screen and never reveal. Use a mask (as `"title"` does) or transform/filter.
+- **Changing these files:** bump the `?v=` number in every page's `<link>`/`<script>` tag. `assets/` is cached for 7 days.
+
 ## Environment variables
 
 | Variable | Required | Notes |
