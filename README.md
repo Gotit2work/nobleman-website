@@ -52,6 +52,10 @@ Film thumbnails in `media/work-*.jpg` are 960×540 JPEGs taken from each film's 
 - **Don't hide a revealing element with `clip-path`.** IntersectionObserver measures the clipped area, so a clipped element can look off-screen and never reveal. Use a mask (as `"title"` does) or transform/filter.
 - **Changing these files:** bump the `?v=` number in every page's `<link>`/`<script>` tag. `assets/` is cached for 7 days.
 
+## Writing
+
+Every word on the site follows [docs/WRITING.md](docs/WRITING.md), a set of rules drawn from the *Murphy's Laws on Technology* poster: say it plainly, name the action on every button, promise only what is always true, plan for the mistake, and proofread. Check new copy against its checklist.
+
 ## Environment variables
 
 | Variable | Required | Notes |
