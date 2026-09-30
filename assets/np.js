@@ -72,11 +72,17 @@
 
   // Reveals: in once the element's top clears the bottom 12% of the screen; out again when it sinks back below
   // that line (scrolling up), so cards fly in and out at the bottom edge. Leaving through the top keeps it in.
-  // Everything entering in one batch is staggered top-to-bottom, left-to-right.
+  // Everything entering in one batch is staggered top-to-bottom, left-to-right. Anything already above the
+  // screen when first seen (a deep link, or a fast scroll while the page was still rendering) is simply shown:
+  // it was skipped, not missed, and must not wait to fly in from the wrong side when the visitor scrolls back.
   var io = new IntersectionObserver(function (entries) {
     var entering = [];
     entries.forEach(function (e) {
       if (e.isIntersecting) entering.push(e);
+      else if (e.boundingClientRect.bottom <= 0 && e.boundingClientRect.height > 0 && !e.target.hasAttribute("data-in")) {
+        e.target.style.setProperty("--np-d", "0ms");
+        e.target.setAttribute("data-in", "");
+      }
       else if (e.boundingClientRect.top > 0 && e.target.hasAttribute("data-in")) {
         e.target.style.setProperty("--np-d", "0ms");
         e.target.removeAttribute("data-in");
@@ -132,7 +138,23 @@
       el.style.translate = "0 " + (Math.max(-1, Math.min(1, t)) * amt).toFixed(1) + "px";
     }
   }
+  // IntersectionObserver only reports changes, so an element jumped over (below the screen, then above it, never
+  // on it) gets no callback at all. Catch those while scrolling, at most every 150 ms plus once after it stops:
+  // anything above the screen that is still hidden is shown.
+  var lastSkip = 0, skipT = 0;
+  function revealSkipped() {
+    if (waiting) return;
+    var now = Date.now();
+    if (now - lastSkip < 150) { if (!skipT) skipT = setTimeout(function () { skipT = 0; revealSkipped(); }, 160); return; }
+    lastSkip = now;
+    var list = document.querySelectorAll("[data-reveal][data-np]:not([data-in])");
+    for (var i = 0; i < list.length; i++) {
+      var r = list[i].getBoundingClientRect();
+      if (r.height > 0 && r.bottom <= 0) { list[i].style.setProperty("--np-d", "0ms"); list[i].setAttribute("data-in", ""); }
+    }
+  }
   window.addEventListener("scroll", queue, { passive: true });
+  window.addEventListener("scroll", revealSkipped, { passive: true });
   window.addEventListener("resize", queue);
 
   function boot() {
