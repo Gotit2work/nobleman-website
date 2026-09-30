@@ -9,7 +9,7 @@ Marketing site for Nobleman Productions (Jean and Justin; veteran owned; San Die
   - Email is Microsoft 365: MX `gotit2work-com.mail.protection.outlook.com`, SPF `v=spf1 include:spf.protection.outlook.com -all`, DMARC `p=none`. Don't change the root SPF; Resend uses its own `send.` subdomain records.
 - This site: `noblemanproductions.gotit2work.com` (CNAME to Vercel).
 - Client portal: `portal.noblemanproductions.gotit2work.com`, repo `Gotit2work/nobleman-portal`.
-- Vercel: account `amangual1`, team slug `gotit2-work`. The team was on Hobby as of 2026-09-30; Vercel restricts Hobby to non-commercial use, so production needs Pro.
+- Vercel: account `amangual1`, team `Gotit2Work` (slug `gotit2-work`, id `team_b7Eucmxp9X2SzzAHXZPA92Qh`). On Hobby by the owner's choice while this is a pre-launch preview; Vercel restricts Hobby to non-commercial use, so upgrade to Pro before marketing the site.
 - Hero video: Vimeo `1197058424`, hash `796798a19d`, Jean's account (`jeangotay`, Vimeo Plus).
 - Full setup, validation, and rollback: `docs/DEPLOYMENT.md`.
 

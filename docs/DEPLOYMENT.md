@@ -27,7 +27,7 @@
 | Vercel account | `amangual1`, team `gotit2-work`, **Hobby** plan |
 | Hero video | Vimeo `1197058424` (hash `796798a19d`), owner account is Vimeo Plus, embeddable |
 
-> **Vercel plan — decide before launch.** Vercel's fair-use guidelines say: *"Hobby teams are restricted to non-commercial personal use only. All commercial usage of the platform requires either a Pro or Enterprise plan."* A production company's marketing site and client portal are commercial. Upgrade the `gotit2-work` team to Pro (a trial was available on the account) before pointing the real domain at it. Check current pricing on vercel.com/pricing.
+> **Vercel plan.** Vercel's fair-use guidelines say: *"Hobby teams are restricted to non-commercial personal use only. All commercial usage of the platform requires either a Pro or Enterprise plan."* Decision on 2026-09-30: stay on Hobby while the site is a pre-launch preview and the portal runs as a demo. Upgrade the `gotit2-work` team to Pro before the site is marketed or real clients use the portal. Check current pricing on vercel.com/pricing.
 
 ---
 
@@ -95,6 +95,7 @@ In each repository on GitHub: open a pull request from `claude/awesome-euler-ynm
    |---|---|---|
    | `SESSION_SECRET` | the 48-byte value you generated | Production, Preview |
    | `BOOTSTRAP_SECRET` | the one-time value | Production only |
+   | `PORTAL_MODE` | `demo` while the portal is a public showcase; delete it to require sign-in | Production, Preview |
 
 5. **Redeploy** so the variables take effect: Deployments → newest → ⋯ → **Redeploy**. Environment variables only apply to deployments created after they were set.
 6. **Settings → Domains → Add** → `portal.noblemanproductions.gotit2work.com`. Copy the CNAME value Vercel shows.
@@ -194,7 +195,7 @@ Create Jean and Justin with the admin API; the commands are in the portal README
 | Vercel domain stuck on *Invalid Configuration* | DNS not propagated; Name doubled (`…gotit2work.com.gotit2work.com`); value typo | Re-check the GoDaddy record; wait up to an hour; `nslookup` against `1.1.1.1` |
 | Page loads but no nav/footer | `SiteChrome.dc.html` / `SiteFooter.dc.html` missing from the deploy | Browser console shows `[dc-runtime] sibling fetch … failed`; confirm both files are at the repo root on `main` |
 | Hero shows the still frame and never plays | Vimeo embed restrictions (Phase 4), or the viewer's device blocks autoplay (e.g. iOS Low Power Mode) | Fix the Vimeo setting; device-side autoplay blocks are expected and the poster is the intended fallback |
-| Form says "Email is not configured yet." | `RESEND_API_KEY` missing, or set without a redeploy | Set it, then redeploy |
+| Form says "Online inquiries aren't switched on yet…" | `RESEND_API_KEY` missing, or set without a redeploy | Set it, then redeploy |
 | Form says "We could not send that…" | Resend domain not verified, or `INTAKE_FROM` uses a domain Resend hasn't verified | Vercel → website → Logs → filter `/api/intake` → look for `intake failed` |
 | Portal: "Sign-in is unavailable right now" | `DATABASE_URL` missing, `schema.sql` not run, or `SESSION_SECRET` shorter than 32 characters | Vercel → portal → Logs → `/api/login` |
 | Portal: "The portal is having trouble…" on load | `/api/me` failing for the same reasons | Same as above |

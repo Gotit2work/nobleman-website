@@ -14,7 +14,10 @@ const row = (label, value) =>
 
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
-  if (!process.env.RESEND_API_KEY) return res.status(500).json({ error: "Email is not configured yet." });
+  // Until Resend is connected, tell the visitor how to reach us instead of showing a configuration error.
+  if (!process.env.RESEND_API_KEY) {
+    return res.status(503).json({ error: "Online inquiries aren't switched on yet. Please email alexis@gotit2work.com and we'll reply the same business day." });
+  }
 
   let raw;
   try {

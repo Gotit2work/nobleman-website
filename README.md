@@ -22,7 +22,7 @@ Pages
 | `INTAKE_TO` | no | Defaults to `alexis@gotit2work.com` |
 | `INTAKE_FROM` | no | Defaults to `Nobleman Productions <noreply@gotit2work.com>`. Must be on a domain verified in Resend |
 
-**Verify the domain first.** In Resend, add `gotit2work.com` and publish the DNS records it gives you (details in the runbook; the root SPF record stays as it is). Until that is done, sending fails and the form shows an error telling the visitor to email Alexis directly.
+**Verify the domain first.** In Resend, add `gotit2work.com` and publish the DNS records it gives you (details in the runbook; the root SPF record stays as it is). Until then the form tells visitors inquiries aren't switched on yet and to email alexis@gotit2work.com directly; if the key is set but the domain isn't verified, sending fails with a similar message.
 
 ## How the intake form behaves
 
