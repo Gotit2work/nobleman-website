@@ -43,6 +43,17 @@ git push -u origin main
 
 `POST /api/intake` sends two emails: the inquiry to `INTAKE_TO` with the visitor's address as reply-to, and a confirmation to the visitor. A hidden honeypot field drops the most basic bots. Submissions are not stored anywhere — if you want a record beyond email, that needs the database.
 
+## Image weight
+
+The photos in `media/` are PNGs between 1.2 and 2.3 MB — about 25 MB for the repo. They were recovered from a temporary CDN and there was no JPEG encoder available to convert them. Before you push traffic at this, convert them once locally:
+
+```bash
+cd website/media
+for f in a0*.png a1[01].png; do cwebp -q 82 "$f" -o "${f%.png}.webp"; done
+```
+
+Then point the `<img src>` and `url(...)` references at the `.webp` files (or ask me to rewrite them). The seven icon masks `a12`–`a18` are already small. Leaving the PNGs as they are works, it is just a slow first load.
+
 ## Still unfinished
 
 Placeholder `#` links remain for About, Nobleman Sailing Media, Drone, and two of the service pages.
