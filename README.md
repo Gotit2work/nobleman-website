@@ -79,6 +79,10 @@ If the hero video changes, regenerate the poster from the new video's thumbnail 
 
 Photos in `media/` are JPEG (mozjpeg, quality 88, 4:4:4 chroma), 40–120 KB each; the originals were 1.2–2.3 MB PNGs. WebP was tested and rejected: it visibly smeared the dark water textures even at quality 95. The seven icon masks `a12`–`a18` stay PNG.
 
+## Share image
+
+`og-logo.jpg` (1200×630) is the preview shown when a page is shared: the white logo (`assets/Nobleman_Logo_White.png`) at 720 px wide, centred on the dark water texture with a soft teal lift and darkened edges. Every page's `og:image` and `twitter:image` point at it. If it changes, save it under a **new file name** and update those tags: Facebook, LinkedIn, and iMessage cache preview images by URL. The water background came from the previous `og.jpg` (in git history). To refresh a preview that's already cached, use Facebook's Sharing Debugger or LinkedIn's Post Inspector.
+
 ## Client logos
 
 The band under the home hero shows past clients' logos, white on transparent, from `media/logos/`. The list, file names, and per-logo heights are `brands` in `index.html`'s logic. The heights are optical: tall emblems are larger and long wordmarks smaller, so every mark reads with similar weight. All are genuine marks, none redrawn:
