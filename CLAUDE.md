@@ -17,7 +17,7 @@ Marketing site for Nobleman Productions (Jean and Justin; veteran owned; San Die
 ## How the pages work
 
 - Each page is static HTML rendered in the browser by `support.js`, a generated "dc-runtime". Don't edit it by hand. Templates live inside `<x-dc>`; the logic is the `class Component extends DCLogic` script.
-- `SiteChrome.dc.html` and `SiteFooter.dc.html` are fetched at runtime by relative URL and must stay at the repo root.
+- `SiteChrome.dc.html` and `SiteFooter.dc.html` are fetched at runtime by relative URL and must stay at the repo root. Don't turn on `cleanUrls`: it would 308 those fetches. Page routes are explicit rewrites in `vercel.json`, and a new page must be added to both patterns there.
 - React 18.3.1 is vendored in `vendor/`, byte-identical to the unpkg builds pinned by SRI in `support.js`. Loading it before `support.js` makes the runtime skip its CDN fetch.
 - **Never put `<link rel="stylesheet">` or a synchronous `<script src>` inside `<helmet>`.** The browser parses it inside `<body>` and delays `DOMContentLoaded`, which is when the runtime boots, so the page stays blank until that request finishes. Put such things in the static `<head>`, async or non-blocking.
 - The iframes in the raw template start loading during HTML parse. That is why `/work` logs a harmless 404 for a literal `{{ w.embed }}` URL.
@@ -31,5 +31,5 @@ Marketing site for Nobleman Productions (Jean and Justin; veteran owned; San Die
 ## Verifying changes
 
 There is no test suite. What worked before:
-- A small local server that mimics Vercel's `cleanUrls` routing and runs `api/*.js` handlers, then Playwright with the preinstalled Chromium (`/opt/pw-browsers`). Check every page on desktop (1440 wide) and mobile (390 wide), including console errors, broken images, and horizontal scroll.
+- A small local server that mimics Vercel's routing (clean page URLs, `.html` redirects) and runs `api/*.js` handlers, then Playwright with the preinstalled Chromium (`/opt/pw-browsers`). Check every page on desktop (1440 wide) and mobile (390 wide), including console errors, broken images, and horizontal scroll.
 - `npx vercel build` with a hand-written `.vercel/project.json` (`{"projectId":"x","orgId":"y","settings":{"framework":null}}`), then read `.vercel/output/config.json` to confirm routes and headers.

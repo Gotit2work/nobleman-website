@@ -1,6 +1,12 @@
 {
-  "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/:page(work|services|start).html", "destination": "/:page", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/:page(work|services|start)", "destination": "/:page.html" }
+  ],
   "headers": [
     {
       "source": "/(.*)",

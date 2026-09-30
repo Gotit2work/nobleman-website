@@ -10,7 +10,9 @@ Pages
 - `/start` → start.html (intake form)
 - anything else → 404.html (static, no runtime)
 
-`SiteChrome.dc.html`, `SiteFooter.dc.html`, and `support.js` are the shared nav, footer, and rendering runtime. All must stay at the repo root. With `cleanUrls` on, Vercel serves the components at `/SiteChrome.dc` and `/SiteFooter.dc` (the runtime's request for the `.html` name is answered with a 308 redirect, which browsers cache).
+`SiteChrome.dc.html`, `SiteFooter.dc.html`, and `support.js` are the shared nav, footer, and rendering runtime. All must stay at the repo root; the runtime fetches `./SiteChrome.dc.html` and `./SiteFooter.dc.html` by those exact names.
+
+**Clean URLs are explicit in `vercel.json`, on purpose.** Vercel's `cleanUrls` setting would redirect every `.html` request, which puts an extra round trip in front of the nav and footer on every first visit. Instead, `/work`, `/services`, `/start` are rewrites and `/<page>.html` redirects to them. **Adding a page means adding its name to both patterns in `vercel.json`.**
 
 `vendor/` holds React 18.3.1 so pages don't depend on unpkg being up. The files are byte-identical to the unpkg builds `support.js` pins by SRI hash. The version is in the file name, so they can be cached forever.
 
