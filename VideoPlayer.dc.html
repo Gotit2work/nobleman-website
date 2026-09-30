@@ -54,6 +54,7 @@ class Component extends DCLogic {
     try { document.documentElement.style.overflow = ""; } catch (e) {}
     this.setState({ film: null });
     try { if (this.lastFocus && this.lastFocus.focus) this.lastFocus.focus(); } catch (e) {}
+    window.dispatchEvent(new CustomEvent("np:closed"));
   };
   sync() {
     const box = this.boxRef.current, v = this.state.film;
