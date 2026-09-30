@@ -11,6 +11,14 @@ h1{letter-spacing:-0.022em}
 .np-line{display:block;overflow:hidden;padding:0 .08em .14em;margin:0 -.08em -.14em}
 .np-line>span{display:inline-block}
 
+/* "production.": the i wears the red REC light as its dot. The real "i" stays in the text (search, screen readers,
+   copying); CSS paints the glyph transparent from its top down to the gap above the stem, which removes only its
+   own dot, and draws the red one there. The em offsets are measured from Cormorant Garamond Italic 400 relative to
+   the letter's box, so this only switches on once that font has really loaded (np.js adds .np-serif). */
+.np-serif .np-rec-i{position:relative;-webkit-text-fill-color:transparent;background:linear-gradient(to bottom,transparent .469em,currentColor .469em);-webkit-background-clip:text;background-clip:text}
+.np-serif .np-rec-i::after{content:"";position:absolute;left:.171em;top:.369em;width:.1em;height:.1em;margin:-.05em 0 0 -.05em;border-radius:50%;background:#e5322d;box-shadow:0 0 .06em rgba(229,50,45,.9),0 0 .24em rgba(229,50,45,.5);animation:npRec 1.2s steps(1) infinite}
+@keyframes npRec{0%,49%{opacity:1}50%,100%{opacity:.15}}
+
 /* Scroll progress hairline (created by np.js). */
 .np-progress{position:fixed;left:0;top:0;right:0;height:2px;background:linear-gradient(90deg,#e5322d,#ff7a6b);transform:scaleX(0);transform-origin:0 50%;z-index:70;pointer-events:none}
 
@@ -62,4 +70,4 @@ h1{letter-spacing:-0.022em}
 .np-logo{display:block;width:auto;opacity:.78;transition:opacity .3s ease}
 .np-logo:hover{opacity:1}
 
-@media (prefers-reduced-motion: reduce){[data-marquee]{animation:none!important}}
+@media (prefers-reduced-motion: reduce){[data-marquee],.np-rec-i::after{animation:none!important}}
