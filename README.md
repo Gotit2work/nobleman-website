@@ -79,8 +79,25 @@ If the hero video changes, regenerate the poster from the new video's thumbnail 
 
 Photos in `media/` are JPEG (mozjpeg, quality 88, 4:4:4 chroma), 40–120 KB each; the originals were 1.2–2.3 MB PNGs. WebP was tested and rejected: it visibly smeared the dark water textures even at quality 95. The seven icon masks `a12`–`a18` stay PNG.
 
+## Client logos
+
+The band under the home hero shows past clients' logos, white on transparent, from `media/logos/`. The list, file names, and per-logo heights are `brands` in `index.html`'s logic. The heights are optical: tall emblems are larger and long wordmarks smaller, so every mark reads with similar weight. All are genuine marks, none redrawn:
+
+| Logo | Source |
+|---|---|
+| Lamborghini, Maserati | simple-icons (CC0 files; the marks are the brands' trademarks) |
+| Harley-Davidson | harley-davidson.com site header SVG |
+| Waldorf Astoria | hilton.com logo SVG |
+| The Ocean Race | vector from the race's official 2019–20 report (no genuine Volvo Ocean Race-era vector was found; the race was renamed in 2019, and the alt text says "formerly Volvo Ocean Race") |
+| Transpac | vector from the 2025 Transpac race program (year line removed) |
+| EcoFlow, Satellite Phone Store | the companies' site header SVGs |
+| MCT | mct-trading.com logo PNG (no vector exists) |
+
+To add one: make it single-colour white on transparent with a tight `viewBox` and no width/height, add it to `brands` with its aspect ratio, and check it at 40 px on the dark background.
+
 ## Still unfinished
 
+- **Client logos need the owners' OK.** Showing a brand's logo implies a working relationship. Confirm each one is a real Nobleman client and that no contract restricts using its logo.
 - **Privacy policy needs an owner review.** It describes what the site actually does (Resend email, Vercel logs, Google Fonts, privacy-enhanced YouTube and Vimeo embeds) and names alexis@gotit2work.com as the contact. It is not legal advice.
 - There is no Terms page and no Instagram link: no confirmed Instagram account for Nobleman Productions was found, so the link was removed rather than guessed.
 - The "Also offered" services in the nav (social packages, executive interviews, photography, documentaries) link to `/start` rather than to pages of their own.

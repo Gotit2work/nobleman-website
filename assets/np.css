@@ -55,9 +55,10 @@ h1{letter-spacing:-0.022em}
 .np-motion [data-hero-media]{transform:scale(calc(1 + var(--np-hero, 0) * .14))}
 .np-motion [data-hero-content]{transform:translate3d(0,calc(var(--np-hero, 0) * -20vh),0);opacity:calc(1 - var(--np-hero, 0) * 1.5)}
 
-/* Logo marquee: small white marks, edges fade out, hover pauses. */
-.np-logos{-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
-.np-logos:hover [data-marquee]{animation-play-state:paused}
+/* Logo marquee: small white marks, edges fade out, hover pauses. The fade sits on a static inner frame, not
+   the band, so the band's own background stays solid. */
+.np-logos-fade{-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.np-logos:hover [data-marquee]{animation-play-state:paused!important}
 .np-logo{display:block;width:auto;opacity:.78;transition:opacity .3s ease}
 .np-logo:hover{opacity:1}
 
