@@ -4,6 +4,7 @@ Marketing site for Nobleman Productions (Jean and Justin; veteran owned; San Die
 
 ## Ownership and infrastructure
 
+- Vercel project `nobleman-website` (`prj_gqDhfZOcMh5eEmr2LS990DiHcgKx`), created 2026-09-30 in team `gotit2-work`: framework Other, Node 22.x, Vercel Authentication on previews only (production is public), custom domain attached and ownership-verified. Not yet linked to GitHub: the Vercel GitHub App was not installed on `Gotit2work`, so deploys from Git failed with `repo_not_found`. Once linked (Project → Settings → Git), deploy the fix branch or merged `main` to production.
 - **Alexis owns `gotit2work.com`.** DNS is at GoDaddy (`ns17/ns18.domaincontrol.com`).
   - Apex `gotit2work.com` → `185.158.133.1` (hosted on Lovable). Don't change it.
   - Email is Microsoft 365: MX `gotit2work-com.mail.protection.outlook.com`, SPF `v=spf1 include:spf.protection.outlook.com -all`, DMARC `p=none`. Don't change the root SPF; Resend uses its own `send.` subdomain records.
