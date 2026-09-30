@@ -7,6 +7,21 @@
  */
 (function () {
   var root = document.documentElement;
+
+  // The display font stylesheet loads async (media=print, switched to all on load); run cb once it's in.
+  var css = document.querySelector('link[href*="fonts.googleapis.com/css2"]');
+  function whenFontCss(cb) {
+    if (!css || css.media !== "print") cb();
+    else css.addEventListener("load", function () { setTimeout(cb, 0); });
+  }
+  // .np-serif = Cormorant Garamond Italic really loaded; effects measured from its shapes key off it.
+  whenFontCss(function () {
+    if (!document.fonts || !document.fonts.load) return;
+    document.fonts.load("italic 400 1em 'Cormorant Garamond'", "i").then(function (faces) {
+      if (faces && faces.length) root.classList.add("np-serif");
+    }, function () {});
+  });
+
   if (!("IntersectionObserver" in window) || !window.requestAnimationFrame) return;
   if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   root.classList.add("np-motion");
@@ -29,9 +44,7 @@
       document.fonts.load("italic 400 1em 'Cormorant Garamond'"),
     ]).then(start, start);
   }
-  var css = document.querySelector('link[href*="fonts.googleapis.com/css2"]');
-  if (!css || css.media !== "print") loadFonts();
-  else css.addEventListener("load", function () { setTimeout(loadFonts, 0); });
+  whenFontCss(loadFonts);
   css && css.addEventListener("error", start);
 
   // Reveals: in once the element's top clears the bottom 12% of the screen; out again when it sinks back below
