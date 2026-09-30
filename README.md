@@ -83,11 +83,26 @@ Photos in `media/` are JPEG (mozjpeg, quality 88, 4:4:4 chroma), 40–120 KB eac
 
 ## Navigation icons
 
-The bottom bar, the mobile sheets, and the desktop mega-menu use the `media/nav-*.png` icons: white on transparent, 192 px, applied as CSS masks so they take the header's colour. They're literal on purpose (camera = Services, play = Work, crew = About, broadcast = Live, mic = Events, key = Client portal); the old nautical metaphors looked nice but didn't say where each link went.
+The bottom bar, the mobile sheets, and the desktop mega-menu use `media/icons/*.png`: white on transparent, 192 px, applied as CSS masks so they take the header's colour. Each icon says what it is, built from a maritime object:
 
-They were generated as one 4×3 sheet with Higgsfield (Recraft V4.1, vector mode), so every icon shares a single stroke style. The source sheet is `docs/nav-icons/sheet.svg`. `docs/nav-icons/slice-icons.mjs` crops each cell to its ink, scales it into a 150 px live area on a 192 px canvas, and turns darkness into alpha (holes stay holes). The sheet also has unused house and envelope icons. To change one icon, regenerate the whole sheet with the same prompt so the style matches, rather than generating a single icon.
+| Icon | Used for |
+|---|---|
+| camera with a ship's-wheel reel | Services |
+| play button in a porthole | Work |
+| sailors in caps | About / About Nobleman |
+| pennant flag with a play button | YouTube Channel Retainers |
+| lighthouse broadcasting | Live Production |
+| microphone on an anchor | Conference & Event Video |
+| maritime signal flags | Also offered |
+| paper boat | Start a project |
+| sailboat on waves | Nobleman Sailing Media |
+| key with a ship's-wheel bow | Client portal |
 
-The mobile bar highlights the current section (Services on any service page, Work on `/work`, About on `/about` and `/privacy`); an open sheet highlights its own tab.
+Decorative metaphors alone (a compass for Work, a ship's wheel for Services) looked nice but didn't say where a link went. Plain UI icons read fine but looked generic. This set does both.
+
+They were generated as one 4×3 sheet with Higgsfield (Recraft V4.1, vector mode), so every icon shares one solid style; the source is `docs/nav-icons/sheet.svg`. `docs/nav-icons/slice-icons.mjs` finds each icon from the ink, scales it into a 150 px live area on a 192 px canvas, and turns darkness into alpha, so cut-out details stay transparent. It reproduces the shipped files byte for byte. The sheet also has spare anchor and message-in-a-bottle icons. To change one icon, regenerate the whole sheet with the same prompt so the style matches, and give changed files a new path (`media/` is cached for 7 days).
+
+The mobile bar highlights the current section (Services on any service page, Work on `/work`, About on `/about` and `/privacy`); an open sheet highlights its own tab. The ship mark in the Start buttons is static and sits inline, centred on the word.
 
 ## Share image
 
