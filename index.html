@@ -1,15 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+<title>Nobleman Productions | Video Production in San Diego &amp; Las Vegas</title>
+<meta name="description" content="Veteran-owned video production in San Diego and Las Vegas. YouTube channel retainers, live production for course creators, and conference and event films.">
+<link rel="canonical" href="https://noblemanproductions.gotit2work.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Nobleman Productions">
+<meta property="og:title" content="Nobleman Productions | Video Production in San Diego &amp; Las Vegas">
+<meta property="og:description" content="Veteran-owned video production in San Diego and Las Vegas. YouTube channel retainers, live production for course creators, and conference and event films.">
+<meta property="og:url" content="https://noblemanproductions.gotit2work.com/">
+<meta property="og:image" content="https://noblemanproductions.gotit2work.com/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#031e25">
+<style>html,body{margin:0;background:#031e25}</style>
+<link rel="preload" as="image" href="/media/hero-poster.jpg" fetchpriority="high">
+<link rel="preconnect" href="https://player.vimeo.com">
+<link rel="dns-prefetch" href="https://f.vimeocdn.com">
+<link rel="dns-prefetch" href="https://vod-adaptive-ak.vimeocdn.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Cormorant+Garamond:ital,wght@1,400;1,500&amp;display=swap" media="print" onload="this.media='all'">
+<script src="https://player.vimeo.com/api/player.js" async></script>
+<script src="/vendor/react-18.3.1.production.min.js"></script>
+<script src="/vendor/react-dom-18.3.1.production.min.js"></script>
+<script src="/support.js"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Cormorant+Garamond:ital,wght@1,400;1,500&amp;display=swap" rel="stylesheet">
 <style>
 html{scroll-behavior:smooth}
 body{margin:0;background:#031e25;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
@@ -33,10 +58,8 @@ a{color:inherit}a:hover{color:inherit}
 
   <div style="container-type:inline-size">
   <section data-theme="dark" style="position:relative;height:{{ heroH }};min-height:{{ heroMinH }};overflow:hidden;background:#031e25;color:#f4f4f2">
-    <div aria-hidden="true" style="position:absolute;inset:0;background:#031e25 url('media/a00.png') center/cover no-repeat;filter:saturate(.8)"></div>
-    <sc-if value="{{ heroReady }}" hint-placeholder-val="{{ false }}">
-    <iframe loading="eager" src="https://player.vimeo.com/video/1197058424?h=796798a19d&amp;background=1&amp;autoplay=1&amp;loop=1&amp;muted=1&amp;badge=0&amp;title=0&amp;byline=0&amp;portrait=0" title="Nobleman Productions reel" allow="autoplay; fullscreen" style="position:absolute;top:50%;left:50%;width:max(100%, 177.78vh);height:max(100%, 56.25cqw);transform:translate(-50%,-50%);border:0;pointer-events:none"></iframe>
-    </sc-if>
+    <div aria-hidden="true" style="position:absolute;inset:0;background:#031e25 url('media/hero-poster.jpg') center/cover no-repeat"></div>
+    <iframe ref="{{ heroRef }}" loading="eager" src="https://player.vimeo.com/video/1197058424?h=796798a19d&amp;background=1&amp;autoplay=1&amp;loop=1&amp;muted=1&amp;badge=0&amp;title=0&amp;byline=0&amp;portrait=0&amp;dnt=1" title="Nobleman Productions reel" allow="autoplay; fullscreen" style="position:absolute;top:50%;left:50%;width:max(100%, 177.78vh);height:max(100%, 56.25cqw);transform:translate(-50%,-50%);border:0;pointer-events:none;opacity:{{ heroVideoOpacity }};transition:opacity 700ms ease"></iframe>
     <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(3,30,37,0.55) 0%, rgba(3,30,37,{{ overlay }}) 45%, rgba(3,30,37,0.95) 100%)"></div>
     <div style="position:absolute;inset:{{ hudTop }} 24px 0;pointer-events:none;max-width:1200px;margin:0 auto">
       <span style="position:absolute;left:8px;top:8px;display:inline-flex;align-items:center;gap:8px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;letter-spacing:.08em;opacity:.9"><span style="width:8px;height:8px;border-radius:50%;background:#e5322d;box-shadow:0 0 10px rgba(229,50,45,.8);display:inline-block;animation:blink 1.2s steps(1) infinite"></span>REC</span>
@@ -78,21 +101,21 @@ a{color:inherit}a:hover{color:inherit}
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px">
         <a data-reveal="" href="/services" style="display:flex;flex-direction:column;gap:20px;padding:32px;border-radius:12px;background:{{ card }};text-decoration:none;transition:background 150ms, background-color 900ms ease">
-          <div style="aspect-ratio:16/10;border-radius:8px;overflow:hidden"><img src="media/a01.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+          <div style="aspect-ratio:16/10;border-radius:8px;overflow:hidden"><img src="media/a01.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
           <span style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;opacity:.6">01 · YouTube Channel Retainers</span>
           <span style="font-size:28px;font-weight:500;letter-spacing:0.01em;line-height:1.2;text-wrap:balance">Grow a channel that actually books clients.</span>
           <span style="font-size:16px;line-height:1.5;opacity:.75">Monthly shoots, editing, optimization, and growth for coaches, advisors, attorneys, and luxury brands.</span>
           <span style="margin-top:auto;padding-top:16px;border-top:1px solid {{ hairline }};font-size:14px;opacity:.7">53 → 8,000 subscribers in six months</span>
         </a>
         <a data-reveal="" href="/services" style="display:flex;flex-direction:column;gap:20px;padding:32px;border-radius:12px;background:{{ card }};text-decoration:none;transition:background 150ms, background-color 900ms ease">
-          <div style="aspect-ratio:16/10;border-radius:8px;overflow:hidden"><img src="media/a02.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+          <div style="aspect-ratio:16/10;border-radius:8px;overflow:hidden"><img src="media/a02.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
           <span style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;opacity:.6">02 · Live Production for Course Creators</span>
           <span style="font-size:28px;font-weight:500;letter-spacing:0.01em;line-height:1.2;text-wrap:balance">Your program is premium. Your production should match.</span>
           <span style="font-size:16px;line-height:1.5;opacity:.75">Multi-camera launches, masterminds, and cohort sessions, engineered for the platform you stream on.</span>
           <span style="margin-top:auto;padding-top:16px;border-top:1px solid {{ hairline }};font-size:14px;opacity:.7">Broadcasts to 50,000+ concurrent viewers</span>
         </a>
         <a data-reveal="" href="/services" style="display:flex;flex-direction:column;gap:20px;padding:32px;border-radius:12px;background:{{ card }};text-decoration:none;transition:background 150ms, background-color 900ms ease">
-          <div style="aspect-ratio:16/10;border-radius:8px;overflow:hidden"><img src="media/a03.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+          <div style="aspect-ratio:16/10;border-radius:8px;overflow:hidden"><img src="media/a03.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
           <span style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;opacity:.6">03 · Conference &amp; Event Video</span>
           <span style="font-size:28px;font-weight:500;letter-spacing:0.01em;line-height:1.2;text-wrap:balance">Hollywood and Emmy talent — at your event.</span>
           <span style="font-size:16px;line-height:1.5;opacity:.75">Recap films, executive cuts, and social clips for conferences in San Diego, Las Vegas, and nationwide.</span>
@@ -102,7 +125,7 @@ a{color:inherit}a:hover{color:inherit}
     </div>
   </section>
 
-  <section data-theme="dark" style="position:relative;padding:clamp(48px,18cqw,260px) 24px;min-height:{{ crewMinH }};display:flex;align-items:center;background-color:#031e25;background-image:linear-gradient(90deg, rgba(3,30,37,0.92) 0%, rgba(3,30,37,0.6) 45%, rgba(3,30,37,0.15) 75%, rgba(3,30,37,0.35) 100%), linear-gradient(180deg, #031e25 0%, rgba(3,30,37,0) 22%, rgba(3,30,37,0) 78%, #031e25 100%), url('media/a04.png');background-size:auto,auto,cover;background-position:{{ crewPos }};color:#f4f4f2;overflow:hidden">
+  <section data-theme="dark" style="position:relative;padding:clamp(48px,18cqw,260px) 24px;min-height:{{ crewMinH }};display:flex;align-items:center;background-color:#031e25;background-image:linear-gradient(90deg, rgba(3,30,37,0.92) 0%, rgba(3,30,37,0.6) 45%, rgba(3,30,37,0.15) 75%, rgba(3,30,37,0.35) 100%), linear-gradient(180deg, #031e25 0%, rgba(3,30,37,0) 22%, rgba(3,30,37,0) 78%, #031e25 100%), url('media/a04.jpg');background-size:auto,auto,cover;background-position:{{ crewPos }};color:#f4f4f2;overflow:hidden">
     <div style="max-width:1200px;width:100%;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0 48px;align-items:center">
       <div data-reveal="" style="display:flex;flex-direction:column;gap:24px;max-width:520px">
         <span style="display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase"><span style="opacity:.6">The crew</span><span style="width:7px;height:7px;border-radius:50%;background:#e5322d;box-shadow:0 0 8px rgba(229,50,45,.8);display:inline-block;animation:blink 1.2s steps(1) infinite;flex:none"></span></span>
@@ -163,11 +186,11 @@ a{color:inherit}a:hover{color:inherit}
           <div style="display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:20px 24px"><span style="font-size:17px;font-weight:500">Nobleman Productions · Reel</span><span style="font-size:13px;opacity:.6;white-space:nowrap">Vimeo</span></div>
         </div>
         <div data-reveal="" style="display:flex;flex-direction:column;gap:0;border-radius:12px;overflow:hidden;background:{{ card }};transition:background-color 900ms ease">
-          <div style="aspect-ratio:16/9;overflow:hidden"><img src="media/a05.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+          <div style="aspect-ratio:16/9;overflow:hidden"><img src="media/a05.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
           <div style="display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:20px 24px"><span style="font-size:17px;font-weight:500">Satellite Phone Store · Series</span><span style="font-size:13px;opacity:.6;white-space:nowrap">28K views</span></div>
         </div>
         <div data-reveal="" style="display:flex;flex-direction:column;gap:0;border-radius:12px;overflow:hidden;background:{{ card }};transition:background-color 900ms ease">
-          <div style="aspect-ratio:16/9;overflow:hidden"><img src="media/a06.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+          <div style="aspect-ratio:16/9;overflow:hidden"><img src="media/a06.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
           <div style="display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:20px 24px"><span style="font-size:17px;font-weight:500">MCT Exchange 2022 · Recap</span><span style="font-size:13px;opacity:.6;white-space:nowrap">Events</span></div>
         </div>
       </div>
@@ -180,17 +203,34 @@ a{color:inherit}a:hover{color:inherit}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;heroOverlay&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:0.5,&quot;min&quot;:0.2,&quot;max&quot;:0.85,&quot;step&quot;:0.05,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;auto&quot;,&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;auto&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;,&quot;description&quot;:&quot;Force the page theme instead of switching on scroll&quot;}}">
 class Component extends DCLogic {
-  state = { theme: "dark", menu: null, mobile: typeof window !== "undefined" && (window.matchMedia("(max-width: 759px)").matches || window.innerWidth < 760), heroReady: false };
+  state = { theme: "dark", menu: null, mobile: typeof window !== "undefined" && (window.matchMedia("(max-width: 759px)").matches || window.innerWidth < 760), heroPlaying: false };
   rootRef = React.createRef();
   get preview() { return !!this.props.previewMobile; }
   tcRef = React.createRef();
   open(m) { clearTimeout(this.closeT); if (m !== this.state.menu) this.setState({ menu: m }); }
+  heroRef = React.createRef();
+  /** The poster (the reel's own frame) stays up until Vimeo reports real playback, so the hero never shows a
+   *  black or buffering player. Whatever happens, the player is shown after 6s so the video can't stay hidden. */
+  revealHero = () => { clearTimeout(this.heroFallback); if (!this.state.heroPlaying) this.setState({ heroPlaying: true }); };
+  attachHero(tries) {
+    const frame = this.heroRef.current;
+    if (frame && window.Vimeo && window.Vimeo.Player) {
+      try {
+        const p = new window.Vimeo.Player(frame);
+        p.on("playing", this.revealHero);
+        p.on("timeupdate", this.revealHero);
+      } catch (err) { this.revealHero(); }
+      return;
+    }
+    if (tries > 0) this.heroAttachT = setTimeout(() => this.attachHero(tries - 1), 100);
+  }
   componentDidMount() {
     this.onResize = () => { if (this.preview) return; const m = window.matchMedia("(max-width: 759px)").matches || window.innerWidth < 760; if (m !== this.state.mobile) this.setState({ mobile: m, menu: null }); };
     window.addEventListener("resize", this.onResize);
     window.addEventListener("orientationchange", this.onResize);
     this.onResize();
-    this.heroT = setTimeout(() => this.setState({ heroReady: true }), 900);
+    this.heroFallback = setTimeout(this.revealHero, 6000);
+    this.attachHero(60);
     this.onScroll = () => {
       const root = this.rootRef.current;
       const scope = this.preview && root ? root : document;
@@ -220,7 +260,8 @@ class Component extends DCLogic {
     window.removeEventListener("scroll", this.onScroll);
     window.removeEventListener("resize", this.onResize);
     window.removeEventListener("orientationchange", this.onResize);
-    clearTimeout(this.heroT);
+    clearTimeout(this.heroAttachT);
+    clearTimeout(this.heroFallback);
     window.removeEventListener("keydown", this.onKey);
     this.io && this.io.disconnect();
     this.mo && this.mo.disconnect();
@@ -247,8 +288,8 @@ class Component extends DCLogic {
       showBlack: isDark ? "none" : "block",
       rootRef: this.rootRef,
       rootFrame: this.preview ? "width:390px;transform:translateZ(0);" : "",
-      heroReady: this.state.heroReady,
-      heroVideoOpacity: this.state.heroReady ? 1 : 0,
+      heroRef: this.heroRef,
+      heroVideoOpacity: this.state.heroPlaying ? 1 : 0,
       themeName: isDark ? "dark" : "light",
       previewFlag: !!this.preview,
       isMobile: mob,

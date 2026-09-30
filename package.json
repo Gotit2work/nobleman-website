@@ -4,5 +4,8 @@
   "type": "module",
   "dependencies": {
     "resend": "^4.0.1"
+  },
+  "engines": {
+    "node": "22.x"
   }
 }

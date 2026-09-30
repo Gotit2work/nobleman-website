@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+<meta name="robots" content="noindex">
+<script src="/vendor/react-18.3.1.production.min.js"></script>
+<script src="/vendor/react-dom-18.3.1.production.min.js"></script>
+<script src="/support.js"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Cormorant+Garamond:ital,wght@1,400;1,500&amp;display=swap" rel="stylesheet">
 <style>
 @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:.15}}
 @keyframes sail{from{transform:translateX(-12cqw)}to{transform:translateX(100cqw)}}
@@ -22,7 +23,7 @@
       <div style="position:absolute;left:0;right:0;top:0;height:100%;background:{{ aboveBg }};transition:background-color 900ms ease;-webkit-mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.6) 35%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.6) 35%,transparent 100%)"></div>
       <div style="position:absolute;right:8%;top:38%;width:clamp(56px,6cqw,96px);opacity:.28;-webkit-mask-image:linear-gradient(180deg,#000 45%,transparent 90%);mask-image:linear-gradient(180deg,#000 45%,transparent 90%);animation:rock 7s ease-in-out infinite;transform-origin:50% 100%"><img src="assets/Nobleman_Mark_White.png" alt="" style="width:100%;height:auto;display:block"></div>
     </div>
-    <div data-theme="dark" style="background-color:#031e25;background-image:linear-gradient(180deg, rgba(3,30,37,0.35) 0%, rgba(3,30,37,0.8) 45%, #031e25 78%), url('media/a00.png');background-size:auto,cover;background-position:center top;padding:clamp(40px,22cqw,320px) 24px 24px">
+    <div data-theme="dark" style="background-color:#031e25;background-image:linear-gradient(180deg, rgba(3,30,37,0.35) 0%, rgba(3,30,37,0.8) 45%, #031e25 78%), url('media/a00.jpg');background-size:auto,cover;background-position:center top;padding:clamp(40px,22cqw,320px) 24px 24px">
       <div style="max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(28px,6cqw,80px);position:relative">
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(20px,4cqw,48px);align-items:end;padding-top:clamp(0px,2cqw,24px)">
           <h2 style="margin:0;grid-column:span 2;font-size:clamp(36px,7cqw,112px);font-weight:400;letter-spacing:-0.02em;line-height:0.95;text-wrap:balance">Tell us about your project.</h2>
@@ -93,7 +94,7 @@
     <div aria-hidden="true" style="position:absolute;left:0;right:0;top:0;height:90px;pointer-events:none;overflow:hidden">
       <div style="position:absolute;left:0;right:0;top:0;height:100%;background:{{ aboveBg }};transition:background-color 900ms ease;-webkit-mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.6) 35%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.6) 35%,transparent 100%)"></div>
     </div>
-    <div data-theme="dark" style="background-color:#031e25;background-image:linear-gradient(180deg, rgba(3,30,37,0.55) 0%, rgba(3,30,37,0.9) 45%, #031e25 80%), url('media/a00.png');background-size:auto,cover;background-position:center top;padding:112px 24px 28px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:36px">
+    <div data-theme="dark" style="background-color:#031e25;background-image:linear-gradient(180deg, rgba(3,30,37,0.55) 0%, rgba(3,30,37,0.9) 45%, #031e25 80%), url('media/a00.jpg');background-size:auto,cover;background-position:center top;padding:112px 24px 28px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:36px">
       <div style="display:flex;flex-direction:column;align-items:center;gap:18px;max-width:340px">
         <h2 style="margin:0;font-size:38px;font-weight:400;letter-spacing:-0.02em;line-height:1;text-wrap:balance">Tell us about your project.</h2>
         <p style="margin:0;font-size:15px;line-height:1.5;opacity:.8;text-wrap:pretty">A personal reply from Jean or Justin the same business day.</p>
