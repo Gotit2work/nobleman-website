@@ -16,6 +16,24 @@ For every word on the Nobleman Productions website and client portal. It comes f
 | 8 | **Write for the busy decision-maker, not the technician.** Lead with what it means for them; put the technical detail second, if at all. | "The degree of technical competence is inversely proportional to the level of management." |
 | 9 | **Proofread.** Spelling, names, dates, and directions ("below" must really be below). | "Work smarder and not harder and be careful of yor speling." |
 
+## Voice: dry, like the poster
+
+The poster is funny because every law is true. Our wit works the same way.
+
+- **Plain first, wit second.** Every block says what we do in plain words before any joke. A visitor who skips the joke still knows the offer.
+- **Aim it at Murphy, not at people.** The joke is on the thing that goes wrong (the unposted video, the livestream, the one-take keynote), never on the client, their audience, or a competitor.
+- **A joke is still a promise.** "Anything that can go wrong on a livestream will" is safe; "Nothing ever goes wrong on our livestreams" breaks Rule 4.
+- **One line per block, at most.** It lands because it's rare.
+- **Never where precision matters:** prices, forms, error messages, privacy, legal, and the portal's approval steps stay plain.
+
+The three pillar laws, used in the nav, on the home page, and on each service page (keep them word for word):
+
+| Pillar | The law | What we do about it |
+|---|---|---|
+| YouTube Channel Retainers | "The video you never post gets zero views. Every single time." | We film several episodes per shoot day, then edit, title, and publish them on a schedule. |
+| Live Production | "Anything that can go wrong on a livestream will, in front of everyone." | We build in backups and fallback plans before show day, and record a backup of the audio. |
+| Conference & Event Video | "The CEO will say the best line exactly once." | We plan the shots in advance and cover the room with several cameras. |
+
 ## Plain-word glossary
 
 Use the word on the right on anything a client sees.

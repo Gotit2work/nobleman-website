@@ -29,7 +29,7 @@ window.dispatchEvent(new CustomEvent("np:play", { detail: film }));
 // film = { provider: "vimeo" | "youtube", id, hash?, title, meta? }
 ```
 
-The player creates the iframe only when a film is opened and removes it on close, so no third-party player loads until someone asks for one and closing always stops playback. YouTube plays from `youtube-nocookie.com`; Vimeo with `dnt=1`. Escape, the × button, and a click on the backdrop all close it. The page scroll is locked while it is open.
+The player creates the iframe only when a film is opened and removes it on close, so no third-party player loads until someone asks for one and closing always stops playback. YouTube plays from `youtube-nocookie.com`; Vimeo with `dnt=1`. Escape, the × button, and a click on the backdrop all close it. The page scroll is locked while it is open. On close it dispatches `np:closed` on `window`, so a page can react (the home page's mini player listens for `np:play` and `np:closed`).
 
 Place the `<dc-import>` outside any element with `container-type` set (see `index.html`): containment makes that element the containing block for `position:fixed`, and the player would be trapped inside it.
 
@@ -90,6 +90,17 @@ The goal is that the header looks finished on the first paint and the reel takes
 - The iframe stays transparent until Vimeo's player API reports `playing` (or the first `timeupdate`), then fades in over the poster. If playback never starts (autoplay blocked, Vimeo unreachable), the poster simply stays. There is deliberately no timed fallback: showing the iframe early exposed Vimeo's grey "player error" box instead of the poster.
 - Google Fonts load asynchronously from `<head>`. Don't put a `<link rel="stylesheet">` or a plain `<script src>` inside a page's `<helmet>`: the browser parses that block as part of `<body>` and holds `DOMContentLoaded`, and the whole page stays blank until that request finishes.
 
+- An error is final. In a browser that can't decode the film (Chromium without H.264, for instance), Vimeo reports `PlaybackError` and then keeps its clock running, and sending `timeupdate`, behind its own error screen. So `timeupdate` after an error isn't treated as proof of a picture.
+
+**Mini player (desktop home page only).** Once the hero has scrolled most of the way off screen, the film keeps playing in a small square card in the bottom-right corner, with a **Start a project** button under it (`[data-pip]` in `index.html`). Pressing the video opens the same film full size with sound in the shared player; × hides it for the rest of the visit. It hides again back at the top and when the footer comes into view (the footer has its own Start button), and never appears below 900 px wide, on phones, or on other pages.
+
+How it works, and why:
+- It is its own Vimeo player. The hero's iframe sits inside a `container-type` wrapper and a scaled layer, and both trap `position:fixed`, so the hero's player can't simply be moved to the corner.
+- The hero is never paused. A Vimeo background player that has been paused via the API may not resume on command (seen in testing: `play()` never settles), which would leave the hero frozen. Instead the mini is created fresh each time it docks, starting at the hero's current second (`#t=`), and removed when it undocks, so there is only a second stream while the card is visible. Both run on the same clock and stay in step.
+- Opening any film removes the mini's stream; closing the film (`np:closed`) brings it back.
+- It shows a still frame and the button, with no second video, under `prefers-reduced-motion`, if the hero film already failed in this browser, or if the mini reports an error.
+- No new cookies or storage: the embed uses `dnt=1` like the hero, and the close state lives only in memory for the visit.
+
 If the hero video changes, regenerate the poster from the new video's thumbnail (oEmbed `thumbnail_url`, with the size suffix changed to `_1920x1080`), resize it to 1440 px wide, and save it as JPEG at about 76 quality.
 
 ## Images
@@ -102,22 +113,23 @@ The bottom bar, the mobile sheets, and the desktop mega-menu use `media/icons/*.
 
 | Icon | Used for |
 |---|---|
+| anchor (home port) | Home (the same icon the client portal uses for Home) |
 | camera with a ship's-wheel reel | Services |
 | play button in a porthole | Work |
-| sailors in caps | About / About Nobleman |
+| sailors in caps | About / About us |
 | pennant flag with a play button | YouTube Channel Retainers |
 | lighthouse broadcasting | Live Production |
 | microphone on an anchor | Conference & Event Video |
-| maritime signal flags | Also offered |
+| maritime signal flags | Site map |
 | paper boat | Start a project |
 | sailboat on waves | Nobleman Sailing Media |
 | key with a ship's-wheel bow | Client portal |
 
 Decorative metaphors alone (a compass for Work, a ship's wheel for Services) looked nice but didn't say where a link went. Plain UI icons read fine but looked generic. This set does both.
 
-They were generated as one 4×3 sheet with Higgsfield (Recraft V4.1, vector mode), so every icon shares one solid style; the source is `docs/nav-icons/sheet.svg`. `docs/nav-icons/slice-icons.mjs` finds each icon from the ink, scales it into a 150 px live area on a 192 px canvas, and turns darkness into alpha, so cut-out details stay transparent. It reproduces the shipped files byte for byte. The sheet also has spare anchor and message-in-a-bottle icons. To change one icon, regenerate the whole sheet with the same prompt so the style matches, and give changed files a new path (`media/` is cached for 7 days).
+They were generated as one 4×3 sheet with Higgsfield (Recraft V4.1, vector mode), so every icon shares one solid style; the source is `docs/nav-icons/sheet.svg`. `docs/nav-icons/slice-icons.mjs` finds each icon from the ink, scales it into a 150 px live area on a 192 px canvas, and turns darkness into alpha, so cut-out details stay transparent. It reproduces the shipped files byte for byte. The sheet also has a spare message-in-a-bottle icon (the anchor is now Home). To change one icon, regenerate the whole sheet with the same prompt so the style matches, and give changed files a new path (`media/` is cached for 7 days).
 
-The mobile bar highlights the current section (Services on any service page, Work on `/work`, About on `/about` and `/privacy`); an open sheet highlights its own tab. The ship mark in the Start buttons is static and sits inline, centred on the word.
+The mobile bar is Home · Services · Work · About · Start, and highlights the current section (Home on `/`, Services on any service page, Work on `/work`, About on `/about`, `/privacy` and `/sitemap`); an open sheet highlights its own tab. The desktop pill marks the same section with a soft background. The ship mark in the Start buttons is static and sits inline, centred on the word.
 
 ## Share image
 
