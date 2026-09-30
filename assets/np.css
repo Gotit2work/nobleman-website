@@ -34,17 +34,19 @@ section[id]{scroll-margin-top:64px}
 
 /* Scroll reveals. Fades use filter:opacity() so an element's own inline opacity survives; the transition is
    !important because several cards carry an inline transition for their theme colour (kept in the list).
+   Only elements np.js has registered ([data-np]) are ever hidden, so anything it misses simply shows, unanimated:
+   a reveal can't strand content invisible.
    Never hide a revealing element with clip-path: IntersectionObserver measures the clipped area, so a clipped
    element can look off-screen and never reveal. The "title" wipe uses a mask driven by --np-m instead. */
 @property --np-m{syntax:'<percentage>';inherits:false;initial-value:112%}
-.np-motion [data-reveal]{filter:opacity(0) blur(0px);transition:filter 1s var(--np-ease),transform 1.35s var(--np-ease),--np-m 1.5s var(--np-ease),background-color .9s ease!important;transition-delay:var(--np-d,0ms)!important}
-.np-motion [data-reveal=""]{transform:translate3d(0,64px,0);filter:opacity(0) blur(10px)}
-.np-motion [data-reveal="card"]{transform:perspective(1400px) translate3d(0,170px,0) rotateX(20deg) scale(.9);transform-origin:50% 0}
-.np-motion [data-reveal="left"]{transform:translate3d(-12vw,0,0) rotate(-2deg)}
-.np-motion [data-reveal="right"]{transform:translate3d(12vw,0,0) rotate(2deg)}
-.np-motion [data-reveal="title"]{--np-m:0%;transform:translate3d(0,.35em,0);-webkit-mask-image:linear-gradient(to top,#000 calc(var(--np-m) - 14%),transparent var(--np-m));mask-image:linear-gradient(to top,#000 calc(var(--np-m) - 14%),transparent var(--np-m))}
-.np-motion [data-reveal="zoom"]{transform:scale(.88);filter:opacity(0) blur(8px)}
-.np-motion [data-reveal][data-in]{filter:none;transform:none;--np-m:114%}
+.np-motion [data-np][data-reveal]{filter:opacity(0) blur(0px);transition:filter 1s var(--np-ease),transform 1.35s var(--np-ease),--np-m 1.5s var(--np-ease),background-color .9s ease!important;transition-delay:var(--np-d,0ms)!important}
+.np-motion [data-np][data-reveal=""]{transform:translate3d(0,64px,0);filter:opacity(0) blur(10px)}
+.np-motion [data-np][data-reveal="card"]{transform:perspective(1400px) translate3d(0,170px,0) rotateX(20deg) scale(.9);transform-origin:50% 0}
+.np-motion [data-np][data-reveal="left"]{transform:translate3d(-12vw,0,0) rotate(-2deg)}
+.np-motion [data-np][data-reveal="right"]{transform:translate3d(12vw,0,0) rotate(2deg)}
+.np-motion [data-np][data-reveal="title"]{--np-m:0%;transform:translate3d(0,.35em,0);-webkit-mask-image:linear-gradient(to top,#000 calc(var(--np-m) - 14%),transparent var(--np-m));mask-image:linear-gradient(to top,#000 calc(var(--np-m) - 14%),transparent var(--np-m))}
+.np-motion [data-np][data-reveal="zoom"]{transform:scale(.88);filter:opacity(0) blur(8px)}
+.np-motion [data-np][data-reveal][data-in]{filter:none;transform:none;--np-m:114%}
 
 /* Landing: letterbox bars open, the poster settles, lines rise out of a mask. [data-intro="n"] sets the order.
    Held until the display font is ready (np.js adds .np-fonts, at most ~1 s) so text never swaps mid-motion. */
