@@ -27,8 +27,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="/assets/np.css?v=1">
-<script src="/assets/np.js?v=1" defer></script>
+<link rel="stylesheet" href="/assets/np.css?v=2">
+<script src="/assets/np.js?v=2" defer></script>
 <script src="https://player.vimeo.com/api/player.js" async></script>
 <script src="/vendor/react-18.3.1.production.min.js"></script>
 <script src="/vendor/react-dom-18.3.1.production.min.js"></script>
@@ -88,15 +88,17 @@ a{color:inherit}a:hover{color:inherit}
     <div data-letterbox="bottom" aria-hidden="true"></div>
   </section>
 
-  <section data-theme="dark" aria-label="Brands and races we have filmed" style="background:#031e25;color:#f4f4f2;border-top:1px solid rgba(244,244,242,0.1);border-bottom:1px solid rgba(244,244,242,0.1);overflow:hidden;padding:22px 0">
-    <div data-marquee="" style="display:flex;width:max-content;animation:marquee 60s linear infinite">
+  <section data-theme="dark" class="np-logos" aria-label="Brands and races we have filmed" style="background:#031e25;color:#f4f4f2;border-top:1px solid rgba(244,244,242,0.1);border-bottom:1px solid rgba(244,244,242,0.1);overflow:hidden;padding:{{ logoPad }} 0">
+    <div class="np-logos-fade" style="overflow:hidden">
+    <div data-marquee="" style="display:flex;width:max-content;animation:marquee 55s linear infinite">
       <sc-for list="{{ marqueeLoops }}" as="loop" hint-placeholder-count="2">
-        <div aria-hidden="{{ loop.hidden }}" style="display:flex;align-items:center;gap:clamp(28px,4cqw,56px);padding-right:clamp(28px,4cqw,56px);white-space:nowrap">
+        <div aria-hidden="{{ loop.hidden }}" style="display:flex;align-items:center;gap:{{ logoGap }};padding-right:{{ logoGap }}">
           <sc-for list="{{ loop.items }}" as="m" hint-placeholder-count="9">
-            <span style="display:inline-flex;align-items:center;gap:clamp(28px,4cqw,56px)"><span style="font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:clamp(22px,2.4cqw,32px);opacity:.88">{{ m }}</span><span aria-hidden="true" style="width:5px;height:5px;border-radius:50%;background:#e5322d;opacity:.8"></span></span>
+            <img class="np-logo" sc-camel-src="{{ m.src }}" alt="{{ m.alt }}" title="{{ m.name }}" width="{{ m.w }}" height="{{ m.h }}" decoding="async" style="height:{{ m.h }}px;width:auto;flex:none">
           </sc-for>
         </div>
       </sc-for>
+    </div>
     </div>
   </section>
 
@@ -255,7 +257,19 @@ class Component extends DCLogic {
     iridium: { provider: "youtube", id: "6EzRjlZSgkg", title: "Satellite Phone Store · Iridium Extreme", meta: "28K views", img: "media/work-iridium-extreme.jpg" },
     mct: { provider: "youtube", id: "rIudMOLFpRM", title: "MCT Exchange 2022 · Recap", meta: "Conference", img: "media/work-mct-exchange.jpg" },
   };
-  brands = ["Lamborghini", "Maserati", "Harley-Davidson", "Waldorf Hotels", "Volvo Ocean Race", "Transpac", "EcoFlow", "Satellite Phone Store", "MCT"];
+  /** Client logos for the marquee: white on transparent in media/logos. Heights are optical, not equal (tall
+   *  emblems larger, long wordmarks smaller) so every mark carries similar weight. aspect = width / height. */
+  brands = [
+    { name: "Lamborghini", file: "lamborghini.svg", h: 40, aspect: 0.872 },
+    { name: "Maserati", file: "maserati.svg", h: 40, aspect: 0.708 },
+    { name: "Harley-Davidson", file: "harley-davidson.svg", h: 34, aspect: 1.316 },
+    { name: "Waldorf Astoria", file: "waldorf-astoria.svg", h: 36, aspect: 2.197 },
+    { name: "The Ocean Race (formerly Volvo Ocean Race)", file: "the-ocean-race.svg", h: 19, aspect: 7.93 },
+    { name: "Transpac", file: "transpac.svg", h: 34, aspect: 1.997 },
+    { name: "EcoFlow", file: "ecoflow.svg", h: 16, aspect: 9.353 },
+    { name: "Satellite Phone Store", file: "satellite-phone-store.svg", h: 23, aspect: 5.371 },
+    { name: "MCT", file: "mct.png", h: 26, aspect: 2.592 },
+  ];
   receipts = [
     ["Former Apple video engineer", "Years inside the world's most demanding video team."],
     ["Hollywood specialty camera", "Specialty camera work on major Hollywood productions."],
@@ -330,7 +344,12 @@ class Component extends DCLogic {
     return {
       playReel: () => this.play(this.films.reel),
       homeFilms: [this.films.motor, this.films.iridium, this.films.mct].map(v => Object.assign({}, v, { play: () => this.play(v) })),
-      marqueeLoops: [{ hidden: "false", items: this.brands }, { hidden: "true", items: this.brands }],
+      marqueeLoops: ["false", "true"].map(hidden => ({ hidden, items: this.brands.map(b => {
+        const h = Math.round(b.h * (mob ? 0.78 : 1));
+        return { name: b.name, alt: hidden === "true" ? "" : b.name, src: "media/logos/" + b.file, h, w: Math.round(h * b.aspect) };
+      }) })),
+      logoGap: mob ? "44px" : "clamp(56px,6cqw,96px)",
+      logoPad: mob ? "26px" : "34px",
       receipts: this.receipts.map(([t, d], i) => ({ n: String(i + 1).padStart(2, "0"), t, d })),
       overlay: this.props.heroOverlay ?? 0.5,
       tcRef: this.tcRef,
