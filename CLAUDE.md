@@ -26,6 +26,7 @@ Marketing site for Nobleman Productions (Jean and Justin; veteran owned; San Die
 - New pages: add the name to both patterns in `vercel.json`, and to `sitemap.xml`.
 - Typography and motion live in `assets/np.css` + `assets/np.js`, loaded by every page (README, "Type and motion"). Animate with `data-reveal`/`data-parallax` attributes, not per-page observers. Never hide a `data-reveal` element with `clip-path` (IntersectionObserver then never sees it). Bump `?v=` on every page when those files change.
 - Client logos in the home band are genuine marks, white on transparent, in `media/logos/` (sources in the README). Never redraw or substitute a logo; if a genuine one can't be found, leave the brand out.
+- Nav icons are literal (`media/nav-*.png`, README "Navigation icons"). Don't go back to decorative metaphors: people have to tell at a glance where each tab goes.
 - The desktop header is a compact pill that hugs its content (`data-navpill`); the mega-menus drop below it as their own panels. Keep it compact; the regression script asserts it is under 820 px wide.
 
 ## Conventions
