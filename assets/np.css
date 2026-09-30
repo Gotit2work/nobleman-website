@@ -26,10 +26,6 @@ h1{letter-spacing:-0.022em}
 .np-law-a{font-size:15px;line-height:1.55;opacity:.75;text-wrap:pretty}
 .np-law-s{font-family:var(--np-serif);font-style:italic;font-weight:400;font-size:20px;line-height:1.28;padding-left:12px;border-left:2px solid #e5322d}
 
-/* Home hero: the three services named in the opening sentence, as quiet links (not buttons). */
-.np-hero-link{color:inherit;font-weight:400;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.22em;text-decoration-color:rgba(244,244,242,.45);transition:text-decoration-color .2s ease}
-.np-hero-link:hover,.np-hero-link:focus-visible{color:inherit;text-decoration-color:currentColor}
-
 /* Deep-link targets (/services#questions) land clear of the fixed header. */
 section[id]{scroll-margin-top:64px}
 
