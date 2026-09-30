@@ -153,12 +153,30 @@
       if (r.height > 0 && r.bottom <= 0) { list[i].style.setProperty("--np-d", "0ms"); list[i].setAttribute("data-in", ""); }
     }
   }
+  // Safety sweep. The observer in boot() should see every rendered element, but on the live site about one load in
+  // 30-40 left a page's elements unregistered (never found why; possibly the script arriving late). So for the first
+  // 10 s, on load, and while scrolling, look for [data-reveal] elements scan() never saw: on screen or above it they
+  // are shown at once (no flash of hidden content), below it they are registered and animate in as usual.
+  function sweep() {
+    var list = document.querySelectorAll("[data-reveal]:not([data-np])"), vh = window.innerHeight || 1;
+    for (var i = 0; i < list.length; i++) {
+      var el = list[i], r = el.getBoundingClientRect();
+      el.setAttribute("data-np", "");
+      if (r.height > 0 && r.top < vh) { el.style.setProperty("--np-d", "0ms"); el.setAttribute("data-in", ""); }
+      if (waiting) waiting.push(el); else io.observe(el);
+    }
+  }
   window.addEventListener("scroll", queue, { passive: true });
-  window.addEventListener("scroll", revealSkipped, { passive: true });
+  window.addEventListener("scroll", function () { sweep(); revealSkipped(); }, { passive: true });
+  window.addEventListener("load", sweep);
+  var sweeps = 0, sweepT = setInterval(function () { sweep(); if (++sweeps >= 20) clearInterval(sweepT); }, 500);
   window.addEventListener("resize", queue);
 
   function boot() {
     document.body.appendChild(bar);
+    // Arriving after the page is already drawn (a slow script load): don't hide what the visitor can already see.
+    var drawn = document.getElementById("dc-root");
+    if (drawn && drawn.firstChild) sweep();
     scan();
     var pending = false;
     new MutationObserver(function () {
