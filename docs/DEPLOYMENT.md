@@ -176,7 +176,7 @@ Create Jean and Justin with the admin API; the commands are in the portal README
 **Website**
 - [ ] `https://noblemanproductions.gotit2work.com` loads with a valid padlock.
 - [ ] The hero shows the harbor frame immediately and the reel starts playing within a few seconds.
-- [ ] Nav and footer appear on `/`, `/work`, `/services`, `/start`; the Work page reel plays.
+- [ ] Nav and footer appear on `/`, `/work`, `/services`, `/live-production`, `/conference-event`, `/about`, `/privacy`, `/start`; a film on `/work` opens in the full-screen player and plays.
 - [ ] The contact form delivers both emails (Phase 5 validation).
 - [ ] `/anything-random` shows the branded 404 page.
 - [ ] Sharing the link in iMessage/Slack shows the Nobleman preview card.
@@ -219,5 +219,5 @@ Create Jean and Justin with the admin API; the commands are in the portal README
 
 - **The portal is a real login in front of a prototype.** Sign-in, roles, and account management are real. The projects, versions, review comments, files, and messages every user sees are hardcoded sample data (the "Meridian" campaign). Don't give clients logins until projects are stored per client.
 - **No admin screens yet.** Accounts are created with `curl` (portal README).
-- **Placeholder content on the website.** 7 of 8 tiles on `/work` are striped placeholders; About, Nobleman Sailing Media, the "Also offered" services, YouTube/Instagram, Privacy, Terms and Sitemap links point to `#`.
+- **Open content decisions on the website.** The privacy policy needs an owner review; there is no Terms page or Instagram link; the inquiry address (alexis@gotit2work.com) differs from noblemanproductions.com (info@noblemanproductions.com); much of the copy duplicates noblemanproductions.com. See the README, "Still unfinished".
 - **The hero plays "RETROBOAT S2 EP1", a 22-minute episode.** A dedicated 15–30 second reel would make a better background loop and use less of visitors' data.

@@ -4,15 +4,37 @@ Static pages plus one serverless function for the intake form. Vercel runs `npm 
 Live at `https://noblemanproductions.gotit2work.com`. **Deploying from scratch: follow [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).**
 
 Pages
-- `/` → index.html (Home)
-- `/work` → work.html
-- `/services` → services.html
+- `/` → index.html (Home: hero reel, credits band, featured films, services, receipts)
+- `/work` → work.html (nine films with filters)
+- `/services` → services.html (YouTube retainers; `/youtube-retainers` serves the same page)
+- `/live-production` → live-production.html
+- `/conference-event` → conference-event.html (conference, event, and drone coverage)
+- `/about` → about.html
+- `/privacy` → privacy.html
 - `/start` → start.html (intake form)
 - anything else → 404.html (static, no runtime)
 
-`SiteChrome.dc.html`, `SiteFooter.dc.html`, and `support.js` are the shared nav, footer, and rendering runtime. All must stay at the repo root; the runtime fetches `./SiteChrome.dc.html` and `./SiteFooter.dc.html` by those exact names.
+Service and About copy was adapted from noblemanproductions.com. Live production, conference/event, About, and Privacy were generated from shared templates during the build-out; they are ordinary HTML now, so edit them directly.
 
-**Clean URLs are explicit in `vercel.json`, on purpose.** Vercel's `cleanUrls` setting would redirect every `.html` request, which puts an extra round trip in front of the nav and footer on every first visit. Instead, `/work`, `/services`, `/start` are rewrites and `/<page>.html` redirects to them. **Adding a page means adding its name to both patterns in `vercel.json`.**
+`SiteChrome.dc.html`, `SiteFooter.dc.html`, `VideoPlayer.dc.html`, and `support.js` are the shared nav, footer, film player, and rendering runtime. All must stay at the repo root; the runtime fetches the `.dc.html` files by those exact names.
+
+## How films play
+
+Every film on the site opens in one shared full-screen player, `VideoPlayer.dc.html`. A page includes it with `<dc-import name="VideoPlayer">` and opens a film by dispatching an event:
+
+```js
+window.__npQueued = film;  // picked up if the player hasn't loaded yet
+window.dispatchEvent(new CustomEvent("np:play", { detail: film }));
+// film = { provider: "vimeo" | "youtube", id, hash?, title, meta? }
+```
+
+The player creates the iframe only when a film is opened and removes it on close, so no third-party player loads until someone asks for one and closing always stops playback. YouTube plays from `youtube-nocookie.com`; Vimeo with `dnt=1`. Escape, the × button, and a click on the backdrop all close it. The page scroll is locked while it is open.
+
+Place the `<dc-import>` outside any element with `container-type` set (see `index.html`): containment makes that element the containing block for `position:fixed`, and the player would be trapped inside it.
+
+Film thumbnails in `media/work-*.jpg` are 960×540 JPEGs taken from each film's YouTube or Vimeo thumbnail.
+
+**Clean URLs are explicit in `vercel.json`, on purpose.** Vercel's `cleanUrls` setting would redirect every `.html` request, which puts an extra round trip in front of the nav and footer on every first visit. Instead, each page name is a rewrite and `/<page>.html` redirects to them. **Adding a page means adding its name to both patterns in `vercel.json`.**
 
 `vendor/` holds React 18.3.1 so pages don't depend on unpkg being up. The files are byte-identical to the unpkg builds `support.js` pins by SRI hash. The version is in the file name, so they can be cached forever.
 
@@ -36,7 +58,7 @@ The goal is that the header looks finished on the first paint and the reel takes
 
 - `media/hero-poster.jpg` is the reel's own Vimeo thumbnail. It is preloaded at high priority from `<head>`, so it is on screen as soon as the page renders.
 - The Vimeo iframe is created on the first render (it used to wait a fixed 900 ms).
-- The iframe stays transparent until Vimeo's player API reports `playing`, then fades in over the poster. If that never happens (autoplay blocked, API unreachable), it is shown anyway after 6 s.
+- The iframe stays transparent until Vimeo's player API reports `playing` (or the first `timeupdate`), then fades in over the poster. If playback never starts (autoplay blocked, Vimeo unreachable), the poster simply stays. There is deliberately no timed fallback: showing the iframe early exposed Vimeo's grey "player error" box instead of the poster.
 - Google Fonts load asynchronously from `<head>`. Don't put a `<link rel="stylesheet">` or a plain `<script src>` inside a page's `<helmet>`: the browser parses that block as part of `<body>` and holds `DOMContentLoaded`, and the whole page stays blank until that request finishes.
 
 If the hero video changes, regenerate the poster from the new video's thumbnail (oEmbed `thumbnail_url`, with the size suffix changed to `_1920x1080`), resize it to 1440 px wide, and save it as JPEG at about 76 quality.
@@ -47,6 +69,8 @@ Photos in `media/` are JPEG (mozjpeg, quality 88, 4:4:4 chroma), 40–120 KB eac
 
 ## Still unfinished
 
-- `/work`: 7 of 8 tiles are striped placeholders waiting for real YouTube/Vimeo links.
-- Placeholder `#` links: About, Nobleman Sailing Media, the "Also offered" services, Drone, YouTube, Instagram, Privacy, Terms, Sitemap.
-- `/services` covers only the YouTube retainer; all three service cards link to it.
+- **Privacy policy needs an owner review.** It describes what the site actually does (Resend email, Vercel logs, Google Fonts, privacy-enhanced YouTube and Vimeo embeds) and names alexis@gotit2work.com as the contact. It is not legal advice.
+- There is no Terms page and no Instagram link: no confirmed Instagram account for Nobleman Productions was found, so the link was removed rather than guessed.
+- The "Also offered" services in the nav (social packages, executive interviews, photography, documentaries) link to `/start` rather than to pages of their own.
+- Inquiries go to alexis@gotit2work.com; noblemanproductions.com publishes info@noblemanproductions.com. Pick one before launch.
+- Much of the copy repeats noblemanproductions.com word for word. If both sites stay public, search engines treat one as a duplicate; decide which is canonical, or rewrite.

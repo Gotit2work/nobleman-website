@@ -54,7 +54,12 @@ a{color:inherit}a:hover{color:inherit}
         <a href="/work" style="display:inline-flex;align-items:center;height:52px;padding:0 28px;border:1px solid rgba(10,10,10,0.5);border-radius:32px;font-size:15px;font-weight:500;text-decoration:none;transition:background 150ms" style-hover="background:rgba(10,10,10,0.06)">See YouTube work</a>
       </div>
     </div>
-    <div style="aspect-ratio:21/9;border-radius:32px;overflow:hidden;background:repeating-linear-gradient(135deg,#e5e7eb 0 10px,#eceef1 10px 20px);display:flex;align-items:center;justify-content:center"><span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase">still · retro boat episode shoot</span></div>
+    <button data-reveal="" onClick="{{ play_retro }}" aria-label="Play Retro Boat · Season 2, Episode 1" style="position:relative;display:block;width:100%;aspect-ratio:21/9;min-height:240px;border-radius:32px;overflow:hidden;background:#031e25;border:0;padding:0;margin:0;cursor:pointer;font:inherit">
+      <div style="position:absolute;inset:0;background:#031e25 url('media/hero-poster.jpg') center/cover no-repeat;transition:transform 1.6s cubic-bezier(.16,.84,.3,1)" style-hover="transform:scale(1.03)"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,30,37,0) 45%,rgba(3,30,37,.72) 100%);pointer-events:none"></div>
+      <span aria-hidden="true" style="position:absolute;left:50%;top:50%;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:50%;background:rgba(3,30,37,.5);border:1px solid rgba(244,244,242,.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center"><span style="width:0;height:0;border-left:19px solid #f4f4f2;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:6px"></span></span>
+      <span style="position:absolute;left:clamp(20px,3vw,36px);right:clamp(20px,3vw,36px);bottom:clamp(18px,2.6vw,30px);display:flex;flex-direction:column;gap:6px;text-align:left;color:#f4f4f2;pointer-events:none"><span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.8">Retainer channel · 53 → 8,000 subscribers</span><span style="font-size:clamp(18px,2vw,26px);font-weight:500;line-height:1.2">Retro Boat · Season 2, Episode 1</span></span>
+    </button>
   </section>
 
   <section style="background:#031e25;color:#f4f4f2;padding:120px 24px">
@@ -88,7 +93,12 @@ a{color:inherit}a:hover{color:inherit}
       </div>
       <div style="display:flex;flex-direction:column;gap:24px">
         <p style="margin:0;font-size:18px;line-height:1.6;text-wrap:pretty">Retro Boat went from 53 to 8,000 subscribers in six months. The Satellite Phone Store series passed 28K views. Both were built the same way: consistent episodes, produced properly, published on schedule.</p>
-        <div style="aspect-ratio:16/9;border-radius:32px;overflow:hidden;background:repeating-linear-gradient(135deg,#d9dce1 0 10px,#dfe2e6 10px 20px);display:flex;align-items:center;justify-content:center"><span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase">youtube embed · retro boat</span></div>
+        <button data-reveal="" onClick="{{ play_highlights }}" aria-label="Play YouTube Highlights Reel" style="position:relative;display:block;width:100%;aspect-ratio:16/9;min-height:240px;border-radius:24px;overflow:hidden;background:#031e25;border:0;padding:0;margin:0;cursor:pointer;font:inherit">
+      <div style="position:absolute;inset:0;background:#031e25 url('media/work-youtube-highlights.jpg') center/cover no-repeat;transition:transform 1.6s cubic-bezier(.16,.84,.3,1)" style-hover="transform:scale(1.03)"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,30,37,0) 45%,rgba(3,30,37,.72) 100%);pointer-events:none"></div>
+      <span aria-hidden="true" style="position:absolute;left:50%;top:50%;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:50%;background:rgba(3,30,37,.5);border:1px solid rgba(244,244,242,.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center"><span style="width:0;height:0;border-left:19px solid #f4f4f2;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:6px"></span></span>
+      <span style="position:absolute;left:clamp(20px,3vw,36px);right:clamp(20px,3vw,36px);bottom:clamp(18px,2.6vw,30px);display:flex;flex-direction:column;gap:6px;text-align:left;color:#f4f4f2;pointer-events:none"><span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.8">Across our channels · 2:14</span><span style="font-size:clamp(18px,2vw,26px);font-weight:500;line-height:1.2">YouTube Highlights Reel</span></span>
+    </button>
       </div>
     </div>
   </section>
@@ -148,11 +158,18 @@ a{color:inherit}a:hover{color:inherit}
   </section>
 
   <dc-import name="SiteFooter" above-bg="{{ footerAbove }}" hint-size="100%,900px"></dc-import>
+  <dc-import name="VideoPlayer" hint-size="100%,0px"></dc-import>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   state = { open: 0 };
+  films = {
+    retro: { provider: "vimeo", id: "1197058424", hash: "796798a19d", title: "Retro Boat · Season 2, Episode 1", meta: "Retainer channel" },
+    highlights: { provider: "vimeo", id: "605083236", title: "YouTube Highlights Reel", meta: "Reel · 2:14" },
+  };
+  /** Opens the shared film player (VideoPlayer.dc.html). */
+  play(v) { window.__npQueued = v; window.dispatchEvent(new CustomEvent("np:play", { detail: v })); }
   faqs = [
     { q: "How long is a retainer?", a: "Six months minimum. Channels compound; the first three months build the library, the next three show the growth." },
     { q: "How many episodes a month?", a: "Most channels run two to four long-form episodes a month plus short-form cuts. We set the cadence in the audit." },
@@ -169,6 +186,8 @@ class Component extends DCLogic {
     const open = this.state.open;
     return {
       footerAbove: "#031e25",
+      play_retro: () => this.play(this.films.retro),
+      play_highlights: () => this.play(this.films.highlights),
       faqs: this.faqs.map((f, i) => ({
         ...f,
         open: open === i,

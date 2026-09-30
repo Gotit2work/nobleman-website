@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<script src="/vendor/react-18.3.1.production.min.js"></script>
+<script src="/vendor/react-dom-18.3.1.production.min.js"></script>
+<script src="/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@keyframes npPlayerIn{from{opacity:0}to{opacity:1}}
+@keyframes npFrameIn{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
+</style>
+</helmet>
+<div data-screen-label="Video player">
+  <sc-if value="{{ open }}" hint-placeholder-val="{{ false }}">
+  <div role="dialog" aria-modal="true" aria-label="{{ title }}" style="position:fixed;inset:0;z-index:300;background:rgba(1,10,13,0.95);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:72px clamp(12px,4vw,56px) 40px;font-family:Inter,system-ui,sans-serif;animation:npPlayerIn 380ms ease both">
+    <button onClick="{{ close }}" aria-label="Close video" style="position:absolute;inset:0;width:100%;height:100%;background:transparent;border:0;cursor:zoom-out"></button>
+    <div ref="{{ boxRef }}" style="position:relative;width:min(100%, calc((100vh - 180px) * 16 / 9));aspect-ratio:16/9;background:#000;border-radius:6px;overflow:hidden;box-shadow:0 40px 120px -30px rgba(0,0,0,.8);animation:npFrameIn 520ms cubic-bezier(.16,.84,.3,1) both"></div>
+    <div style="position:relative;display:flex;gap:14px;align-items:baseline;justify-content:center;flex-wrap:wrap;color:#f4f4f2;pointer-events:none;text-align:center;padding:0 16px"><span style="font-size:17px;font-weight:500">{{ title }}</span><span style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;opacity:.6">{{ meta }}</span></div>
+    <button onClick="{{ close }}" aria-label="Close" style="position:absolute;top:18px;right:18px;width:48px;height:48px;border-radius:50%;border:1px solid rgba(244,244,242,.35);background:rgba(3,30,37,.6);color:#f4f4f2;font:inherit;font-size:24px;line-height:1;cursor:pointer">×</button>
+  </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+/**
+ * Shared full-screen film player. A page opens it with:
+ *   window.__npQueued = film; window.dispatchEvent(new CustomEvent("np:play", { detail: film }));
+ * where film = { provider: "vimeo" | "youtube", id, hash?, title, meta? }.
+ * The iframe is created only when a film is opened and removed on close, which stops playback and means no
+ * player loads until someone asks for one.
+ */
+class Component extends DCLogic {
+  state = { film: null };
+  boxRef = React.createRef();
+  embedUrl(v) {
+    return v.provider === "youtube"
+      ? "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(v.id) + "?autoplay=1&rel=0&modestbranding=1&playsinline=1"
+      : "https://player.vimeo.com/video/" + encodeURIComponent(v.id) + "?" + (v.hash ? "h=" + encodeURIComponent(v.hash) + "&" : "") + "autoplay=1&title=0&byline=0&portrait=0&dnt=1";
+  }
+  openFilm(v) {
+    if (!v || !v.id) return;
+    window.__npQueued = null;
+    this.lastFocus = document.activeElement;
+    try { document.documentElement.style.overflow = "hidden"; } catch (e) {}
+    this.setState({ film: v });
+  }
+  close = () => {
+    try { document.documentElement.style.overflow = ""; } catch (e) {}
+    this.setState({ film: null });
+    try { if (this.lastFocus && this.lastFocus.focus) this.lastFocus.focus(); } catch (e) {}
+  };
+  sync() {
+    const box = this.boxRef.current, v = this.state.film;
+    if (!box) return;
+    const want = v ? this.embedUrl(v) : "";
+    const cur = box.firstChild;
+    if (cur && cur.getAttribute("data-src") === want) return;
+    box.textContent = "";
+    if (!want) return;
+    const f = document.createElement("iframe");
+    f.src = want; f.setAttribute("data-src", want); f.title = v.title || "Film";
+    f.allow = "autoplay; fullscreen; picture-in-picture; encrypted-media";
+    f.setAttribute("allowfullscreen", "");
+    f.style.cssText = "position:absolute;inset:0;width:100%;height:100%;border:0;display:block";
+    box.appendChild(f);
+  }
+  componentDidMount() {
+    this.onPlay = (e) => this.openFilm(e.detail);
+    this.onKey = (e) => { if (e.key === "Escape" && this.state.film) this.close(); };
+    window.addEventListener("np:play", this.onPlay);
+    window.addEventListener("keydown", this.onKey);
+    // A click that landed before this component finished loading.
+    if (window.__npQueued) this.openFilm(window.__npQueued);
+  }
+  componentDidUpdate() { this.sync(); }
+  componentWillUnmount() {
+    window.removeEventListener("np:play", this.onPlay);
+    window.removeEventListener("keydown", this.onKey);
+    try { document.documentElement.style.overflow = ""; } catch (e) {}
+  }
+  renderVals() {
+    const v = this.state.film;
+    return { open: !!v, title: v ? v.title : "", meta: v && v.meta ? v.meta : "", boxRef: this.boxRef, close: this.close };
+  }
+}
+</script>
+</body>
+</html>
