@@ -1,23 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+<title>Work | Nobleman Productions</title>
+<meta name="description" content="Selected films from Nobleman Productions: YouTube series, live broadcasts, conference recaps, marine and powersports.">
+<link rel="canonical" href="https://noblemanproductions.gotit2work.com/work">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Nobleman Productions">
+<meta property="og:title" content="Work | Nobleman Productions">
+<meta property="og:description" content="Selected films from Nobleman Productions: YouTube series, live broadcasts, conference recaps, marine and powersports.">
+<meta property="og:url" content="https://noblemanproductions.gotit2work.com/work">
+<meta property="og:image" content="https://noblemanproductions.gotit2work.com/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#031e25">
+<style>html,body{margin:0;background:#fff}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="/assets/np.css?v=1">
+<script src="/assets/np.js?v=1" defer></script>
+<script src="/vendor/react-18.3.1.production.min.js"></script>
+<script src="/vendor/react-dom-18.3.1.production.min.js"></script>
+<script src="/support.js"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Cormorant+Garamond:ital,wght@1,400;1,500&amp;display=swap" rel="stylesheet">
 <style>
 html{scroll-behavior:smooth}
 body{margin:0;background:#ffffff;color:#0a0a0a;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 a{color:inherit}a:hover{color:inherit}
 *{box-sizing:border-box}
 @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:.15}}
-[data-reveal]{opacity:0;transform:translateY(28px);transition:opacity 1.2s cubic-bezier(.16,.84,.3,1),transform 1.2s cubic-bezier(.16,.84,.3,1)}
-[data-reveal][data-in]{opacity:1;transform:none}
 </style>
 </helmet>
 <div data-screen-label="Work" style="background:#fff;min-height:100vh;display:flex;flex-direction:column">
@@ -25,7 +45,10 @@ a{color:inherit}a:hover{color:inherit}
   <dc-import name="SiteChrome" theme="light" hint-size="100%,0px"></dc-import>
 
   <section style="max-width:1200px;width:100%;margin:0 auto;padding:150px 24px 40px;display:flex;flex-direction:column;gap:40px">
-    <h1 style="margin:0;font-size:clamp(48px,7vw,120px);font-weight:500;letter-spacing:-0.01em;line-height:1.02">Work</h1>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px 48px;align-items:end">
+      <h1 data-reveal="title" style="margin:0;font-size:clamp(58px,9.1vw,162px);font-weight:500;line-height:1">Work</h1>
+      <p style="margin:0;font-size:18px;line-height:1.55;max-width:520px;opacity:.8;text-wrap:pretty">Production reels, client films, and the channels we build. From the Transpac to Sturgis, Las Vegas keynotes to satellite phones.</p>
+    </div>
     <div style="display:flex;gap:8px 28px;flex-wrap:wrap;border-top:1px solid #e5e7eb;border-bottom:1px solid #e5e7eb;padding:16px 0">
       <sc-for list="{{ filters }}" as="f" hint-placeholder-count="6">
         <button onClick="{{ f.select }}" style="background:none;border:0;padding:6px 0;font:inherit;font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;color:{{ f.color }};border-bottom:1px solid {{ f.border }}">{{ f.label }}</button>
@@ -36,25 +59,28 @@ a{color:inherit}a:hover{color:inherit}
   <section style="max-width:1200px;width:100%;margin:0 auto;padding:0 24px 96px;flex:1">
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px 32px">
       <sc-for list="{{ items }}" as="w" hint-placeholder-count="6">
-        <a href="{{ w.href }}" style="display:flex;flex-direction:column;gap:16px;text-decoration:none;color:#0a0a0a">
-          <sc-if value="{{ w.embed }}" hint-placeholder-val="{{ false }}">
-            <div style="aspect-ratio:16/9;border-radius:32px;overflow:hidden;background:#031e25"><iframe src="{{ w.embed }}" title="{{ w.title }}" allow="fullscreen; picture-in-picture" style="width:100%;height:100%;border:0;display:block"></iframe></div>
-          </sc-if>
-          <sc-if value="{{ w.placeholder }}" hint-placeholder-val="{{ true }}">
-            <div style="aspect-ratio:16/9;border-radius:32px;overflow:hidden;background:repeating-linear-gradient(135deg,#e5e7eb 0 10px,#eceef1 10px 20px);display:flex;align-items:center;justify-content:center"><span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;text-align:center;padding:0 24px">{{ w.note }}</span></div>
-          </sc-if>
-          <div style="display:flex;justify-content:space-between;gap:16px;align-items:baseline">
-            <span style="font-size:18px">{{ w.title }}</span>
-            <span style="font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;white-space:nowrap">{{ w.meta }}</span>
+        <button data-reveal="card" onClick="{{ w.play }}" aria-label="Play {{ w.title }}" style="display:flex;flex-direction:column;gap:16px;border:0;padding:0;margin:0;background:none;text-align:left;cursor:pointer;color:#0a0a0a;font:inherit">
+          <div style="position:relative;width:100%;aspect-ratio:16/9;border-radius:24px;overflow:hidden;background:#031e25">
+            <div data-parallax="22" style="position:absolute;inset:-28px 0;background:#031e25 url('{{ w.img }}') center/cover no-repeat;transition:transform 1.4s cubic-bezier(.16,.84,.3,1)" style-hover="transform:scale(1.05)"></div>
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,30,37,0) 55%,rgba(3,30,37,.55) 100%);pointer-events:none"></div>
+            <span aria-hidden="true" style="position:absolute;left:50%;top:50%;width:68px;height:68px;margin:-34px 0 0 -34px;border-radius:50%;background:rgba(3,30,37,.5);border:1px solid rgba(244,244,242,.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center"><span style="width:0;height:0;border-left:17px solid #f4f4f2;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:5px"></span></span>
+            <span style="position:absolute;left:18px;bottom:14px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#f4f4f2;opacity:.9">{{ w.kind }}</span>
           </div>
-        </a>
+          <div style="display:flex;flex-direction:column;gap:6px;width:100%">
+            <div style="display:flex;justify-content:space-between;gap:16px;align-items:baseline">
+              <span class="np-display" style="font-size:26px;line-height:1.1">{{ w.title }}</span>
+              <span style="font-size:11px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;white-space:nowrap">{{ w.meta }}</span>
+            </div>
+            <span style="font-size:14px;line-height:1.5;opacity:.65;text-wrap:pretty">{{ w.blurb }}</span>
+          </div>
+        </button>
       </sc-for>
     </div>
   </section>
 
   <section style="background:#031e25;color:#f4f4f2;padding:96px 24px">
     <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap">
-      <h2 style="margin:0;font-size:clamp(36px,5vw,72px);font-weight:500;letter-spacing:0.005em;line-height:1.12;max-width:720px;text-wrap:balance">Tell us about your project.</h2>
+      <h2 style="margin:0;font-size:clamp(45px,6.5vw,97px);font-weight:500;line-height:1.08;max-width:720px;text-wrap:balance">Tell us about your project.</h2>
       <div style="display:flex;gap:12px;flex-wrap:wrap">
         <a href="https://vimeo.com/noblemanproductions" style="display:inline-flex;align-items:center;height:48px;padding:0 22px;border:1px solid #fff;color:#fff;border-radius:32px;font-size:15px;font-weight:500;text-decoration:none;transition:background 150ms" style-hover="background:#fff;color:#0a0a0a">Full archive on Vimeo</a>
         <a href="/start" style="display:inline-flex;align-items:center;height:48px;padding:0 22px;background:#fff;color:#0a0a0a;border-radius:32px;font-size:15px;font-weight:500;text-decoration:none;transition:background 150ms" style-hover="background:#f3f4f6;color:#0a0a0a">Start a Project</a>
@@ -63,28 +89,33 @@ a{color:inherit}a:hover{color:inherit}
   </section>
 
   <dc-import name="SiteFooter" above-bg="{{ footerAbove }}" hint-size="100%,900px"></dc-import>
+
+  <dc-import name="VideoPlayer" hint-size="100%,0px"></dc-import>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   state = { filter: "All" };
-  filters = ["All", "YouTube", "Live", "Events", "Marine", "Powersports"];
+  /** Every film here is published and embeddable (checked against Vimeo and YouTube oEmbed). */
   work = [
-    { title: "Nobleman Productions · Reel", tags: ["Marine", "Powersports", "Events"], meta: "Vimeo", href: "https://vimeo.com/1197058424/796798a19d", embed: "https://player.vimeo.com/video/1197058424?h=796798a19d&badge=0&title=0&byline=0&portrait=0" },
-    { title: "Satellite Phone Store · Series", tags: ["YouTube"], meta: "28K views", href: "#", note: "youtube embed · satellite phone store" },
-    { title: "Retro Boat · Channel", tags: ["YouTube", "Marine"], meta: "53 → 8,000 subs", href: "#", note: "youtube embed · retro boat episode" },
-    { title: "MCT Exchange 2022 · Recap", tags: ["Events"], meta: "Events", href: "#", note: "vimeo embed · mct exchange recap" },
-    { title: "Course launch · Live broadcast", tags: ["Live"], meta: "Live", href: "#", note: "vimeo embed · live production sample" },
-    { title: "Nobleman Sailing Media · Offshore", tags: ["Marine", "YouTube"], meta: "YouTube", href: "#", note: "youtube embed · nobleman sailing media" },
-    { title: "Powersports · Desert shoot", tags: ["Powersports"], meta: "Vimeo", href: "#", note: "vimeo embed · powersports" },
-    { title: "Conference · Same-day highlights", tags: ["Events"], meta: "Events", href: "#", note: "vimeo embed · same-day highlight reel" },
+    { provider: "vimeo", id: "607606969", title: "Power Sports Reel", kind: "Reel · Vimeo", meta: "0:44", tags: ["Reels", "Powersports"], img: "media/work-motor-sizzle.jpg", blurb: "Lamborghini, Maserati, Harley-Davidson. The adrenaline end of what we shoot." },
+    { provider: "vimeo", id: "609415730", title: "Sailing Reel", kind: "Reel · Vimeo", meta: "1:06", tags: ["Reels", "Marine"], img: "media/work-sailing-sizzle.jpg", blurb: "Volvo Ocean Race, Maserati racing, and aboard a boat in the Transpac." },
+    { provider: "vimeo", id: "605083236", title: "YouTube Highlights", kind: "Reel · Vimeo", meta: "2:14", tags: ["Reels", "YouTube"], img: "media/work-youtube-highlights.jpg", blurb: "Our best-performing YouTube work across channels and industries." },
+    { provider: "youtube", id: "6EzRjlZSgkg", title: "Iridium Extreme · Satellite Phone Store", kind: "Series · YouTube", meta: "28K views", tags: ["YouTube"], img: "media/work-iridium-extreme.jpg", blurb: "A product series that explains the gear and saved the client hundreds of support hours." },
+    { provider: "youtube", id: "eO6kBGQCe2g", title: "Gamble · 2019 Transpacific Race", kind: "Film · YouTube", meta: "14K views", tags: ["Marine", "YouTube"], img: "media/work-gamble-transpac.jpg", blurb: "Offshore for the Transpac, from sunsets to heavy weather." },
+    { provider: "youtube", id: "hPs5WLlw36k", title: "The Trail to Sturgis · Harley-Davidson Pan America", kind: "Film · YouTube", meta: "12.5K views", tags: ["Powersports", "YouTube"], img: "media/work-trail-to-sturgis.jpg", blurb: "The Pan America's first year, told as a ride to Sturgis." },
+    { provider: "youtube", id: "zaOdk6WX5m4", title: "Women Leading the Way · EcoFlow ADV Rally", kind: "Film · YouTube", meta: "7.1K views", tags: ["Powersports", "Events"], img: "media/work-ecoflow-adv-rally.jpg", blurb: "A team of women riders on a scavenger hunt across Southern California." },
+    { provider: "youtube", id: "rIudMOLFpRM", title: "MCT Exchange 2022 · Recap", kind: "Conference · YouTube", meta: "Events", tags: ["Events"], img: "media/work-mct-exchange.jpg", blurb: "Recap film for Mortgage Capital Trading's annual conference." },
+    { provider: "vimeo", id: "1197058424", hash: "796798a19d", title: "Retro Boat · Season 2, Episode 1", kind: "Episode · YouTube channel", meta: "53 → 8,000 subs", tags: ["YouTube", "Marine"], img: "media/hero-poster.jpg", blurb: "A retainer channel we grew from 53 to 8,000 subscribers in six months." },
   ];
+  filters = ["All", "Reels", "YouTube", "Events", "Marine", "Powersports"];
+  /** Opens the shared film player (VideoPlayer.dc.html). */
+  play(v) { window.__npQueued = v; window.dispatchEvent(new CustomEvent("np:play", { detail: v })); }
   componentDidMount() {
-    this.io = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.setAttribute("data-in", ""); this.io.unobserve(e.target); } }); }, { threshold: 0.12 });
-    const observe = () => document.querySelectorAll("[data-reveal]:not([data-in])").forEach(el => this.io.observe(el));
-    observe(); this.mo = new MutationObserver(observe); this.mo.observe(document.body, { childList: true, subtree: true });
   }
-  componentWillUnmount() { this.io && this.io.disconnect(); this.mo && this.mo.disconnect(); }
+  componentWillUnmount() {
+
+  }
   renderVals() {
     const cur = this.state.filter;
     return {
@@ -95,7 +126,7 @@ class Component extends DCLogic {
         border: f === cur ? "#0a0a0a" : "transparent",
         select: () => this.setState({ filter: f }),
       })),
-      items: this.work.filter(w => cur === "All" || w.tags.includes(cur)).map(w => ({ ...w, placeholder: !w.embed })),
+      items: this.work.filter(w => cur === "All" || w.tags.includes(cur)).map(w => Object.assign({}, w, { meta: w.meta, play: () => this.play(Object.assign({}, w, { meta: w.kind + " · " + w.meta })) })),
     };
   }
 }
