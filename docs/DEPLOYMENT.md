@@ -165,6 +165,8 @@ vimeo.com (Jean's account, `jeangotay`) → video `1197058424` → **Settings �
 
 ## Phase 6 — First portal owner and connections
 
+> The portal has its own, fuller runbook: `docs/GO-LIVE.md` in `Gotit2work/nobleman-portal`. It covers the database, secrets, the first owner, email, Vimeo, Notion, and Stripe payments (test mode first), with checks, troubleshooting, and rollback. The steps below are the short form.
+
 1. With `PORTAL_MODE` deleted and the portal redeployed, open `https://portal.noblemanproductions.gotit2work.com`. Expected: **Set up the portal**.
 2. Setup code: the `BOOTSTRAP_SECRET` value (Vercel → portal → Settings → Environment Variables → reveal it). Then your name, email, and a password of at least 10 characters → **Create the owner account**. You're signed in as the owner.
 3. It refuses to run again once a staff account exists. Delete `BOOTSTRAP_SECRET` anyway and redeploy: a removed secret can't leak.
@@ -173,6 +175,7 @@ vimeo.com (Jean's account, `jeangotay`) → video `1197058424` → **Settings �
    - **Connect email** (Resend): the API key from Phase 5 and a sender such as `Nobleman Productions <portal@gotit2work.com>`. Press **Send a test email**. *Expected:* it arrives.
    - **Add a connection → Vimeo**: Jean's token (portal README, "Vimeo"), or let Jean sign in and add it. *Expected:* **Test it** ticks every scope and shows the plan.
    - Frame.io, YouTube, Wistia, and Notion as needed (portal README has the steps for each, including Frame.io's Adobe redirect URI).
+   - **Payments → Connect Stripe**: a test key first, then the webhook (the card shows its address and events), then live keys (portal `docs/GO-LIVE.md`, step 12).
 6. Studio → **People** → **Invite a person** for Jean and Justin (Owner or Producer). Each gets an email with a one-time link to choose a password; the link is also shown for you to copy. Make at least two owners.
 7. Studio → **Settings** → **System check**: nothing red. Once every staff member has two-step sign-in, Settings → Security → require it.
 

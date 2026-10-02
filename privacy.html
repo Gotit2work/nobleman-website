@@ -116,7 +116,7 @@ a{color:inherit}a:hover{color:inherit}
       <div class="pv-short">
         <div class="pv-tile" data-reveal="card"><span class="pv-n">01</span><b>What we collect</b><span>What you type into our form or email us, what you add to and do in the client portal if you have an account, and the basic technical details every website receives, like your IP address.</span></div>
         <div class="pv-tile" data-reveal="card"><span class="pv-n">02</span><b>What we never do</b><span>Sell or rent your information, share it for advertising, or put ad or analytics trackers on our sites.</span></div>
-        <div class="pv-tile" data-reveal="card"><span class="pv-n">03</span><b>Who helps us</b><span>A few companies host the sites, play the films, deliver email, and help us track projects. Each one is named below, with what it receives.</span></div>
+        <div class="pv-tile" data-reveal="card"><span class="pv-n">03</span><b>Who helps us</b><span>A few companies host the sites, play the films, deliver email, take payments, and help us track projects. Each one is named below, with what it receives.</span></div>
         <div class="pv-tile" data-reveal="card"><span class="pv-n">04</span><b>Your say</b><span>Email us to see, correct, or delete what you’ve sent us. There’s no charge.</span></div>
       </div>
     </div>
@@ -202,10 +202,12 @@ a{color:inherit}a:hover{color:inherit}
             <li>files you send us: the file itself in private storage, plus its name, size, and type;</li>
             <li>videos you send us, which go straight to our Vimeo account, where only we can see them;</li>
             <li>share links you create to a finished film, who created each one, when it ends, and how many times it has been opened. We don’t record who opens a share link;</li>
-            <li>milestones you confirm, such as a filming day.</li>
+            <li>milestones you confirm, such as a filming day;</li>
+            <li>payments we ask for and their status: what each is for, the amount, the due date, whether and when it was paid, the name Stripe gives us for who paid, and Stripe’s reference numbers for the checkout and the payment.</li>
           </ul>
+          <p><strong>Payments.</strong> When you pay in the portal, you pay on Stripe’s own checkout page. Your card or bank details go to Stripe, never to us or the portal. Stripe tells the portal whether the payment succeeded, the name and email used at checkout, and its reference numbers. Stripe handles the payment under its own privacy policy and keeps its own records, including receipts.</p>
           <p><strong>Activity log.</strong> So we know a delivery landed and can help if something goes wrong, the portal records what happens in it, with the person’s name, the time, and the IP address: signing in, watching a version or film (once a day per film), downloading, approving, creating or turning off share links, changes to your team, and changes our staff make. Only our staff can see it. Entries are deleted after about 13 months.</p>
-          <p><strong>Emails.</strong> The portal emails you invitations, links to confirm a new account, login links, and password reset links when you or we ask for them (each link works once and expires; we keep only a scrambled copy, deleted a week after it’s used or expires), a receipt when you approve a version, and a reminder before a review date we’ve set. If you leave updates on, we also email you when we share a new version, film, or file, or message you. Our team gets an email when you leave a note, approve or ask for changes, message us, send something, confirm a milestone, or change your team, and it includes what you wrote. You can turn your updates off under Account in the portal.</p>
+          <p><strong>Emails.</strong> The portal emails you invitations, links to confirm a new account, login links, and password reset links when you or we ask for them (each link works once and expires; we keep only a scrambled copy, deleted a week after it’s used or expires), a receipt when you approve a version, and a reminder before a review date we’ve set. If you leave updates on, we also email you when we share a new version, film, or file, ask for a payment, or message you, and when a payment is paid or doesn’t go through. Our team gets an email when you leave a note, approve or ask for changes, message us, send something, confirm a milestone, change your team, or pay, and it includes what you wrote. You can turn your updates off under Account in the portal.</p>
           <p>To stop people guessing passwords and codes, the portal also keeps a short record of failed logins, two-step codes, and requests for emailed links (including new accounts): the email address that was tried and the IP address it came from. These records are deleted after about a day.</p>
           <p><strong>Project tracking.</strong> We may keep a copy of each project’s status in Notion, our planning tool: the project and company name, stage, progress, whether a version is waiting or approved, how many notes are open, the next milestone, and review dates. It doesn’t include your name, email, notes, or messages.</p>
           <p>The films you watch and download in the portal are stored with the video service we use for that project (section 06).</p>
@@ -227,6 +229,7 @@ a{color:inherit}a:hover{color:inherit}
               <tr><td>Google Drive, Loom, Dropbox</td><td data-label="What it does for us">Play a video we’ve linked from there, only on projects where we do.</td><td data-label="What it receives">Standard request details when the video loads or plays, and more under their own policies once it plays.</td></tr>
               <tr><td>Notion</td><td data-label="What it does for us">Our project planning, if we keep project status there.</td><td data-label="What it receives">The project status described in section 05, with no personal details.</td></tr>
               <tr><td>YouTube (Google)</td><td data-label="What it does for us">Plays some of our films, in privacy-enhanced mode.</td><td data-label="What it receives">Standard request details, and more once you press play.</td></tr>
+              <tr><td>Stripe</td><td data-label="What it does for us">Takes payments in the client portal, on Stripe’s own checkout page.</td><td data-label="What it receives">Your card or bank details, the name and email you use at checkout, the amount and what it’s for, and the project and company name. We never see your card details.</td></tr>
               <tr><td>Neon</td><td data-label="What it does for us">The portal’s database. The demo doesn’t use it.</td><td data-label="What it receives">The account details, notes, decisions, messages, file records, share links, and activity log in section 05.</td></tr>
             </tbody>
           </table>
@@ -243,6 +246,7 @@ a{color:inherit}a:hover{color:inherit}
             <li><strong>Account requests:</strong> unconfirmed ones after about a day; once the studio has let you in or declined, after 30 days.</li>
             <li><strong>Notes, decisions, messages, and files</strong> stay with the project, under the name of the person who added them, even after that person’s account is closed. Deleting a project deletes them all, including its stored files. Ask, and we’ll delete yours sooner.</li>
             <li><strong>Videos sent through the portal</strong> stay in our Vimeo account until we delete them there.</li>
+            <li><strong>Payment records</strong> stay with the project, so you and we can see what was paid, until the project is deleted. Stripe keeps its own payment records for as long as the law requires.</li>
             <li><strong>Activity log:</strong> about 13 months.</li>
             <li><strong>Emailed links:</strong> a week after they’re used or expire.</li>
             <li><strong>Share links:</strong> with the project, until it’s deleted. A link that’s turned off or has ended stops working at once.</li>
