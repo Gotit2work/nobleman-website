@@ -40,11 +40,13 @@
 - [ ] A terminal with `curl` and `openssl` (macOS/Linux; on Windows use WSL or Git Bash).
 - [ ] The fix branch `claude/awesome-euler-ynmcfs` merged into `main` in **both** repositories (Phase 0).
 
-Generate two secrets now and keep them in your password manager:
+Generate four secrets on your own computer now and keep them in your password manager (never paste them into chat or email):
 
 ```bash
-openssl rand -base64 48   # SESSION_SECRET  (portal, permanent)
-openssl rand -base64 32   # BOOTSTRAP_SECRET (portal, one-time)
+openssl rand -base64 48   # SESSION_SECRET         (portal, permanent; changing it signs everyone out)
+openssl rand -base64 48   # PORTAL_ENCRYPTION_KEY  (portal, permanent; encrypts stored connection keys, never change it)
+openssl rand -base64 32   # CRON_SECRET            (portal, the daily job)
+openssl rand -base64 32   # BOOTSTRAP_SECRET       (portal, one-time)
 ```
 
 ---
@@ -90,14 +92,17 @@ In each repository on GitHub: open a pull request from `claude/awesome-euler-ynm
    *Tradeoff:* previews then share the production database, so a preview of unfinished code can change real client data. Previews sit behind Vercel Authentication, so only the team can open them. If the Neon integration offers **a database branch per preview deployment**, turn it on: each preview then gets its own copy.
 3. **Tables:** nothing to do. The portal creates and updates its own tables on the first request after a deploy (`api/_schema.js`).
 4. **File storage:** Storage → **Create** → **Blob** → access **Private** → connect to the portal project. Vercel sets `BLOB_READ_WRITE_TOKEN`.
-5. **Environment Variables** on the portal project (the full list, including Vimeo and email, is in the portal README):
+5. **Environment Variables** on the portal project (the full list is in the portal README):
 
    | Name | Value | Environments |
    |---|---|---|
    | `SESSION_SECRET` | the 48-byte value you generated (Sensitive) | Production, Preview |
+   | `PORTAL_ENCRYPTION_KEY` | the second 48-byte value (Sensitive) | Production, Preview |
+   | `CRON_SECRET` | the cron value (Sensitive). Vercel sends it to the daily job (`vercel.json` → `crons`) | Production |
    | `BOOTSTRAP_SECRET` | the one-time value | Production only |
-   | `VIMEO_ACCESS_TOKEN` | Jean's token, scopes in the portal README (Sensitive) | Production, Preview |
    | `PORTAL_MODE` | `demo` while the portal is a public showcase; delete it to require sign-in | Production, Preview |
+
+   Video accounts (Vimeo, Frame.io, YouTube, Wistia), email (Resend), and Notion are connected later in the portal itself (Studio → Connections), so their keys never need to live in Vercel. `VIMEO_ACCESS_TOKEN`, `RESEND_API_KEY`, and `PORTAL_EMAIL_FROM` still work as environment variables if you prefer.
 
 6. **Redeploy** so the variables take effect: Deployments → newest → ⋯ → **Redeploy**. Environment variables only apply to deployments created after they were set.
 7. **Settings → Domains → Add** → `portal.noblemanproductions.gotit2work.com`. Copy the CNAME value Vercel shows.
@@ -158,13 +163,18 @@ vimeo.com (Jean's account, `jeangotay`) → video `1197058424` → **Settings �
 
 ---
 
-## Phase 6 — First portal admin
+## Phase 6 — First portal owner and connections
 
 1. With `PORTAL_MODE` deleted and the portal redeployed, open `https://portal.noblemanproductions.gotit2work.com`. Expected: **Set up the portal**.
-2. Setup code: the `BOOTSTRAP_SECRET` value (Vercel → portal → Settings → Environment Variables → reveal it). Then your name, email, and a password of at least 10 characters → **Create the first staff account**. You're signed in.
+2. Setup code: the `BOOTSTRAP_SECRET` value (Vercel → portal → Settings → Environment Variables → reveal it). Then your name, email, and a password of at least 10 characters → **Create the owner account**. You're signed in as the owner.
 3. It refuses to run again once a staff account exists. Delete `BOOTSTRAP_SECRET` anyway and redeploy: a removed secret can't leak.
-4. Studio → **People** → **Add a person** → Staff, for Jean and Justin. Each gets a temporary password shown once; send it to them yourself (the portal doesn't email it). They choose their own when they first sign in.
-5. Studio → **Vimeo & connections**: every scope ticked, plan and upload space shown.
+4. Account → **Set up two-step sign-in** with your authenticator app. Save the recovery codes in your password manager.
+5. Studio → **Connections**:
+   - **Connect email** (Resend): the API key from Phase 5 and a sender such as `Nobleman Productions <portal@gotit2work.com>`. Press **Send a test email**. *Expected:* it arrives.
+   - **Add a connection → Vimeo**: Jean's token (portal README, "Vimeo"), or let Jean sign in and add it. *Expected:* **Test it** ticks every scope and shows the plan.
+   - Frame.io, YouTube, Wistia, and Notion as needed (portal README has the steps for each, including Frame.io's Adobe redirect URI).
+6. Studio → **People** → **Invite a person** for Jean and Justin (Owner or Producer). Each gets an email with a one-time link to choose a password; the link is also shown for you to copy. Make at least two owners.
+7. Studio → **Settings** → **System check**: nothing red. Once every staff member has two-step sign-in, Settings → Security → require it.
 
 ---
 
@@ -182,8 +192,10 @@ vimeo.com (Jean's account, `jeangotay`) → video `1197058424` → **Settings �
 - [ ] `https://portal.noblemanproductions.gotit2work.com` shows the screening-room sign-in; `/demo` shows the sample project.
 - [ ] A wrong password shows "That email and password don’t match."
 - [ ] The right password opens the portal greeting you by name; a reload keeps you signed in; Sign out works.
-- [ ] With a test client and a test project linked to a Vimeo folder: a version plays, a note saves, approving asks first and then shows who approved it, a message sends, a small file uploads and downloads.
-- [ ] Studio → Vimeo & connections shows nothing red.
+- [ ] An invitation email arrives, its link opens "Choose your password", and the same link doesn't work a second time.
+- [ ] With a test client and a test project linked to a Vimeo folder: only the newest version shows, a note saves, approving asks first (with room for small fixes) and then shows who approved it and emails a receipt, a message sends, a small file uploads and downloads, and a share link opens the film without signing in and stops working once turned off.
+- [ ] Studio → Settings → System check shows nothing red; Studio → Activity lists each step above.
+- [ ] Vercel → portal → Settings → Cron Jobs lists `/api/cron` daily.
 
 ---
 
@@ -198,9 +210,13 @@ vimeo.com (Jean's account, `jeangotay`) → video `1197058424` → **Settings �
 | Form says "We could not send that…" | Resend domain not verified, or `INTAKE_FROM` uses a domain Resend hasn't verified | Vercel → website → Logs → filter `/api/intake` → look for `intake failed` |
 | Portal: "The portal is still being set up" | `DATABASE_URL` missing, or set without a redeploy | Set it (Storage → Neon), then redeploy |
 | Portal: "Sign-in isn’t working right now" | Database unreachable, or `SESSION_SECRET` missing or shorter than 32 characters | Vercel → portal → Logs → `/api/session` |
-| Portal: "Too many tries. Wait 15 minutes…" | 8 failed sign-ins for that email (or 30 from one IP) within 15 minutes | Wait, or Studio → People → Reset password (clears that person's failures) |
+| Portal: "Too many tries…" | 8 failed sign-ins for that email (or 30 from one IP) within 15 minutes; codes and emailed links have their own limits (portal README, "Security model") | Wait for the window to pass |
+| Portal: someone lost the phone with their two-step codes | — | They use a recovery code; or Studio → People → More → **Turn off two-step (lost phone)**, after confirming it's really them |
+| Portal: invitations or sign-in links don't arrive | Email not connected, sender domain not verified in Resend, or the message is in spam | Studio → Connections → Email → **Send a test email**; meanwhile Studio → People → Resend invite shows the link to copy |
+| Portal: Frame.io "Needs sign-in" | Adobe sign-in not done, expired after about 14 days unused, or the redirect URI doesn't match | Studio → Connections → Frame.io → **Sign in with Adobe**; check the redirect URI matches exactly; check `CRON_SECRET` so the daily job keeps it fresh |
+| Portal: Notion not updating | The page or database isn't shared with the Notion connection, or a column was renamed to another type | Studio → Connections → Notion shows the last error; in Notion, ••• → Connections → add the connection |
 | Portal: "Setup is switched off" | `BOOTSTRAP_SECRET` missing on the first run | Add it, redeploy, reload |
-| Portal: videos missing or "Vimeo isn’t connected" | No `VIMEO_ACCESS_TOKEN`, a missing scope, or the project has no folder | Studio → Vimeo & connections shows which; Studio → Projects → Edit → Vimeo folder |
+| Portal: videos missing | The video connection isn't working, a missing scope, the project has no source, or the video is hidden in Studio | Studio → Connections → **Test it**; Studio → Projects → the project → Video source and Videos |
 | Portal: a video won't play | The video's Vimeo privacy is "Only me", or embedding is limited to other domains | Vimeo → video → Settings → Privacy (portal README, "Vimeo") |
 | Portal: uploads fail | No `BLOB_READ_WRITE_TOKEN`, or the store isn't private | Storage → Blob → connect a private store; redeploy |
 
@@ -220,7 +236,8 @@ vimeo.com (Jean's account, `jeangotay`) → video `1197058424` → **Settings �
 ## Known limits after this runbook
 
 - **Vimeo download links need Standard.** Jean's account is on Plus, so the portal offers "Download on Vimeo" for films that allow downloads instead of listing sizes (portal README, "Vimeo").
-- **Invitations and password resets aren't emailed.** Studio shows a temporary password once; staff send it themselves.
+- **Email is needed for the smoothest sign-in.** Without the Resend connection, invitations and reset links are shown in Studio to copy and send by hand, and nobody gets updates or reminders.
+- **The daily job runs once a day.** Reminders, Notion catch-up, and Frame.io's sign-in refresh happen within one hour each day (Hobby's cron limit); changes made in the portal reach Notion within seconds regardless.
 - **Hobby plan.** Vercel restricts Hobby to non-commercial use; move to Pro before clients rely on the portal.
 - **Open content decisions on the website.** The privacy policy needs an owner review; there is no Terms page or Instagram link; the inquiry address (alexis@gotit2work.com) differs from noblemanproductions.com (info@noblemanproductions.com); much of the copy duplicates noblemanproductions.com. See the README, "Still unfinished".
 - **The hero plays "RETROBOAT S2 EP1", a 22-minute episode.** A dedicated 15–30 second reel would make a better background loop and use less of visitors' data.

@@ -114,9 +114,9 @@ a{color:inherit}a:hover{color:inherit}
     <div style="display:flex;flex-direction:column;gap:18px">
       <h2 style="margin:0;font-size:clamp(30px,2.8vw,38px);line-height:1.05">The short version</h2>
       <div class="pv-short">
-        <div class="pv-tile" data-reveal="card"><span class="pv-n">01</span><b>What we collect</b><span>What you type into our form or email us, what you add to the client portal if you have an account, and the basic technical details every website receives, like your IP address.</span></div>
+        <div class="pv-tile" data-reveal="card"><span class="pv-n">01</span><b>What we collect</b><span>What you type into our form or email us, what you add to and do in the client portal if you have an account, and the basic technical details every website receives, like your IP address.</span></div>
         <div class="pv-tile" data-reveal="card"><span class="pv-n">02</span><b>What we never do</b><span>Sell or rent your information, share it for advertising, or put ad or analytics trackers on our sites.</span></div>
-        <div class="pv-tile" data-reveal="card"><span class="pv-n">03</span><b>Who helps us</b><span>A few companies host the sites, play the films, and deliver email. Each one is named below, with what it receives.</span></div>
+        <div class="pv-tile" data-reveal="card"><span class="pv-n">03</span><b>Who helps us</b><span>A few companies host the sites, play the films, deliver email, and help us track projects. Each one is named below, with what it receives.</span></div>
         <div class="pv-tile" data-reveal="card"><span class="pv-n">04</span><b>Your say</b><span>Email us to see, correct, or delete what you’ve sent us. There’s no charge.</span></div>
       </div>
     </div>
@@ -171,11 +171,12 @@ a{color:inherit}a:hover{color:inherit}
           <table class="pv-table">
             <thead><tr><th scope="col">Name</th><th scope="col">Kind</th><th scope="col">What it’s for</th><th scope="col">How long</th></tr></thead>
             <tbody>
-              <tr><td><code>np_session</code></td><td data-label="Kind">Cookie</td><td data-label="What it’s for">Keeps you signed in to the portal. The demo has no sign-in, so it never sets it.</td><td data-label="How long">7 days, or until you sign out</td></tr>
+              <tr><td><code>np_session</code></td><td data-label="Kind">Cookie</td><td data-label="What it’s for">Keeps you signed in to the portal. The demo and share pages have no sign-in, so they never set it.</td><td data-label="How long">7 days unless we set it shorter or longer (1 to 30 days), or until you sign out</td></tr>
             </tbody>
           </table>
           <h3>Films</h3>
-          <p>Films on this website play through Vimeo or YouTube, including the home page’s background video, which plays from Vimeo. Films in the portal play through Vimeo. We turn on Vimeo’s do-not-track setting, which tells its player not to set cookies or collect viewing statistics. YouTube films use YouTube’s privacy-enhanced mode, which doesn’t store information about you until you press play. Once a YouTube film plays, Google may use its own cookies under its own policy.</p>
+          <p>Films on this website play through Vimeo or YouTube, including the home page’s background video, which plays from Vimeo. We turn on Vimeo’s do-not-track setting, which tells its player not to set cookies or collect viewing statistics. YouTube films use YouTube’s privacy-enhanced mode, which doesn’t store information about you until you press play. Once a YouTube film plays, Google may use its own cookies under its own policy.</p>
+          <p>Films in the portal play from wherever we keep that project’s videos: Vimeo or YouTube as above; Frame.io or Wistia, whose files play in the portal’s own player straight from their storage; or, for a video we’ve linked, Google Drive, Loom, or Dropbox, whose own players load under their own policies.</p>
         </section>
 
         <section class="pv-sec" id="portal">
@@ -186,20 +187,27 @@ a{color:inherit}a:hover{color:inherit}
           <ul>
             <li>your name, email address, and job title, if you give one;</li>
             <li>your password, stored only in scrambled form (a “hash”) that can’t be turned back into the password, so nobody, including us, can read it;</li>
-            <li>when you last signed in, and whether you’ve chosen your own password yet;</li>
-            <li>whether you want email updates.</li>
+            <li>your role (for example decision maker or reviewer), which sets what you can do;</li>
+            <li>when you last signed in, when you last used the portal (so we don’t email you about things while you’re already looking at them), and whether you’ve chosen your own password yet;</li>
+            <li>whether you want email updates;</li>
+            <li>if you turn on two-step sign-in: its key, encrypted, and your recovery codes, stored only as hashes.</li>
           </ul>
+          <p>Your company’s decision makers can add colleagues to the portal. They give us the colleague’s name, email address, and role, and the colleague gets an email to set up their account.</p>
           <p>What you do in the portal is kept with your company’s project, with your name and the time:</p>
           <ul>
             <li>notes you leave on a version, and the moment in the film each one points to;</li>
             <li>versions you approve or ask to change, and what you asked for;</li>
             <li>messages, and which ones you’ve read;</li>
             <li>files you send us: the file itself in private storage, plus its name, size, and type;</li>
-            <li>videos you send us, which go straight to our Vimeo account, where only we can see them.</li>
+            <li>videos you send us, which go straight to our Vimeo account, where only we can see them;</li>
+            <li>share links you create to a finished film, who created each one, when it ends, and how many times it has been opened. We don’t record who opens a share link;</li>
+            <li>milestones you confirm, such as a filming day.</li>
           </ul>
-          <p><strong>Email updates.</strong> If you leave them on, we email you when we message you or add a file or video to your project. Our team gets an email when you leave a note, approve or ask for changes, message us, or send something, and it includes what you wrote. You can turn your updates off under Account in the portal.</p>
-          <p>To stop people guessing passwords, the portal also keeps a short record of failed sign-ins: the email address that was tried and the IP address it came from. These records are deleted after about a day.</p>
-          <p>The films you watch and download in the portal are stored on Vimeo. The portal’s player has Vimeo’s do-not-track setting on.</p>
+          <p><strong>Activity log.</strong> So we know a delivery landed and can help if something goes wrong, the portal records what happens in it, with the person’s name, the time, and the IP address: signing in, watching a version or film (once a day per film), downloading, approving, creating or turning off share links, changes to your team, and changes our staff make. Only our staff can see it. Entries are deleted after about 13 months.</p>
+          <p><strong>Emails.</strong> The portal emails you invitations, sign-in links, and password reset links when you or we ask for them (each link works once and expires; we keep only a scrambled copy, deleted a week after it’s used or expires), a receipt when you approve a version, and a reminder before a review date we’ve set. If you leave updates on, we also email you when we share a new version, film, or file, or message you. Our team gets an email when you leave a note, approve or ask for changes, message us, send something, confirm a milestone, or change your team, and it includes what you wrote. You can turn your updates off under Account in the portal.</p>
+          <p>To stop people guessing passwords and codes, the portal also keeps a short record of failed sign-ins, two-step codes, and requests for emailed links: the email address that was tried and the IP address it came from. These records are deleted after about a day.</p>
+          <p><strong>Project tracking.</strong> We may keep a copy of each project’s status in Notion, our planning tool: the project and company name, stage, progress, whether a version is waiting or approved, how many notes are open, the next milestone, and review dates. It doesn’t include your name, email, notes, or messages.</p>
+          <p>The films you watch and download in the portal are stored with the video service we use for that project (section 06).</p>
         </section>
 
         <section class="pv-sec" id="providers">
@@ -210,12 +218,15 @@ a{color:inherit}a:hover{color:inherit}
             <thead><tr><th scope="col">Company</th><th scope="col">What it does for us</th><th scope="col">What it receives</th></tr></thead>
             <tbody>
               <tr><td>Vercel</td><td data-label="What it does for us">Hosts this website and the client portal, and stores the files sent through the portal (Vercel Blob, private).</td><td data-label="What it receives">The request details in section 03, and the files in section 05. Form entries pass through it on their way to Resend.</td></tr>
-              <tr><td>Resend</td><td data-label="What it does for us">Sends the emails our form creates (your inquiry to us, and a confirmation to you) and the portal’s email updates.</td><td data-label="What it receives">Everything you typed into the form, including your email address. For portal updates: your name, email address, and the text of the update.</td></tr>
+              <tr><td>Resend</td><td data-label="What it does for us">Sends the emails our form creates (your inquiry to us, and a confirmation to you) and the portal’s emails: invitations, sign-in links, receipts, reminders, and updates.</td><td data-label="What it receives">Everything you typed into the form, including your email address. For portal emails: your name, email address, and the text of the email.</td></tr>
               <tr><td>Microsoft 365</td><td data-label="What it does for us">Our business email, where inquiries and our replies are kept.</td><td data-label="What it receives">Your inquiry and any emails we exchange.</td></tr>
               <tr><td>Google Fonts</td><td data-label="What it does for us">Delivers the typefaces both sites use.</td><td data-label="What it receives">Your IP address and browser details when the fonts load.</td></tr>
-              <tr><td>Vimeo</td><td data-label="What it does for us">Plays our films and the home page video, stores the films in the portal, and receives videos sent through the portal.</td><td data-label="What it receives">Standard request details when a film loads or plays, and the videos you send us with your company’s name on them.</td></tr>
+              <tr><td>Vimeo</td><td data-label="What it does for us">Plays our films and the home page video, stores films shown in the portal, and receives videos sent through the portal.</td><td data-label="What it receives">Standard request details when a film loads or plays, and the videos you send us with your company’s name on them.</td></tr>
+              <tr><td>Frame.io (Adobe), Wistia</td><td data-label="What it does for us">Store and stream films for projects we keep there.</td><td data-label="What it receives">Standard request details when a film plays or downloads.</td></tr>
+              <tr><td>Google Drive, Loom, Dropbox</td><td data-label="What it does for us">Play a video we’ve linked from there, only on projects where we do.</td><td data-label="What it receives">Standard request details when the video loads or plays, and more under their own policies once it plays.</td></tr>
+              <tr><td>Notion</td><td data-label="What it does for us">Our project planning, if we keep project status there.</td><td data-label="What it receives">The project status described in section 05, with no personal details.</td></tr>
               <tr><td>YouTube (Google)</td><td data-label="What it does for us">Plays some of our films, in privacy-enhanced mode.</td><td data-label="What it receives">Standard request details, and more once you press play.</td></tr>
-              <tr><td>Neon</td><td data-label="What it does for us">The portal’s database. The demo doesn’t use it.</td><td data-label="What it receives">The account details, notes, decisions, messages, and file records in section 05.</td></tr>
+              <tr><td>Neon</td><td data-label="What it does for us">The portal’s database. The demo doesn’t use it.</td><td data-label="What it receives">The account details, notes, decisions, messages, file records, share links, and activity log in section 05.</td></tr>
             </tbody>
           </table>
           <p>We don’t give your information to anyone else unless the law requires it.</p>
@@ -230,6 +241,9 @@ a{color:inherit}a:hover{color:inherit}
             <li><strong>Portal accounts:</strong> until the account is closed. Closing an account deletes it and stops its sign-in at once.</li>
             <li><strong>Notes, decisions, messages, and files</strong> stay with the project, under the name of the person who added them, even after that person’s account is closed. Deleting a project deletes them all, including its stored files. Ask, and we’ll delete yours sooner.</li>
             <li><strong>Videos sent through the portal</strong> stay in our Vimeo account until we delete them there.</li>
+            <li><strong>Activity log:</strong> about 13 months.</li>
+            <li><strong>Emailed links:</strong> a week after they’re used or expire.</li>
+            <li><strong>Share links:</strong> with the project, until it’s deleted. A link that’s turned off or has ended stops working at once.</li>
             <li><strong>Failed sign-in records:</strong> about a day.</li>
           </ul>
         </section>
@@ -250,7 +264,7 @@ a{color:inherit}a:hover{color:inherit}
           <h2>Your choices</h2>
           <p>Email <a href="mailto:alexis@gotit2work.com">alexis@gotit2work.com</a> and we will:</p>
           <ul>
-            <li>tell you what information we have about you;</li>
+            <li>tell you what information we have about you, and send you a copy of everything the portal holds about your company;</li>
             <li>correct anything that’s wrong;</li>
             <li>delete what you’ve sent us, except records the law requires us to keep;</li>
             <li>close and delete a portal account, and remove what you added to the portal.</li>
@@ -270,10 +284,12 @@ a{color:inherit}a:hover{color:inherit}
           <h2>Keeping it safe</h2>
           <ul>
             <li>Both sites only load over an encrypted connection (HTTPS).</li>
-            <li>Portal passwords are stored only as a hash, never as the password itself.</li>
+            <li>Portal passwords are stored only as a hash, never as the password itself, and nobody sets a password for you: you choose it from a one-time link.</li>
+            <li>You can turn on two-step sign-in, so a code from your phone is needed as well as your password.</li>
             <li>The portal’s sign-in cookie can’t be read by scripts on the page, and sign-in pauses after repeated failed attempts.</li>
+            <li>Keys the portal uses to reach video services and Notion are stored encrypted.</li>
             <li>Each client company only sees its own projects. Files are kept in private storage, and each download link stops working after ten minutes.</li>
-            <li>Changing or resetting a password signs that account out everywhere.</li>
+            <li>Changing or resetting a password, or a change of role or email, signs that account out everywhere.</li>
           </ul>
           <p>No system is perfectly secure. If something ever went wrong that affected your information, we would tell you as the law requires.</p>
         </section>
