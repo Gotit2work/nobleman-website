@@ -65,7 +65,7 @@ Its "Jump to" buttons link into page sections by id: `/#services`, `/#crew`, `/#
 
 ## Privacy notice
 
-`privacy.html` describes what the code actually does, and nothing more: the form's fields, Vercel's request logs, no cookies on this site, the portal's `np_session` cookie and its two browser-storage keys (`np-review-time`, `np-portal-seen`), the providers (Vercel, Resend, Microsoft 365, Google Fonts, Vimeo, YouTube, and Neon for the real portal), retention, and how to ask for changes. When a change adds a cookie, storage key, tracker, provider, or new data the portal keeps, update the page and its date in the same change. The portal links to `/privacy#portal` from sign-in, Help, and Account.
+`privacy.html` describes what the code actually does, and nothing more: the form's fields, Vercel's request logs, no cookies on this site, the portal's one cookie (`np_session`; it keeps no browser storage), what a portal account stores (profile, notes, decisions, messages, files, client videos, email-update choice), the providers (Vercel, including Blob for portal files; Resend, including portal email updates; Microsoft 365, Google Fonts, Vimeo, YouTube, and Neon for the portal database), retention, and how to ask for changes. When a change adds a cookie, storage key, tracker, provider, or new data the portal keeps, update the page and its date in the same change. The portal links to `/privacy#portal` from sign-in, Help, and Account.
 
 ## Environment variables
 
