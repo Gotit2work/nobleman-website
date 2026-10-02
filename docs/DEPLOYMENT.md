@@ -87,18 +87,20 @@ In each repository on GitHub: open a pull request from `claude/awesome-euler-ynm
 
 1. **Add New… → Project** → import `Gotit2work/nobleman-portal`. Same settings as Phase 1 (Framework **Other**, no overrides). Deploy. (Sign-in will fail until steps 2–5 are done; that is expected.)
 2. Portal project → **Storage → Create Database → Neon** (Vercel Marketplace). Region: **Washington, D.C. (iad1)**, which matches Vercel's default function region so every query stays in-region. Connect it to the portal project for **Production, Preview, and Development**. Vercel sets `DATABASE_URL` automatically.
-   *Tradeoff:* previews then share the production database. That is fine while the portal holds only logins; revisit once real client data exists (Neon can branch a database per preview).
-3. **Create the tables.** Storage → your database → **Open in Neon** → **SQL Editor** → paste all of `schema.sql` from the portal repo → **Run**. Expected: a run of `CREATE TABLE` / `CREATE INDEX` with no errors. The file is idempotent; re-running it after future updates is safe.
-4. **Environment Variables** on the portal project:
+   *Tradeoff:* previews then share the production database, so a preview of unfinished code can change real client data. Previews sit behind Vercel Authentication, so only the team can open them. If the Neon integration offers **a database branch per preview deployment**, turn it on: each preview then gets its own copy.
+3. **Tables:** nothing to do. The portal creates and updates its own tables on the first request after a deploy (`api/_schema.js`).
+4. **File storage:** Storage → **Create** → **Blob** → access **Private** → connect to the portal project. Vercel sets `BLOB_READ_WRITE_TOKEN`.
+5. **Environment Variables** on the portal project (the full list, including Vimeo and email, is in the portal README):
 
    | Name | Value | Environments |
    |---|---|---|
-   | `SESSION_SECRET` | the 48-byte value you generated | Production, Preview |
+   | `SESSION_SECRET` | the 48-byte value you generated (Sensitive) | Production, Preview |
    | `BOOTSTRAP_SECRET` | the one-time value | Production only |
+   | `VIMEO_ACCESS_TOKEN` | Jean's token, scopes in the portal README (Sensitive) | Production, Preview |
    | `PORTAL_MODE` | `demo` while the portal is a public showcase; delete it to require sign-in | Production, Preview |
 
-5. **Redeploy** so the variables take effect: Deployments → newest → ⋯ → **Redeploy**. Environment variables only apply to deployments created after they were set.
-6. **Settings → Domains → Add** → `portal.noblemanproductions.gotit2work.com`. Copy the CNAME value Vercel shows.
+6. **Redeploy** so the variables take effect: Deployments → newest → ⋯ → **Redeploy**. Environment variables only apply to deployments created after they were set.
+7. **Settings → Domains → Add** → `portal.noblemanproductions.gotit2work.com`. Copy the CNAME value Vercel shows.
 
 📸 *Screenshot Storage showing Neon connected, and Environment Variables (names only; keep values hidden).*
 
@@ -111,7 +113,7 @@ GoDaddy → **My Products** → `gotit2work.com` → **DNS** → **Add New Recor
 | Type | Name | Value | TTL |
 |---|---|---|---|
 | CNAME | `noblemanproductions` | value from Phase 1 step 6 | 1 hour |
-| CNAME | `portal.noblemanproductions` | value from Phase 2 step 6 | 1 hour |
+| CNAME | `portal.noblemanproductions` | value from Phase 2 step 7 | 1 hour |
 
 - Type the Name exactly as shown. GoDaddy appends `.gotit2work.com` itself, so entering the full name produces `noblemanproductions.gotit2work.com.gotit2work.com`.
 - If Vercel also asks for a `TXT` record named `_vercel` (it does when the domain was ever used in another Vercel account), add it exactly as shown.
@@ -158,16 +160,11 @@ vimeo.com (Jean's account, `jeangotay`) → video `1197058424` → **Settings �
 
 ## Phase 6 — First portal admin
 
-```bash
-curl -sS -X POST https://portal.noblemanproductions.gotit2work.com/api/bootstrap \
-  -H 'content-type: application/json' \
-  -d '{"secret":"<BOOTSTRAP_SECRET>","name":"Alexis","email":"alexis@gotit2work.com","password":"<12+ characters>"}'
-```
-
-Expected: HTTP 201 with your user. A second run answers 409 ("An admin already exists").
-Then delete `BOOTSTRAP_SECRET` from the portal's environment variables and redeploy. The endpoint is harmless once an admin exists, but a removed secret can't leak.
-
-Create Jean and Justin with the admin API; the commands are in the portal README.
+1. With `PORTAL_MODE` deleted and the portal redeployed, open `https://portal.noblemanproductions.gotit2work.com`. Expected: **Set up the portal**.
+2. Setup code: the `BOOTSTRAP_SECRET` value (Vercel → portal → Settings → Environment Variables → reveal it). Then your name, email, and a password of at least 10 characters → **Create the first staff account**. You're signed in.
+3. It refuses to run again once a staff account exists. Delete `BOOTSTRAP_SECRET` anyway and redeploy: a removed secret can't leak.
+4. Studio → **People** → **Add a person** → Staff, for Jean and Justin. Each gets a temporary password shown once; send it to them yourself (the portal doesn't email it). They choose their own when they first sign in.
+5. Studio → **Vimeo & connections**: every scope ticked, plan and upload space shown.
 
 ---
 
@@ -182,9 +179,11 @@ Create Jean and Justin with the admin API; the commands are in the portal README
 - [ ] Sharing the link in iMessage/Slack shows the Nobleman preview card.
 
 **Portal**
-- [ ] `https://portal.noblemanproductions.gotit2work.com` shows the sign-in screen.
-- [ ] A wrong password shows "That email and password do not match."
+- [ ] `https://portal.noblemanproductions.gotit2work.com` shows the screening-room sign-in; `/demo` shows the sample project.
+- [ ] A wrong password shows "That email and password don’t match."
 - [ ] The right password opens the portal greeting you by name; a reload keeps you signed in; Sign out works.
+- [ ] With a test client and a test project linked to a Vimeo folder: a version plays, a note saves, approving asks first and then shows who approved it, a message sends, a small file uploads and downloads.
+- [ ] Studio → Vimeo & connections shows nothing red.
 
 ---
 
@@ -197,10 +196,13 @@ Create Jean and Justin with the admin API; the commands are in the portal README
 | Hero shows the still frame and never plays | Vimeo embed restrictions (Phase 4), or the viewer's device blocks autoplay (e.g. iOS Low Power Mode) | Fix the Vimeo setting; device-side autoplay blocks are expected and the poster is the intended fallback |
 | Form says "Online inquiries aren't switched on yet…" | `RESEND_API_KEY` missing, or set without a redeploy | Set it, then redeploy |
 | Form says "We could not send that…" | Resend domain not verified, or `INTAKE_FROM` uses a domain Resend hasn't verified | Vercel → website → Logs → filter `/api/intake` → look for `intake failed` |
-| Portal: "Sign-in is unavailable right now" | `DATABASE_URL` missing, `schema.sql` not run, or `SESSION_SECRET` shorter than 32 characters | Vercel → portal → Logs → `/api/login` |
-| Portal: "The portal is having trouble…" on load | `/api/me` failing for the same reasons | Same as above |
-| Portal: "Too many attempts. Wait 15 minutes…" | 8 failed sign-ins for that email (or 30 from one IP) within 15 minutes | Wait, or in Neon SQL Editor: `delete from login_attempts where email = 'person@example.com';` |
-| Logs show `login throttle unavailable` | `login_attempts` table missing | Re-run `schema.sql` (safe) |
+| Portal: "The portal is still being set up" | `DATABASE_URL` missing, or set without a redeploy | Set it (Storage → Neon), then redeploy |
+| Portal: "Sign-in isn’t working right now" | Database unreachable, or `SESSION_SECRET` missing or shorter than 32 characters | Vercel → portal → Logs → `/api/session` |
+| Portal: "Too many tries. Wait 15 minutes…" | 8 failed sign-ins for that email (or 30 from one IP) within 15 minutes | Wait, or Studio → People → Reset password (clears that person's failures) |
+| Portal: "Setup is switched off" | `BOOTSTRAP_SECRET` missing on the first run | Add it, redeploy, reload |
+| Portal: videos missing or "Vimeo isn’t connected" | No `VIMEO_ACCESS_TOKEN`, a missing scope, or the project has no folder | Studio → Vimeo & connections shows which; Studio → Projects → Edit → Vimeo folder |
+| Portal: a video won't play | The video's Vimeo privacy is "Only me", or embedding is limited to other domains | Vimeo → video → Settings → Privacy (portal README, "Vimeo") |
+| Portal: uploads fail | No `BLOB_READ_WRITE_TOKEN`, or the store isn't private | Storage → Blob → connect a private store; redeploy |
 
 ---
 
@@ -217,7 +219,8 @@ Create Jean and Justin with the admin API; the commands are in the portal README
 
 ## Known limits after this runbook
 
-- **The portal is a real login in front of a prototype.** Sign-in, roles, and account management are real. The projects, versions, review comments, files, and messages every user sees are hardcoded sample data (the "Meridian" campaign). Don't give clients logins until projects are stored per client.
-- **No admin screens yet.** Accounts are created with `curl` (portal README).
+- **Vimeo download links need Standard.** Jean's account is on Plus, so the portal offers "Download on Vimeo" for films that allow downloads instead of listing sizes (portal README, "Vimeo").
+- **Invitations and password resets aren't emailed.** Studio shows a temporary password once; staff send it themselves.
+- **Hobby plan.** Vercel restricts Hobby to non-commercial use; move to Pro before clients rely on the portal.
 - **Open content decisions on the website.** The privacy policy needs an owner review; there is no Terms page or Instagram link; the inquiry address (alexis@gotit2work.com) differs from noblemanproductions.com (info@noblemanproductions.com); much of the copy duplicates noblemanproductions.com. See the README, "Still unfinished".
 - **The hero plays "RETROBOAT S2 EP1", a 22-minute episode.** A dedicated 15–30 second reel would make a better background loop and use less of visitors' data.
