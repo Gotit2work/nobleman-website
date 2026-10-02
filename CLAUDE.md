@@ -8,8 +8,11 @@ Marketing site for Nobleman Productions (Jean and Justin; veteran owned; San Die
 - **Alexis owns `gotit2work.com`.** DNS is at GoDaddy (`ns17/ns18.domaincontrol.com`).
   - Apex `gotit2work.com` → `185.158.133.1` (hosted on Lovable). Don't change it.
   - Email is Microsoft 365: MX `gotit2work-com.mail.protection.outlook.com`, SPF `v=spf1 include:spf.protection.outlook.com -all`, DMARC `p=none`. Don't change the root SPF; Resend uses its own `send.` subdomain records.
-- This site: `noblemanproductions.gotit2work.com` (GoDaddy CNAME `noblemanproductions` → `cname.vercel-dns.com`; certificate issued).
-- Client portal: `portal.noblemanproductions.gotit2work.com`, repo `Gotit2work/nobleman-portal`.
+- This site: `noblemanproductions.gotit2work.com`. Client portal: `portal.noblemanproductions.gotit2work.com`, repo `Gotit2work/nobleman-portal`.
+- **Moving to the studio's own domain, `noblemanproductions.com`: follow `docs/MOVE.md`.** Every address in the code changes with `node scripts/move-domain.mjs --apply` (the same script is in the portal repo); never change them one by one. Lines that must keep the old address carry `move-domain:keep`. Old addresses stay attached in Vercel after the move: the old website address redirects, and the old portal address keeps answering (Stripe and Adobe call it) while the portal sends visitors on.
+  - `noblemanproductions.com` DNS is at GoDaddy (`ns75/ns76.domaincontrol.com`, a separate account from gotit2work.com). Today `@` and `www` point at Lovable (`185.158.133.1`, the studio's current site). **Its MX is the studio's Google Workspace Gmail: never touch MX, the `google-site-verification` TXT, or `send.` records.**
+  - The old Lovable site's pages are redirected in `vercel.json` (`/work-samples`, `/voice-samples` → `/work`; `/contact`, `/quote` → `/start`); `/youtube-retainers` serves Services. Keep them.
+- The gotit2work.com records for this site: GoDaddy CNAME `noblemanproductions` → `cname.vercel-dns.com` (certificate issued).
 - Vercel: account `amangual1`, team `Gotit2Work` (slug `gotit2-work`, id `team_b7Eucmxp9X2SzzAHXZPA92Qh`). On Hobby by the owner's choice while this is a pre-launch preview; Vercel restricts Hobby to non-commercial use, so upgrade to Pro before marketing the site.
 - Hero video: Vimeo `1197058424`, hash `796798a19d`, Jean's account (`jeangotay`, Vimeo Plus).
 - Full setup, validation, and rollback: `docs/DEPLOYMENT.md`.

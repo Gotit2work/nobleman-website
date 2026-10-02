@@ -1,7 +1,7 @@
 # Nobleman Productions — Website
 
 Static pages plus one serverless function for the intake form. Vercel runs `npm install`; there is no build step.
-Live at `https://noblemanproductions.gotit2work.com`. **Deploying from scratch: follow [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).**
+Live at `https://noblemanproductions.gotit2work.com`. **Deploying from scratch: follow [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md). Moving to noblemanproductions.com: [docs/MOVE.md](docs/MOVE.md)** (one script changes every address: `node scripts/move-domain.mjs`).
 
 Pages
 - `/` → index.html (Home: hero reel, credits band, featured films, services, receipts)
@@ -13,6 +13,7 @@ Pages
 - `/privacy` → privacy.html (what both sites collect, cookies and storage, providers, retention, choices)
 - `/start` → start.html (intake form)
 - `/sitemap` → sitemap.html (the human site map: an “I want to…” finder, then every page with deep links into its sections); `/sitemap.xml` is the search-engine version
+- the current noblemanproductions.com site's old pages forward permanently, so links to them keep working after the move: `/work-samples` and `/voice-samples` → `/work`, `/contact` and `/quote` → `/start`
 - anything else → 404.html (static, no runtime)
 
 Service and About copy was adapted from noblemanproductions.com. Live production, conference/event, About, and Privacy were generated from shared templates during the build-out; they are ordinary HTML now, so edit them directly.

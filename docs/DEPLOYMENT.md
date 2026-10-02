@@ -113,6 +113,8 @@ In each repository on GitHub: open a pull request from `claude/awesome-euler-ynm
 
 ## Phase 3 — DNS at GoDaddy
 
+> These are the records for the addresses under `gotit2work.com`. For the studio's own domain, noblemanproductions.com, follow **[MOVE.md](MOVE.md)** instead: its records keep the studio's Google Workspace email working.
+
 GoDaddy → **My Products** → `gotit2work.com` → **DNS** → **Add New Record**:
 
 | Type | Name | Value | TTL |
@@ -120,15 +122,15 @@ GoDaddy → **My Products** → `gotit2work.com` → **DNS** → **Add New Recor
 | CNAME | `noblemanproductions` | value from Phase 1 step 6 | 1 hour |
 | CNAME | `portal.noblemanproductions` | value from Phase 2 step 7 | 1 hour |
 
-- Type the Name exactly as shown. GoDaddy appends `.gotit2work.com` itself, so entering the full name produces `noblemanproductions.gotit2work.com.gotit2work.com`.
+- Type the Name exactly as shown. GoDaddy appends `.gotit2work.com` itself, so entering the full name produces `noblemanproductions.gotit2work.com.gotit2work.com`. <!-- move-domain:keep -->
 - If Vercel also asks for a `TXT` record named `_vercel` (it does when the domain was ever used in another Vercel account), add it exactly as shown.
 - **Do not edit** the `@` A record, MX, the SPF TXT, the `MS=` TXT, or `_dmarc`.
 
 **Validation**
 
 ```bash
-nslookup -type=CNAME noblemanproductions.gotit2work.com 1.1.1.1
-nslookup -type=CNAME portal.noblemanproductions.gotit2work.com 1.1.1.1
+nslookup -type=CNAME noblemanproductions.gotit2work.com 1.1.1.1          # move-domain:keep
+nslookup -type=CNAME portal.noblemanproductions.gotit2work.com 1.1.1.1   # move-domain:keep
 ```
 
 Expected: each answers with the Vercel value. In Vercel, both domains flip to **Valid Configuration** and a certificate is issued automatically, usually within minutes (up to an hour).

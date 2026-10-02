@@ -10,6 +10,21 @@
       "source": "/:page(work|services|start|live-production|conference-event|about|privacy|sitemap).html",
       "destination": "/:page",
       "permanent": true
+    },
+    {
+      "source": "/work-samples",
+      "destination": "/work",
+      "permanent": true
+    },
+    {
+      "source": "/voice-samples",
+      "destination": "/work",
+      "permanent": true
+    },
+    {
+      "source": "/:page(contact|quote)",
+      "destination": "/start",
+      "permanent": true
     }
   ],
   "rewrites": [
