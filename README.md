@@ -124,7 +124,7 @@ The bottom bar, the mobile sheets, and the desktop mega-menu use `media/icons/*.
 | maritime signal flags | Site map |
 | paper boat | Start a project |
 | sailboat on waves | Nobleman Sailing Media |
-| key with a ship's-wheel bow | Client portal |
+| key with a ship's-wheel bow | Log in / the portal |
 
 Decorative metaphors alone (a compass for Work, a ship's wheel for Services) looked nice but didn't say where a link went. Plain UI icons read fine but looked generic. This set does both.
 

@@ -193,6 +193,7 @@ vimeo.com (Jean's account, `jeangotay`) → video `1197058424` → **Settings �
 - [ ] A wrong password shows "That email and password don’t match."
 - [ ] The right password opens the portal greeting you by name; a reload keeps you signed in; Sign out works.
 - [ ] An invitation email arrives, its link opens "Choose your password", and the same link doesn't work a second time.
+- [ ] **Create an account** with a test address: the confirmation email arrives, its link shows "You're on the list", Home shows "Someone is asking to join", and **Let them in** sends the invitation. With a client's email domain set (Studio → Clients), a test address on that domain goes straight to choosing a password.
 - [ ] With a test client and a test project linked to a Vimeo folder: only the newest version shows, a note saves, approving asks first (with room for small fixes) and then shows who approved it and emails a receipt, a message sends, a small file uploads and downloads, and a share link opens the film without signing in and stops working once turned off.
 - [ ] Studio → Settings → System check shows nothing red; Studio → Activity lists each step above.
 - [ ] Vercel → portal → Settings → Cron Jobs lists `/api/cron` daily.

@@ -167,11 +167,11 @@ a{color:inherit}a:hover{color:inherit}
           <span class="pv-n">04</span>
           <h2>Cookies and browser storage</h2>
           <p><strong>This website sets no cookies of its own</strong>, and it runs no advertising or analytics trackers.</p>
-          <p>The client portal sets one cookie, and only when you sign in. It keeps nothing else in your browser.</p>
+          <p>The client portal sets one cookie, and only when you log in. It keeps nothing else in your browser.</p>
           <table class="pv-table">
             <thead><tr><th scope="col">Name</th><th scope="col">Kind</th><th scope="col">What it’s for</th><th scope="col">How long</th></tr></thead>
             <tbody>
-              <tr><td><code>np_session</code></td><td data-label="Kind">Cookie</td><td data-label="What it’s for">Keeps you signed in to the portal. The demo and share pages have no sign-in, so they never set it.</td><td data-label="How long">7 days unless we set it shorter or longer (1 to 30 days), or until you sign out</td></tr>
+              <tr><td><code>np_session</code></td><td data-label="Kind">Cookie</td><td data-label="What it’s for">Keeps you logged in to the portal. The demo and share pages have no login, so they never set it.</td><td data-label="How long">7 days unless we set it shorter or longer (1 to 30 days), or until you sign out</td></tr>
             </tbody>
           </table>
           <h3>Films</h3>
@@ -183,14 +183,15 @@ a{color:inherit}a:hover{color:inherit}
           <span class="pv-n">05</span>
           <h2>The client portal</h2>
           <div class="pv-note"><p><strong>The demo keeps nothing.</strong> Anyone can open the portal’s demo and click through a sample project without signing in. Notes, approvals, and messages you try there aren’t saved or sent to anyone.</p></div>
-          <p>There’s no public sign-up: we create an account for each person who needs one. For each account the portal keeps:</p>
+          <p>You can create an account yourself on the portal’s login screen, or we create one for you. When you create one, we keep your name, email address, company, anything you write for the studio, and the IP address the request came from, and we email you a link to confirm the address. If your company’s email domain is one we’ve set up, you join your company’s projects as soon as you confirm it; otherwise the studio decides whether to let you in, and you hear from us by email either way.</p>
+          <p>For each account the portal keeps:</p>
           <ul>
             <li>your name, email address, and job title, if you give one;</li>
             <li>your password, stored only in scrambled form (a “hash”) that can’t be turned back into the password, so nobody, including us, can read it;</li>
             <li>your role (for example decision maker or reviewer), which sets what you can do;</li>
-            <li>when you last signed in, when you last used the portal (so we don’t email you about things while you’re already looking at them), and whether you’ve chosen your own password yet;</li>
+            <li>when you last logged in, when you last used the portal (so we don’t email you about things while you’re already looking at them), and whether you’ve chosen your own password yet;</li>
             <li>whether you want email updates;</li>
-            <li>if you turn on two-step sign-in: its key, encrypted, and your recovery codes, stored only as hashes.</li>
+            <li>if you turn on two-step verification: its key, encrypted, and your recovery codes, stored only as hashes.</li>
           </ul>
           <p>Your company’s decision makers can add colleagues to the portal. They give us the colleague’s name, email address, and role, and the colleague gets an email to set up their account.</p>
           <p>What you do in the portal is kept with your company’s project, with your name and the time:</p>
@@ -204,8 +205,8 @@ a{color:inherit}a:hover{color:inherit}
             <li>milestones you confirm, such as a filming day.</li>
           </ul>
           <p><strong>Activity log.</strong> So we know a delivery landed and can help if something goes wrong, the portal records what happens in it, with the person’s name, the time, and the IP address: signing in, watching a version or film (once a day per film), downloading, approving, creating or turning off share links, changes to your team, and changes our staff make. Only our staff can see it. Entries are deleted after about 13 months.</p>
-          <p><strong>Emails.</strong> The portal emails you invitations, sign-in links, and password reset links when you or we ask for them (each link works once and expires; we keep only a scrambled copy, deleted a week after it’s used or expires), a receipt when you approve a version, and a reminder before a review date we’ve set. If you leave updates on, we also email you when we share a new version, film, or file, or message you. Our team gets an email when you leave a note, approve or ask for changes, message us, send something, confirm a milestone, or change your team, and it includes what you wrote. You can turn your updates off under Account in the portal.</p>
-          <p>To stop people guessing passwords and codes, the portal also keeps a short record of failed sign-ins, two-step codes, and requests for emailed links: the email address that was tried and the IP address it came from. These records are deleted after about a day.</p>
+          <p><strong>Emails.</strong> The portal emails you invitations, links to confirm a new account, login links, and password reset links when you or we ask for them (each link works once and expires; we keep only a scrambled copy, deleted a week after it’s used or expires), a receipt when you approve a version, and a reminder before a review date we’ve set. If you leave updates on, we also email you when we share a new version, film, or file, or message you. Our team gets an email when you leave a note, approve or ask for changes, message us, send something, confirm a milestone, or change your team, and it includes what you wrote. You can turn your updates off under Account in the portal.</p>
+          <p>To stop people guessing passwords and codes, the portal also keeps a short record of failed logins, two-step codes, and requests for emailed links (including new accounts): the email address that was tried and the IP address it came from. These records are deleted after about a day.</p>
           <p><strong>Project tracking.</strong> We may keep a copy of each project’s status in Notion, our planning tool: the project and company name, stage, progress, whether a version is waiting or approved, how many notes are open, the next milestone, and review dates. It doesn’t include your name, email, notes, or messages.</p>
           <p>The films you watch and download in the portal are stored with the video service we use for that project (section 06).</p>
         </section>
@@ -218,7 +219,7 @@ a{color:inherit}a:hover{color:inherit}
             <thead><tr><th scope="col">Company</th><th scope="col">What it does for us</th><th scope="col">What it receives</th></tr></thead>
             <tbody>
               <tr><td>Vercel</td><td data-label="What it does for us">Hosts this website and the client portal, and stores the files sent through the portal (Vercel Blob, private).</td><td data-label="What it receives">The request details in section 03, and the files in section 05. Form entries pass through it on their way to Resend.</td></tr>
-              <tr><td>Resend</td><td data-label="What it does for us">Sends the emails our form creates (your inquiry to us, and a confirmation to you) and the portal’s emails: invitations, sign-in links, receipts, reminders, and updates.</td><td data-label="What it receives">Everything you typed into the form, including your email address. For portal emails: your name, email address, and the text of the email.</td></tr>
+              <tr><td>Resend</td><td data-label="What it does for us">Sends the emails our form creates (your inquiry to us, and a confirmation to you) and the portal’s emails: invitations, account confirmations, login links, receipts, reminders, and updates.</td><td data-label="What it receives">Everything you typed into the form, including your email address. For portal emails: your name, email address, and the text of the email.</td></tr>
               <tr><td>Microsoft 365</td><td data-label="What it does for us">Our business email, where inquiries and our replies are kept.</td><td data-label="What it receives">Your inquiry and any emails we exchange.</td></tr>
               <tr><td>Google Fonts</td><td data-label="What it does for us">Delivers the typefaces both sites use.</td><td data-label="What it receives">Your IP address and browser details when the fonts load.</td></tr>
               <tr><td>Vimeo</td><td data-label="What it does for us">Plays our films and the home page video, stores films shown in the portal, and receives videos sent through the portal.</td><td data-label="What it receives">Standard request details when a film loads or plays, and the videos you send us with your company’s name on them.</td></tr>
@@ -238,13 +239,14 @@ a{color:inherit}a:hover{color:inherit}
           <ul>
             <li><strong>Inquiries and emails:</strong> in our business email for as long as we need them to work with you, plus any records the law requires us to keep, such as invoices. Ask, and we’ll delete the rest.</li>
             <li><strong>Server logs:</strong> Vercel keeps them for a limited time under its own policy. We don’t copy or store them anywhere else.</li>
-            <li><strong>Portal accounts:</strong> until the account is closed. Closing an account deletes it and stops its sign-in at once.</li>
+            <li><strong>Portal accounts:</strong> until the account is closed. Closing an account deletes it and stops its login at once.</li>
+            <li><strong>Account requests:</strong> unconfirmed ones after about a day; once the studio has let you in or declined, after 30 days.</li>
             <li><strong>Notes, decisions, messages, and files</strong> stay with the project, under the name of the person who added them, even after that person’s account is closed. Deleting a project deletes them all, including its stored files. Ask, and we’ll delete yours sooner.</li>
             <li><strong>Videos sent through the portal</strong> stay in our Vimeo account until we delete them there.</li>
             <li><strong>Activity log:</strong> about 13 months.</li>
             <li><strong>Emailed links:</strong> a week after they’re used or expire.</li>
             <li><strong>Share links:</strong> with the project, until it’s deleted. A link that’s turned off or has ended stops working at once.</li>
-            <li><strong>Failed sign-in records:</strong> about a day.</li>
+            <li><strong>Failed login records:</strong> about a day.</li>
           </ul>
         </section>
 
@@ -285,8 +287,9 @@ a{color:inherit}a:hover{color:inherit}
           <ul>
             <li>Both sites only load over an encrypted connection (HTTPS).</li>
             <li>Portal passwords are stored only as a hash, never as the password itself, and nobody sets a password for you: you choose it from a one-time link.</li>
-            <li>You can turn on two-step sign-in, so a code from your phone is needed as well as your password.</li>
-            <li>The portal’s sign-in cookie can’t be read by scripts on the page, and sign-in pauses after repeated failed attempts.</li>
+            <li>You can turn on two-step verification, so a code from your phone is needed as well as your password.</li>
+            <li>The portal’s login cookie can’t be read by scripts on the page, and logging in pauses after repeated failed attempts.</li>
+            <li>A new account only exists once its email address is confirmed, and joining a company by its email domain only works for domains we’ve set up (never free email services).</li>
             <li>Keys the portal uses to reach video services and Notion are stored encrypted.</li>
             <li>Each client company only sees its own projects. Files are kept in private storage, and each download link stops working after ten minutes.</li>
             <li>Changing or resetting a password, or a change of role or email, signs that account out everywhere.</li>
