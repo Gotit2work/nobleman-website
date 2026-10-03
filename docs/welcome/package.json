@@ -1,0 +1,11 @@
+{
+  "name": "nobleman-welcome",
+  "private": true,
+  "type": "module",
+  "description": "Builds Nobleman-Welcome.pdf from welcome.html. Not deployed (.vercelignore keeps docs/ out).",
+  "scripts": { "build": "node build.mjs" },
+  "devDependencies": {
+    "playwright-core": "1.56.1",
+    "qrcode": "1.5.4"
+  }
+}

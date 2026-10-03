@@ -58,6 +58,18 @@ Film thumbnails in `media/work-*.jpg` are 960×540 JPEGs taken from each film's 
 
 Every word on the site follows [docs/WRITING.md](docs/WRITING.md), a set of rules drawn from the *Murphy's Laws on Technology* poster: say it plainly, name the action on every button, promise only what is always true, plan for the mistake, and proofread. Check new copy against its checklist.
 
+## Client welcome PDF
+
+`docs/welcome/Nobleman-Welcome.pdf` is a six-page welcome to hand a prospective client: the cover, a note from Jean and Justin, the three service lines with what's included and "also on request", the crew and credentials with the client logos, how a project runs with selected work, and a last page with a link and QR code to **Start a project**. It's built from `docs/welcome/welcome.html` with the site's own fonts, logo, colors, and photos, and every line comes from the site's copy (the pillar laws word for word).
+
+```bash
+cd docs/welcome && npm install            # once
+node build.mjs                            # → Nobleman-Welcome.pdf
+node build.mjs --for "Harbor Labs"        # → Nobleman-Welcome-Harbor-Labs.pdf, "Prepared for Harbor Labs" on the cover
+```
+
+It refuses to write the PDF if an image is missing, anything runs off a page or out of a card, a font other than the brand's three gets in, or anything would need transparency (what makes PDFs slow and glitchy in Acrobat), and it saves a fast-opening copy that qpdf has checked. When a service, credential, or number changes on the site, change `welcome.html` the same way and rebuild. After the domain move, rebuild it (docs/MOVE.md, step 5). It isn't deployed: `.vercelignore` keeps `docs/` out.
+
 ## Site map and deep links
 
 `/sitemap` is for people; `/sitemap.xml` is for search engines. The footer, the Company menu (desktop and mobile), the privacy page and the 404 page all link to `/sitemap`.
