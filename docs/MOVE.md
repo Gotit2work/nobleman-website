@@ -107,6 +107,13 @@ git commit -am "Move to noblemanproductions.com" && git push
 
 *Expected:* the script ends with `Done: … now say noblemanproductions.com`, and Vercel deploys each push to production in about a minute. In the portal repository, `cd tests && npm test` passes too (it was run on a moved copy before this guide was written: 309 API and 141 browser checks).
 
+Then rebuild the client welcome PDF, whose printed link and QR code now point at the new address (the script changed `welcome.html`, not the PDF):
+
+```bash
+cd docs/welcome && npm install && node build.mjs   # in nobleman-website
+git add Nobleman-Welcome.pdf && git commit -m "Welcome PDF: new address" && git push
+```
+
 No terminal? Ask Claude: "Run step 5 of docs/MOVE.md in nobleman-website and nobleman-portal."
 
 *Check:* on `https://noblemanproductions.com`, **Log in** opens `https://portal.noblemanproductions.com/signin`, and `https://noblemanproductions.com/sitemap.xml` lists only `noblemanproductions.com` pages.
@@ -168,6 +175,7 @@ Once the new site has run a week without problems: in Lovable, unpublish the old
 - [ ] The old website address forwards to the new one, page for page; the old portal address moves visitors to the new one.
 - [ ] Email to and from `@noblemanproductions.com` works as before.
 - [ ] Both repositories' scripts report `nothing names noblemanproductions.gotit2work.com any more`.
+- [ ] `docs/welcome/Nobleman-Welcome.pdf` is rebuilt: its QR code opens `https://noblemanproductions.com/start`. Throw away printed copies with the old address.
 - [ ] Portal System check is all green (portal live only).
 - [ ] Stripe's webhook test returns 200 (if connected).
 - [ ] 📸 Screenshots: GoDaddy DNS before and after, Vercel Domains showing Valid, the System check.

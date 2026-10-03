@@ -41,6 +41,7 @@ Marketing site for Nobleman Productions (Jean and Justin; veteran owned; San Die
 
 - All visible copy follows `docs/WRITING.md` (the Murphy's Laws rules): plain words, action-named buttons, no promise that isn't always true ("usually the same business day", "when planned into the shoot"), nothing described that doesn't exist. Run its checklist before shipping copy.
 
+- The client welcome PDF (`docs/welcome/`, README "Client welcome PDF") repeats the site's services, credentials, and numbers. When those change on the site, change `welcome.html` too and rebuild with `node build.mjs`; its checks must pass.
 - Photos: JPEG, mozjpeg quality 88, 4:4:4 chroma, alpha removed. WebP was rejected because it smears the dark footage.
 - Cache headers: `vendor/` is immutable (versioned file names); `media/` and `assets/` get 7 days. Give an image a new file name if it must change right away.
 - `.vercelignore` keeps `README.md`, `CLAUDE.md`, and `docs/` out of the public deployment.
