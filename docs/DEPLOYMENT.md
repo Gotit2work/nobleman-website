@@ -9,7 +9,7 @@
 
 **Scope.** Vercel projects, environment variables, the portal database, DNS at GoDaddy, email sending through Resend, and the first portal admin. It does not cover building the portal's project/review features (see "Known limits" at the end).
 
-**Owner.** Alexis does every step. Nothing here needs Jean or Justin until their portal accounts are created in Phase 6.
+**Owner.** Alexis does every step except one: Jean creates the portal's first (owner) account in Phase 6, with his own email.
 
 **Time.** About 60–90 minutes of work, plus up to an hour of waiting for DNS and email verification.
 
@@ -46,7 +46,6 @@ Generate four secrets on your own computer now and keep them in your password ma
 openssl rand -base64 48   # SESSION_SECRET         (portal, permanent; changing it signs everyone out)
 openssl rand -base64 48   # PORTAL_ENCRYPTION_KEY  (portal, permanent; encrypts stored connection keys, never change it)
 openssl rand -base64 32   # CRON_SECRET            (portal, the daily job)
-openssl rand -base64 32   # BOOTSTRAP_SECRET       (portal, one-time)
 ```
 
 ---
@@ -99,10 +98,10 @@ In each repository on GitHub: open a pull request from `claude/awesome-euler-ynm
    | `SESSION_SECRET` | the 48-byte value you generated (Sensitive) | Production, Preview |
    | `PORTAL_ENCRYPTION_KEY` | the second 48-byte value (Sensitive) | Production, Preview |
    | `CRON_SECRET` | the cron value (Sensitive). Vercel sends it to the daily job (`vercel.json` → `crons`) | Production |
-   | `BOOTSTRAP_SECRET` | the one-time value | Production only |
-   | `PORTAL_MODE` | `demo` while the portal is a public showcase; delete it to require sign-in | Production, Preview |
+   | `RESEND_API_KEY` | a Resend key with Sending access (Sensitive). The first owner confirms by email, so the portal needs it before anyone can claim it | Production, Preview |
+   | `PORTAL_EMAIL_FROM` | `Nobleman Productions <portal@gotit2work.com>` | Production, Preview |
 
-   Video accounts (Vimeo, Frame.io, YouTube, Wistia), email (Resend), and Notion are connected later in the portal itself (Studio → Connections), so their keys never need to live in Vercel. `VIMEO_ACCESS_TOKEN`, `RESEND_API_KEY`, and `PORTAL_EMAIL_FROM` still work as environment variables if you prefer.
+   Video accounts (Vimeo, Frame.io, YouTube, Wistia) and Notion are connected later in the portal itself (Studio → Connections), so their keys never need to live in Vercel. If `PORTAL_MODE` is still listed, delete it: the portal no longer uses it.
 
 6. **Redeploy** so the variables take effect: Deployments → newest → ⋯ → **Redeploy**. Environment variables only apply to deployments created after they were set.
 7. **Settings → Domains → Add** → `portal.noblemanproductions.gotit2work.com`. Copy the CNAME value Vercel shows.
@@ -169,17 +168,15 @@ vimeo.com (Jean's account, `jeangotay`) → video `1197058424` → **Settings �
 
 > The portal has its own, fuller runbook: `docs/GO-LIVE.md` in `Gotit2work/nobleman-portal`. It covers the database, secrets, the first owner, email, Vimeo, Notion, and Stripe payments (test mode first), with checks, troubleshooting, and rollback. The steps below are the short form.
 
-1. With `PORTAL_MODE` deleted and the portal redeployed, open `https://portal.noblemanproductions.gotit2work.com`. Expected: **Set up the portal**.
-2. Setup code: the `BOOTSTRAP_SECRET` value (Vercel → portal → Settings → Environment Variables → reveal it). Then your name, email, and a password of at least 10 characters → **Create the owner account**. You're signed in as the owner.
-3. It refuses to run again once a staff account exists. Delete `BOOTSTRAP_SECRET` anyway and redeploy: a removed secret can't leak.
-4. Account → **Set up two-step sign-in** with your authenticator app. Save the recovery codes in your password manager.
-5. Studio → **Connections**:
-   - **Connect email** (Resend): the API key from Phase 5 and a sender such as `Nobleman Productions <portal@gotit2work.com>`. Press **Send a test email**. *Expected:* it arrives.
+1. Open `https://portal.noblemanproductions.gotit2work.com`. Expected: only **Log in** and **Create an account**, with Create an account chosen.
+2. Jean creates the first account: **Create an account** with `jeancgotay@gmail.com` or `jean@noblemanproductions.com` (one login, two addresses) → presses the button in **Confirm your email** → **Choose your password**. He's in as the owner. Until then, no other address can create an account (`OWNER_EMAILS` in the portal's `api/_settings.js`).
+3. Jean: Studio → **People** → **Invite a person**: Justin as Owner (at least two owners), Alexis as Owner or Producer. Each gets an email with a one-time link to choose a password.
+4. Each of you: Account → **Set up two-step sign-in** with your authenticator app. Save the recovery codes in your password manager.
+5. Studio → **Connections** (email already works from the Vercel key; **Connect email** only to manage it in Studio):
    - **Add a connection → Vimeo**: Jean's token (portal README, "Vimeo"), or let Jean sign in and add it. *Expected:* **Test it** ticks every scope and shows the plan.
    - Frame.io, YouTube, Wistia, and Notion as needed (portal README has the steps for each, including Frame.io's Adobe redirect URI).
    - **Payments → Connect Stripe**: a test key first, then the webhook (the card shows its address and events), then live keys (portal `docs/GO-LIVE.md`, step 12).
-6. Studio → **People** → **Invite a person** for Jean and Justin (Owner or Producer). Each gets an email with a one-time link to choose a password; the link is also shown for you to copy. Make at least two owners.
-7. Studio → **Settings** → **System check**: nothing red. Once every staff member has two-step sign-in, Settings → Security → require it.
+6. Studio → **Settings** → **System check**: nothing red. Once every staff member has two-step sign-in, Settings → Security → require it.
 
 ---
 
@@ -194,7 +191,7 @@ vimeo.com (Jean's account, `jeangotay`) → video `1197058424` → **Settings �
 - [ ] Sharing the link in iMessage/Slack shows the Nobleman preview card.
 
 **Portal**
-- [ ] `https://portal.noblemanproductions.gotit2work.com` shows the screening-room sign-in; `/demo` shows the sample project.
+- [ ] `https://portal.noblemanproductions.gotit2work.com` shows only the sign-in (Log in, Create an account); `/demo` shows the same sign-in until a staff member logs in.
 - [ ] A wrong password shows "That email and password don’t match."
 - [ ] The right password opens the portal greeting you by name; a reload keeps you signed in; Sign out works.
 - [ ] An invitation email arrives, its link opens "Choose your password", and the same link doesn't work a second time.
@@ -221,7 +218,8 @@ vimeo.com (Jean's account, `jeangotay`) → video `1197058424` → **Settings �
 | Portal: invitations or sign-in links don't arrive | Email not connected, sender domain not verified in Resend, or the message is in spam | Studio → Connections → Email → **Send a test email**; meanwhile Studio → People → Resend invite shows the link to copy |
 | Portal: Frame.io "Needs sign-in" | Adobe sign-in not done, expired after about 14 days unused, or the redirect URI doesn't match | Studio → Connections → Frame.io → **Sign in with Adobe**; check the redirect URI matches exactly; check `CRON_SECRET` so the daily job keeps it fresh |
 | Portal: Notion not updating | The page or database isn't shared with the Notion connection, or a column was renamed to another type | Studio → Connections → Notion shows the last error; in Notion, ••• → Connections → add the connection |
-| Portal: "Setup is switched off" | `BOOTSTRAP_SECRET` missing on the first run | Add it, redeploy, reload |
+| Portal: "The portal isn’t open for new accounts yet" | No owner yet, and another address was used | Jean uses `jeancgotay@gmail.com` or `jean@noblemanproductions.com` |
+| Portal: "The portal can’t send email yet…" | No `RESEND_API_KEY` / `PORTAL_EMAIL_FROM` | Add them (Phase 2, step 5), redeploy |
 | Portal: videos missing | The video connection isn't working, a missing scope, the project has no source, or the video is hidden in Studio | Studio → Connections → **Test it**; Studio → Projects → the project → Video source and Videos |
 | Portal: a video won't play | The video's Vimeo privacy is "Only me", or embedding is limited to other domains | Vimeo → video → Settings → Privacy (portal README, "Vimeo") |
 | Portal: uploads fail | No `BLOB_READ_WRITE_TOKEN`, or the store isn't private | Storage → Blob → connect a private store; redeploy |
