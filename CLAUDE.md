@@ -2,6 +2,11 @@
 
 Marketing site for Nobleman Productions (Jean and Justin; veteran owned; San Diego and Las Vegas). Operated by Alexis / GotIT2Work.
 
+> **The website has moved to Lovable** (October 2026): `Gotit2work/nobleman-productions`, Lovable project
+> `38e7d22c-71ac-4819-8165-292a96b52e13` (workspace "Transfer 1"). Make website changes there. This repo stays
+> live on Vercel until the domain moves to the Lovable site; if something here must change before then, make the
+> same change in the Lovable repo in the same session so the two don't drift.
+
 ## Ownership and infrastructure
 
 - Vercel project `nobleman-website` (`prj_gqDhfZOcMh5eEmr2LS990DiHcgKx`), created 2026-09-30 in team `gotit2-work`: framework Other, Node 22.x, Vercel Authentication on previews only (production is public), custom domain attached and ownership-verified. Linked to GitHub (`Gotit2work/nobleman-website`, made public so Hobby can deploy it); pushes to `main` deploy to production.
