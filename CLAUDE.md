@@ -3,9 +3,11 @@
 Marketing site for Nobleman Productions (Jean and Justin; veteran owned; San Diego and Las Vegas). Operated by Alexis / GotIT2Work.
 
 > **The website has moved to Lovable** (October 2026): `Gotit2work/nobleman-productions`, Lovable project
-> `38e7d22c-71ac-4819-8165-292a96b52e13` (workspace "Transfer 1"). Make website changes there. This repo stays
-> live on Vercel until the domain moves to the Lovable site; if something here must change before then, make the
-> same change in the Lovable repo in the same session so the two don't drift.
+> `38e7d22c-71ac-4819-8165-292a96b52e13` (workspace "Transfer 1"). Make website changes there.
+> Since 2026-10-05 `noblemanproductions.gotit2work.com` is served by Lovable (GoDaddy A record
+> `noblemanproductions` → `185.158.133.1`, replacing the CNAME to Vercel). Nothing in this repo is live any more:
+> the Vercel project still holds the domain only as a rollback until it's removed (Lovable repo, `docs/GO-LIVE.md`).
+> Keep this repo for history and as the reference the port was checked against.
 
 ## Ownership and infrastructure
 
@@ -17,7 +19,7 @@ Marketing site for Nobleman Productions (Jean and Justin; veteran owned; San Die
 - **Moving to the studio's own domain, `noblemanproductions.com`: follow `docs/MOVE.md`.** Every address in the code changes with `node scripts/move-domain.mjs --apply` (the same script is in the portal repo); never change them one by one. Lines that must keep the old address carry `move-domain:keep`. Old addresses stay attached in Vercel after the move: the old website address redirects, and the old portal address keeps answering (Stripe and Adobe call it) while the portal sends visitors on.
   - `noblemanproductions.com` DNS is at GoDaddy (`ns75/ns76.domaincontrol.com`, a separate account from gotit2work.com). Today `@` and `www` point at Lovable (`185.158.133.1`, the studio's current site). **Its MX is the studio's Google Workspace Gmail: never touch MX, the `google-site-verification` TXT, or `send.` records.**
   - The old Lovable site's pages are redirected in `vercel.json` (`/work-samples`, `/voice-samples` → `/work`; `/contact`, `/quote` → `/start`); `/youtube-retainers` serves Services. Keep them.
-- The gotit2work.com records for this site: GoDaddy CNAME `noblemanproductions` → `cname.vercel-dns.com` (certificate issued).
+- The gotit2work.com records for this site (until 2026-10-05): GoDaddy CNAME `noblemanproductions` → `cname.vercel-dns.com`. Now an A record to Lovable; see the note at the top.
 - Vercel: account `amangual1`, team `Gotit2Work` (slug `gotit2-work`, id `team_b7Eucmxp9X2SzzAHXZPA92Qh`). On Hobby by the owner's choice while this is a pre-launch preview; Vercel restricts Hobby to non-commercial use, so upgrade to Pro before marketing the site.
 - Hero video: Vimeo `1197058424`, hash `796798a19d`, Jean's account (`jeangotay`, Vimeo Plus).
 - Full setup, validation, and rollback: `docs/DEPLOYMENT.md`.
