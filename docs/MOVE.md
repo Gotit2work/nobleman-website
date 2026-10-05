@@ -145,7 +145,7 @@ The old address keeps working for all of these, so a late step does no harm. Do 
 | Service | Where | Change |
 |---|---|---|
 | **Stripe** (if connected) | Stripe → Developers → **Webhooks** → the portal's endpoint → edit its **endpoint URL** | `https://portal.noblemanproductions.com/api/connect?webhook=stripe`. Editing the URL keeps its signing secret, so nothing changes in the portal. Do it in test mode and in live mode if both exist. |
-| **Adobe / Frame.io** (if connected) | Adobe Developer Console → the project → OAuth Web App credential → **Redirect URI** | **Add** `https://portal.noblemanproductions.com/api/connect` (keep the old one) → Save. Then Studio → Connections → Frame.io → **Sign in with Adobe** once. |
+| **Adobe / Frame.io** (if connected) | Adobe Developer Console → the project → OAuth Web App credential → **Redirect URI** | **Add** `https://portal.noblemanproductions.com/api/connect` (keep the old one) → Save. Then Studio → Connections → Frame.io → **Sign in with Adobe** once, and switch **Live updates** off and on once so Frame.io's webhook calls the new address (the old one keeps answering either way). |
 | **Notion** (if connected) | Studio → Connections → Notion → **Sync now** | The Portal links in the database change to the new address. |
 | **Google Search Console** | search.google.com/search-console | Add the property `noblemanproductions.com` (it may already be verified by the existing `google-site-verification` record) → **Sitemaps** → submit `https://noblemanproductions.com/sitemap.xml`. |
 | **Email signatures, social profiles, Google Business Profile** | each one | Change the website to `https://noblemanproductions.com`. |
