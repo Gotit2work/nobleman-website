@@ -211,7 +211,7 @@ vimeo.com (Jean's account, `jeangotay`) → video `1197058424` → **Settings �
 | Hero shows the still frame and never plays | Vimeo embed restrictions (Phase 4), or the viewer's device blocks autoplay (e.g. iOS Low Power Mode) | Fix the Vimeo setting; device-side autoplay blocks are expected and the poster is the intended fallback |
 | Form says "Online inquiries aren't switched on yet…" | `RESEND_API_KEY` missing, or set without a redeploy | Set it, then redeploy |
 | Form says "We could not send that…" | Resend domain not verified, or `INTAKE_FROM` uses a domain Resend hasn't verified | Vercel → website → Logs → filter `/api/intake` → look for `intake failed` |
-| Portal: "The portal is still being set up" | `DATABASE_URL` missing, or set without a redeploy | Set it (Storage → Neon), then redeploy |
+| Portal: Log in says "The portal isn’t open yet." | `DATABASE_URL` missing, or set without a redeploy | Set it (Storage → Neon), then redeploy |
 | Portal: "Sign-in isn’t working right now" | Database unreachable, or `SESSION_SECRET` missing or shorter than 32 characters | Vercel → portal → Logs → `/api/session` |
 | Portal: "Too many tries…" | 8 failed sign-ins for that email (or 30 from one IP) within 15 minutes; codes and emailed links have their own limits (portal README, "Security model") | Wait for the window to pass |
 | Portal: someone lost the phone with their two-step codes | — | They use a recovery code; or Studio → People → More → **Turn off two-step (lost phone)**, after confirming it's really them |
