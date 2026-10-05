@@ -171,7 +171,7 @@ a{color:inherit}a:hover{color:inherit}
           <table class="pv-table">
             <thead><tr><th scope="col">Name</th><th scope="col">Kind</th><th scope="col">What it’s for</th><th scope="col">How long</th></tr></thead>
             <tbody>
-              <tr><td><code>np_session</code></td><td data-label="Kind">Cookie</td><td data-label="What it’s for">Keeps you logged in to the portal. The demo and share pages have no login, so they never set it.</td><td data-label="How long">7 days unless we set it shorter or longer (1 to 30 days), or until you sign out</td></tr>
+              <tr><td><code>np_session</code></td><td data-label="Kind">Cookie</td><td data-label="What it’s for">Keeps you logged in to the portal. Share pages have no login, so they never set it.</td><td data-label="How long">7 days unless we set it shorter or longer (1 to 30 days), or until you sign out</td></tr>
             </tbody>
           </table>
           <h3>Films</h3>
@@ -182,12 +182,11 @@ a{color:inherit}a:hover{color:inherit}
         <section class="pv-sec" id="portal">
           <span class="pv-n">05</span>
           <h2>The client portal</h2>
-          <div class="pv-note"><p><strong>The demo keeps nothing.</strong> Anyone can open the portal’s demo and click through a sample project without signing in. Notes, approvals, and messages you try there aren’t saved or sent to anyone.</p></div>
           <p>You can create an account yourself on the portal’s login screen, or we create one for you. When you create one, we keep your name, email address, company, anything you write for the studio, and the IP address the request came from, and we email you a link to confirm the address. If your company’s email domain is one we’ve set up, you join your company’s projects as soon as you confirm it; otherwise the studio decides whether to let you in, and you hear from us by email either way.</p>
           <p>We can also send you a project’s own link. When you open it and create a login, we keep your name, email address, and the password you choose (as described below), that you ticked the box saying you’re working on the project, which project you joined through the link and when, and the IP address the request came from. You’re let in to that project straight away, without an emailed confirmation, and our team gets an email saying you joined. You see only the projects you joined this way unless we change that for you.</p>
           <p>For each account the portal keeps:</p>
           <ul>
-            <li>your name, email address, and job title, if you give one;</li>
+            <li>your name, email address (and a second address that logs in to the same account, if we add one for you), and job title, if you give one;</li>
             <li>your password, stored only in scrambled form (a “hash”) that can’t be turned back into the password, so nobody, including us, can read it;</li>
             <li>your role (for example decision maker or reviewer), which sets what you can do;</li>
             <li>when you last logged in, when you last used the portal (so we don’t email you about things while you’re already looking at them), whether you’ve chosen your own password yet, and whether you’ve finished or skipped the portal’s short tutorial (so it starts by itself only once);</li>
@@ -233,7 +232,7 @@ a{color:inherit}a:hover{color:inherit}
               <tr><td>Notion</td><td data-label="What it does for us">Our project planning, if we keep project status there.</td><td data-label="What it receives">The project status described in section 05, with no personal details.</td></tr>
               <tr><td>YouTube (Google)</td><td data-label="What it does for us">Plays some of our films, in privacy-enhanced mode.</td><td data-label="What it receives">Standard request details, and more once you press play.</td></tr>
               <tr><td>Stripe</td><td data-label="What it does for us">Takes payments in the client portal, on Stripe’s own checkout page.</td><td data-label="What it receives">Your card or bank details, the name and email you use at checkout, the amount and what it’s for, and the project and company name. We never see your card details.</td></tr>
-              <tr><td>Neon</td><td data-label="What it does for us">The portal’s database. The demo doesn’t use it.</td><td data-label="What it receives">The account details, notes, decisions, messages, file records, share links, and activity log in section 05.</td></tr>
+              <tr><td>Neon</td><td data-label="What it does for us">The portal’s database.</td><td data-label="What it receives">The account details, notes, decisions, messages, file records, share links, and activity log in section 05.</td></tr>
             </tbody>
           </table>
           <p>We don’t give your information to anyone else unless the law requires it.</p>
